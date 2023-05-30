@@ -1,0 +1,11 @@
+Double dispatch 					Bien
+Decorator						Bien. No debería implementar el método getCostoServicios en la clase abstracta del decorator
+Factory							Bien, lo aplica para armar el decorator
+Diseño del mundo del problema. Cómo arma las clases.
+(VER EL UML para unificar criterios)			No utiliza una clase principal que relacione los elementos del sistema.Todas las entidades estan "sueltas" en el método main.
+Excepciones						Bien
+Singleton						No utiliza
+Clone.							AL Clonar la factura castea el abonado como DecoratorPago. Debería haberlo casteado como IAbonado
+precondiciones y documentación				Bien.
+Codigo ejecuta haciendo lo indispensable al menos.	Bien. Mal hehca la aplicación de Maven. El proyecto visto como Maven tiene una estructura inconsistente
+INFORME							Bien
