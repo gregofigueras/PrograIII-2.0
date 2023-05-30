@@ -23,6 +23,7 @@ public class Factura implements Cloneable {
 	public Factura(IAbonado abonado) {
 		super();
 		this.abonado = abonado;
+		this.total = this.abonado.getCostoServicios();
 	}
 
 	/**
