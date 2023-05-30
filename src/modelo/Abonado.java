@@ -1,9 +1,10 @@
 	package modelo;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
 
 import excepciones.DomicilioInvalidoException;
@@ -13,11 +14,12 @@ import interfaces.IAbonado;
  * @author 
  * clase abstracta que representa un abonado dentro de un sistema 
  */
-public abstract class Abonado extends Thread implements IAbonado{
+public abstract class Abonado implements IAbonado{
 	protected String nombre;
 	protected String DNI;
 	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos
-	protected Tecnico tecnico;
+	protected ArrayList<Factura> listaFacturas;
+	protected GregorianCalendar fecha;
 	
 	/**
 	 * constructor de la clase
@@ -30,9 +32,15 @@ public abstract class Abonado extends Thread implements IAbonado{
 	public Abonado(String nombre, String DNI) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.tecnico = null;
 		this.servicios = new HashMap<String,Servicio>();
 	}
+	
+	
+
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -124,20 +132,12 @@ public abstract class Abonado extends Thread implements IAbonado{
 			throw e;
 		}
 	}
-	
-	public void run() { 
-		this.tecnico = 
-		this.tecnico.ConsultaTecnica(this); 
-		Random r = new Random(); 
-		int q = r.nextInt(60); 
-		try {
-			Thread.sleep(q);
-			this.tecnico.TerminaConsulta(this);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	public void PagarFactura() {
+		System.out.println("El monto a pagar es: "+this.getCostoServicios());
+		System.out.println("El abonado " + this.getNombre() + " ha pagado su factura");
 	}
 	
+	public void AgregarFactura(Factura factura) {
+		listaFacturas.add(factura);
+	}
 }

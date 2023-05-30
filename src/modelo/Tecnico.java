@@ -1,29 +1,29 @@
 package modelo;
 
+import java.util.Random;
+
 public class Tecnico {
-	private String nombre;
-	private boolean libre = true;
+	protected String nombre;
+	private Abonado abonado; 
 	
 	public Tecnico(String nombre) {
 		this.nombre = nombre;
+		this.abonado = null;
+		
 	}
-
-	public synchronized void ConsultaTecnica(Abonado abonado) {
-		while (libre == false) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	
+	public void run(Abonado abonado) { 
+		this.abonado = abonado;
+		this.abonado.ConsultaTecnica(this); 
+		Random r = new Random(); 
+		int q = r.nextInt(60); 
+		try {
+			Thread.sleep(q);
+			this.abonado.TerminaConsulta(this);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println("El tecnico "+ this.nombre + "esta asistiendo a " + abonado.nombre);
-		this.libre = false; 
-	}
-
-	public synchronized void TerminaConsulta(Abonado abonado) {
-		System.out.println("El tecnico "+ this.nombre + " ahora esta libre");
-		this.libre = true;
-		notifyAll();
+		
 	}
 }

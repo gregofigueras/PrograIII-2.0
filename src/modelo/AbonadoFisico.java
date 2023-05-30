@@ -3,12 +3,16 @@ package modelo;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import interfaces.IState;
 
 /**
  * @author 
  *Clase que representa un abonado de tipo fisico dentro del sistema
  */
 public class AbonadoFisico extends Abonado implements Runnable{
+	
+	
+	private IState estado;
 	
 	/**
 	 * Constructor de la clase
@@ -21,6 +25,9 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	 */
 	public AbonadoFisico(String nombre, String DNI, Tecnico tecnico) {
 		super(nombre, DNI, tecnico);
+		
+		this.estado=  new SinContratacionesState(this); 
+		
 		assert nombre != null : "nombre no valido";
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
@@ -63,6 +70,30 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	public HashMap<String, Servicio> getServicio() {
 		return null;
 	}
+	
+	
+	
+	public void agregaServicio(String domicilio, Servicio servicio) {
+		assert domicilio != null : "domicilio no valido"; 
+		assert domicilio != "" :  "domicilio no valido";
+		assert servicio != null : "servicio no valido"; 
+		assert servicio.numId!= 0 :  "servicio no valido";
+		
+		servicios.put(domicilio, servicio);
+		
+		this.estado = new ConContratacionesState (this);
+		
+		assert servicios.get(domicilio) == servicio: "fallo en la postcondicion";
+		assert servicios.isEmpty() == true : "fallo invariante";
+		
+	}
+	
+	
+	
+	protected void setEstado(IState estado)
+    {
+		this.estado = estado;
+    }
 	
 
 }
