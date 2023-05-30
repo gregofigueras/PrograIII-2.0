@@ -3,6 +3,7 @@
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 
 import excepciones.DomicilioInvalidoException;
@@ -12,10 +13,11 @@ import interfaces.IAbonado;
  * @author 
  * clase abstracta que representa un abonado dentro de un sistema 
  */
-public abstract class Abonado implements IAbonado{
+public abstract class Abonado extends Thread implements IAbonado{
 	protected String nombre;
 	protected String DNI;
 	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos
+	protected Tecnico tecnico;
 	
 	/**
 	 * constructor de la clase
@@ -28,6 +30,7 @@ public abstract class Abonado implements IAbonado{
 	public Abonado(String nombre, String DNI) {
 		this.DNI = DNI;
 		this.nombre = nombre;
+		this.tecnico = null;
 		this.servicios = new HashMap<String,Servicio>();
 	}
 
@@ -121,4 +124,20 @@ public abstract class Abonado implements IAbonado{
 			throw e;
 		}
 	}
+	
+	public void run() { 
+		this.tecnico = 
+		this.tecnico.ConsultaTecnica(this); 
+		Random r = new Random(); 
+		int q = r.nextInt(60); 
+		try {
+			Thread.sleep(q);
+			this.tecnico.TerminaConsulta(this);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
