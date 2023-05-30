@@ -86,7 +86,7 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	
 	
 	
-	protected void setEstado(IState estado)
+	public void setEstado(IState estado)
     {
 		this.estado = estado;
     }

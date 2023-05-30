@@ -1,7 +1,9 @@
-package modelo;
+package state;
 
 import excepciones.DomicilioInvalidoException;
 import interfaces.IState;
+import modelo.AbonadoFisico;
+import modelo.Servicio;
 
 public class MorosoState implements IState {
 	
