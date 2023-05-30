@@ -18,6 +18,7 @@ public abstract class Abonado extends Thread implements IAbonado{
 	protected String DNI;
 	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos
 	protected Tecnico tecnico;
+	private boolean libre = true;
 	
 	/**
 	 * constructor de la clase
@@ -125,19 +126,23 @@ public abstract class Abonado extends Thread implements IAbonado{
 		}
 	}
 	
-	public void run() { 
-		this.tecnico = 
-		this.tecnico.ConsultaTecnica(this); 
-		Random r = new Random(); 
-		int q = r.nextInt(60); 
-		try {
-			Thread.sleep(q);
-			this.tecnico.TerminaConsulta(this);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public synchronized void ConsultaTecnica(Tecnico tecnico) {
+		while (libre == false) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+		System.out.println("El tecnico "+ this.tecnico.nombre + "esta asistiendo a " + this.nombre);
+		this.libre = false; 
+	}
+
+	public synchronized void TerminaConsulta(Tecnico tecnico) {
+		System.out.println("El tecnico "+ this.tecnico.nombre + " ahora esta libre");
+		this.libre = true;
+		notifyAll();
 	}
 	
 }
