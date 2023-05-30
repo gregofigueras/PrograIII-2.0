@@ -25,7 +25,7 @@ public class vista extends JFrame {
 	private JPanel panelDerecho;
 	private JPanel panelC1;
 	private JPanel panelC2;
-	private JPanel panel;
+	private JPanel panelC3;
 	private JLabel lblAccionesAbonado;
 	private JPanel panelAccionesAbonado;
 	private JButton btnPagaFactura;
@@ -108,9 +108,10 @@ public class vista extends JFrame {
 		this.panelC2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		this.panelCentral.add(this.panelC2);
 		
-		this.panel = new JPanel();
-		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		this.panelCentral.add(this.panel);
+		this.panelC3 = new JPanel();
+		this.panelC3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.panelCentral.add(this.panelC3);
+		this.panelC3.setLayout(new BorderLayout(0, 0));
 		
 		this.panelDerecho = new JPanel();
 		this.panelPrincipal.add(this.panelDerecho);
