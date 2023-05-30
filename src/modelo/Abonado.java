@@ -1,5 +1,6 @@
 	package modelo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,7 +14,7 @@ import interfaces.IAbonado;
  * @author 
  * clase abstracta que representa un abonado dentro de un sistema 
  */
-public abstract class Abonado extends Thread implements IAbonado{
+public abstract class Abonado extends Thread implements IAbonado, Serializable{
 	protected String nombre;
 	protected String DNI;
 	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos
