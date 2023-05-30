@@ -14,7 +14,7 @@ import interfaces.IAbonado;
  * @author 
  * clase abstracta que representa un abonado dentro de un sistema 
  */
-public abstract class Abonado implements IAbonado{
+public abstract class Abonado extends Thread implements IAbonado, Serializable{
 	protected String nombre;
 	protected String DNI;
 	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos

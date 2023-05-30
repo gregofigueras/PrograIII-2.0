@@ -1,8 +1,9 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Tecnico {
+public class Tecnico implements Serializable {
 	protected String nombre;
 	private Abonado abonado; 
 	

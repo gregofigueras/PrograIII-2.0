@@ -19,8 +19,8 @@ public class AbonadoJuridico extends Abonado{
 	 * <b> pre: </b> DNI tiene que ser no vacio y no null <br> 
 	 * <b> post: </b> Crea un objeto de tipo abonado 
 	 */
-	public AbonadoJuridico(String nombre, String DNI, Tecnico tecnico) {
-		super(nombre, DNI, tecnico);
+	public AbonadoJuridico(String nombre, String DNI) {
+		super(nombre, DNI);
 		assert nombre != null : "nombre no valido";
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
