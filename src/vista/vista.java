@@ -14,15 +14,14 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 public class vista extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
-	private JTextArea textArea;
-	private JList listAbonados;
 	private JPanel panelCentral;
-	private JPanel panelDerecho;
+	private JPanel panelDer;
 	private JPanel panelC1;
 	private JPanel panelC2;
 	private JPanel panelC3;
@@ -34,6 +33,16 @@ public class vista extends JFrame {
 	private JPanel panelContrataNServicio;
 	private JButton btnDarDeBajaS;
 	private JPanel panelDarDeBajaS;
+	private JPanel panelTecnicos;
+	private JButton btnSolicitaTec;
+	private JButton btnNewButton;
+	private JLabel lblAccionesTecnico;
+	private JList listTecnicos;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	private JScrollPane panelIzq;
+	private JList listAbonados;
+	private JLabel lblAbonados;
 
 	/**
 	 * Launch the application.
@@ -67,8 +76,14 @@ public class vista extends JFrame {
 		this.contentPane.add(this.panelPrincipal, BorderLayout.CENTER);
 		this.panelPrincipal.setLayout(new GridLayout(1, 3, 0, 0));
 		
+		this.panelIzq = new JScrollPane();
+		this.panelPrincipal.add(this.panelIzq);
+		
 		this.listAbonados = new JList();
-		this.panelPrincipal.add(this.listAbonados);
+		this.panelIzq.setViewportView(this.listAbonados);
+		
+		this.lblAbonados = new JLabel("Abonados");
+		this.panelIzq.setColumnHeaderView(this.lblAbonados);
 		
 		this.panelCentral = new JPanel();
 		this.panelPrincipal.add(this.panelCentral);
@@ -79,7 +94,7 @@ public class vista extends JFrame {
 		this.panelCentral.add(this.panelC1);
 		this.panelC1.setLayout(new BorderLayout(0, 0));
 		
-		this.lblAccionesAbonado = new JLabel("Acciones abonado");
+		this.lblAccionesAbonado = new JLabel("Acciones de abonado");
 		this.panelC1.add(this.lblAccionesAbonado, BorderLayout.NORTH);
 		
 		this.panelAccionesAbonado = new JPanel();
@@ -113,11 +128,29 @@ public class vista extends JFrame {
 		this.panelCentral.add(this.panelC3);
 		this.panelC3.setLayout(new BorderLayout(0, 0));
 		
-		this.panelDerecho = new JPanel();
-		this.panelPrincipal.add(this.panelDerecho);
+		this.panelTecnicos = new JPanel();
+		this.panelC3.add(this.panelTecnicos, BorderLayout.SOUTH);
+		
+		this.btnSolicitaTec = new JButton("Solicitar tecnico");
+		this.panelTecnicos.add(this.btnSolicitaTec);
+		
+		this.btnNewButton = new JButton("Dar de alta");
+		this.panelTecnicos.add(this.btnNewButton);
+		
+		this.lblAccionesTecnico = new JLabel("Acciones de tecnico");
+		this.panelC3.add(this.lblAccionesTecnico, BorderLayout.NORTH);
+		
+		this.listTecnicos = new JList();
+		this.panelC3.add(this.listTecnicos, BorderLayout.CENTER);
+		
+		this.panelDer = new JPanel();
+		this.panelPrincipal.add(this.panelDer);
+		
+		this.scrollPane = new JScrollPane();
+		this.contentPane.add(this.scrollPane, BorderLayout.SOUTH);
 		
 		this.textArea = new JTextArea();
-		this.contentPane.add(this.textArea, BorderLayout.SOUTH);
+		this.scrollPane.setViewportView(this.textArea);
 	}
 
 }
