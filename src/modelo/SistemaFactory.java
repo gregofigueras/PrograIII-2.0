@@ -1,11 +1,14 @@
 package modelo;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import excepciones.TipoAbonadoInvalidoException;
 import excepciones.TipoPagoInvalidoException;
 import interfaces.IAbonado;
+import persistencia.IPersistencia;
+import persistencia.PersistenciaXML;
 
 /**
  * @author Clase del patron factory para crear nuevos objetos de instancia
@@ -14,6 +17,7 @@ import interfaces.IAbonado;
 public class SistemaFactory implements Serializable {
 	static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
 	static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
+	IPersistencia persistencia = new PersistenciaXML();
 
 	/**
 	 * Constructor de la clase sistemaFactory
@@ -77,7 +81,42 @@ public class SistemaFactory implements Serializable {
 		return respuesta;
 	}
 
-	public static Tecnico getTecnico() {
+	public Tecnico getTecnico(String nombre) {
+		Tecnico tecnico = new Tecnico(nombre);
+		tecnicos.add(tecnico);
+		return tecnico;
+	}
 
+	public void finalizaJornada() {
+		try {
+			persistencia.abrirOutput("listaAsociada.xml");
+			System.out.println("Archivo de escritura creado");
+			persistencia.escribir(abonados);
+			System.out.println("Lista de abonados cargada");
+			persistencia.escribir(tecnicos);
+			System.out.println("Lista de tecnicos cargada");
+			persistencia.cerrarOutput();
+			System.out.println("Archivo de escritura cerrado");
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void iniciaJornada() {
+		try {
+			persistencia.abrirInput("listaAsociada.xml");
+			System.out.println("Archivo de lectura abierto");
+			abonados = persistencia.Leer();
+			System.out.println("Abonados cargados");
+			tecnicos = persistencia.Leer();
+			System.out.println("Tecnicos cargados");
+			persistencia.cerrarInput();
+			System.out.println("Archivo de lectura cerrado");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
