@@ -34,6 +34,13 @@ public abstract class Abonado implements IAbonado{
 		this.nombre = nombre;
 		this.servicios = new HashMap<String,Servicio>();
 	}
+	
+	
+
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -128,5 +135,9 @@ public abstract class Abonado implements IAbonado{
 	public void PagarFactura() {
 		System.out.println("El monto a pagar es: "+this.getCostoServicios());
 		System.out.println("El abonado " + this.getNombre() + " ha pagado su factura");
+	}
+	
+	public void AgregarFactura(Factura factura) {
+		listaFacturas.add(factura);
 	}
 }

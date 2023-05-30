@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import interfaces.IAbonado;
@@ -47,7 +48,24 @@ public class DecoratorCheque extends DecoratorPagos {
 
 	@Override
 	public HashMap<String, Servicio> getServicio() {
-		return null;
+		return encapsulado.getServicio();
+	}
+
+	@Override
+	public void PagarFactura() {
+		encapsulado.PagarFactura();
+		
+	}
+
+	@Override
+	public void AgregarFactura(Factura factura) {
+		encapsulado.AgregarFactura(factura);
+		
+	}
+
+	@Override
+	public GregorianCalendar getFecha() {
+		return encapsulado.getFecha();
 	}
 	
 	

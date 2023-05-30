@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.GregorianCalendar;
+
 import interfaces.IAbonado;
 
 /**
@@ -8,6 +10,8 @@ import interfaces.IAbonado;
  */
 public class Factura implements Cloneable{ 
 	private IAbonado abonado;
+	private GregorianCalendar fecha;
+	private double total;
 
 	/**
 	 * Constructor de la clase
@@ -26,7 +30,8 @@ public class Factura implements Cloneable{
 	public void getFactura() {
 		System.out.println(this.abonado.getNombre() + "     " + this.abonado.getDNI() + "\n");
 		this.abonado.imprimeServicios();
-		System.out.println(this.abonado.getCostoServicios());
+		total=this.abonado.getCostoServicios();
+		this.fecha=abonado.getFecha();
 	}
 
 	/**
