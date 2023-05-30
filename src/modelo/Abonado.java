@@ -1,5 +1,6 @@
-	package modelo;
+package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -11,36 +12,36 @@ import excepciones.DomicilioInvalidoException;
 import interfaces.IAbonado;
 
 /**
- * @author 
- * clase abstracta que representa un abonado dentro de un sistema 
+ * @author clase abstracta que representa un abonado dentro de un sistema
  */
-public abstract class Abonado extends Thread implements IAbonado, Serializable{
+public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected String nombre;
 	protected String DNI;
-	protected HashMap<String,Servicio> servicios;	//Hashmap asi no hay domicilios repetidos
+	private boolean libre = true;
+	private Tecnico tecnico;
+	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
-	
+
 	/**
 	 * constructor de la clase
+	 * 
 	 * @param nombre: es el nombre del abonado
-	 * @param DNI: DNI del abonado
-	 * <b> pre: </b> nombre tiene que ser no vacio y no null <br> 
-	 * <b> pre: </b> DNI tiene que ser no vacio y no null <br> 
-	 * <b> post: </b> Crea un objeto de tipo abonado 
+	 * @param DNI:    DNI del abonado <b> pre: </b> nombre tiene que ser no vacio y
+	 *                no null <br>
+	 *                <b> pre: </b> DNI tiene que ser no vacio y no null <br>
+	 *                <b> post: </b> Crea un objeto de tipo abonado
 	 */
 	public Abonado(String nombre, String DNI) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.servicios = new HashMap<String,Servicio>();
+		this.tecnico = null;
+		this.servicios = new HashMap<String, Servicio>();
 	}
-	
-	
 
 	public GregorianCalendar getFecha() {
 		return fecha;
 	}
-
 
 	public String getNombre() {
 		return nombre;
@@ -53,91 +54,115 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable{
 	public HashMap<String, Servicio> getServicios() {
 		return servicios;
 	}
-	
+
 	/**
-	 * metodo void que agrega un determinado domicilio y tipo de servicio al hashmap de servicios
+	 * metodo void que agrega un determinado domicilio y tipo de servicio al hashmap
+	 * de servicios
+	 * 
 	 * @param domicilio: domicilio del servicio
-	 * @param servicio: parametro que representa a un tipo de servicio
-	 * <b> pre: </b> domicilio tiene que ser no nulo y no vacio <br>
-	 * <b> pre: </b> servicio tiene que ser no nulo y no vacio <br>
-	 * <b> post: </b> agrega servicio al hashmap de domicilios 
+	 * @param servicio:  parametro que representa a un tipo de servicio <b> pre:
+	 *                   </b> domicilio tiene que ser no nulo y no vacio <br>
+	 *                   <b> pre: </b> servicio tiene que ser no nulo y no vacio
+	 *                   <br>
+	 *                   <b> post: </b> agrega servicio al hashmap de domicilios
 	 */
 	public void agregaServicio(String domicilio, Servicio servicio) {
-		assert domicilio != null : "domicilio no valido"; 
-		assert domicilio != "" :  "domicilio no valido";
-		assert servicio != null : "servicio no valido"; 
-		assert servicio.numId!= 0 :  "servicio no valido";
+		assert domicilio != null : "domicilio no valido";
+		assert domicilio != "" : "domicilio no valido";
+		assert servicio != null : "servicio no valido";
+		assert servicio.numId != 0 : "servicio no valido";
 		servicios.put(domicilio, servicio);
-		assert servicios.get(domicilio) == servicio: "fallo en la postcondicion";
+		assert servicios.get(domicilio) == servicio : "fallo en la postcondicion";
 		assert servicios.isEmpty() == true : "fallo invariante";
-		
+
 	}
-	
+
 	/**
-	 * metodo void que quita un determinado servicio de un domicilio en el hashmap de servicios
-	 * @param domicilio: domicilio del servicio
-	 * <b> pre: </b> domicilio tiene que ser no nulo y no vacio <br>
-	 * <b> post: </b> elimina un servicio del hashmap de domicilios 
+	 * metodo void que quita un determinado servicio de un domicilio en el hashmap
+	 * de servicios
+	 * 
+	 * @param domicilio: domicilio del servicio <b> pre: </b> domicilio tiene que
+	 *                   ser no nulo y no vacio <br>
+	 *                   <b> post: </b> elimina un servicio del hashmap de
+	 *                   domicilios
 	 */
 	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
-		assert domicilio != null : "domicilio no valido"; 
-		assert domicilio != "" :  "domicilio no valido";
-		
+		assert domicilio != null : "domicilio no valido";
+		assert domicilio != "" : "domicilio no valido";
+
 		if (this.servicios.containsKey(domicilio)) {
 			servicios.remove(domicilio);
-		}
-		else 
+		} else
 			throw new DomicilioInvalidoException(domicilio);
-		
+
 		assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
 	}
-	
+
 	/**
-	 *metodo void que imprime por pantalla cada uno de los servicios de un abonado
-	 *<b> post: </b> imprime por pantalla los servicios de un abonado
+	 * metodo void que imprime por pantalla cada uno de los servicios de un abonado
+	 * <b> post: </b> imprime por pantalla los servicios de un abonado
 	 */
 	@Override
 	public void imprimeServicios() {
-		Iterator<Entry<String,Servicio>> it = this.servicios.entrySet().iterator();
+		Iterator<Entry<String, Servicio>> it = this.servicios.entrySet().iterator();
 		while (it.hasNext()) {
 			System.out.println(it.next().toString());
 		}
 	}
 
 	/**
-	 *metodo abstracto que calcula el costo de todos los servicios de un cliente 
+	 * metodo abstracto que calcula el costo de todos los servicios de un cliente
 	 */
 	public abstract double getCostoServicios();
-	
+
 	/**
-	 *metodo que clona el abonado <br> 
-	 *puede lanzar una excepcion en caso que el abonado sea juridico
-	 *<b> post: </b> genera un clon de abonado
+	 * metodo que clona el abonado <br>
+	 * puede lanzar una excepcion en caso que el abonado sea juridico <b> post: </b>
+	 * genera un clon de abonado
 	 */
-	public Object clone() throws CloneNotSupportedException{
+	public Object clone() throws CloneNotSupportedException {
 		Abonado clonado;
-		Iterator<Entry<String,Servicio>> it = this.servicios.entrySet().iterator();		
-		
+		Iterator<Entry<String, Servicio>> it = this.servicios.entrySet().iterator();
+
 		try {
-		clonado = (Abonado)super.clone();
-		clonado.servicios = (HashMap<String,Servicio>) servicios.clone();		
-		while (it.hasNext()) {
-			Map.Entry<String,Servicio> entry = it.next();
-			clonado.servicios.put(entry.getKey(), (Servicio) entry.getValue().clone());
-		}
-		return clonado;
-		}
-		catch (CloneNotSupportedException e){
+			clonado = (Abonado) super.clone();
+			clonado.servicios = (HashMap<String, Servicio>) servicios.clone();
+			while (it.hasNext()) {
+				Map.Entry<String, Servicio> entry = it.next();
+				clonado.servicios.put(entry.getKey(), (Servicio) entry.getValue().clone());
+			}
+			return clonado;
+		} catch (CloneNotSupportedException e) {
 			e.getMessage();
 			throw e;
 		}
 	}
+
 	public void PagarFactura() {
-		System.out.println("El monto a pagar es: "+this.getCostoServicios());
+		System.out.println("El monto a pagar es: " + this.getCostoServicios());
 		System.out.println("El abonado " + this.getNombre() + " ha pagado su factura");
 	}
-	
+
 	public void AgregarFactura(Factura factura) {
 		listaFacturas.add(factura);
+	}
+
+	public synchronized void ConsultaTecnica(Tecnico tecnico) {
+		while (libre == false) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("El tecnico " + this.tecnico.nombre + "esta asistiendo a " + this.nombre);
+		this.libre = false;
+	}
+
+	public synchronized void TerminaConsulta(Tecnico tecnico) {
+		System.out.println("El tecnico " + this.tecnico.nombre + " ahora esta libre");
+		this.libre = true;
+		notifyAll();
 	}
 }

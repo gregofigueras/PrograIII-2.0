@@ -12,7 +12,7 @@ import interfaces.IAbonado;
  *         IAbonado
  */
 public class SistemaFactory implements Serializable {
-	static ArrayList<Abonado> abonados = new ArrayList<Abonado>();
+	static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
 	static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
 
 	/**
@@ -73,6 +73,7 @@ public class SistemaFactory implements Serializable {
 		assert respuesta.getFormaPago().equalsIgnoreCase(formaPago) : "fallo en el postcondicion";
 
 		abonados.add(encapsulado);
+
 		return respuesta;
 	}
 }
