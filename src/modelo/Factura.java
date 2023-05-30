@@ -9,9 +9,11 @@ import interfaces.IAbonado;
  *Clase que representa una factura dentro del sistema
  */
 public class Factura implements Cloneable{ 
+	
 	private IAbonado abonado;
 	private GregorianCalendar fecha;
 	private double total;
+	private boolean pago=false;
 
 	/**
 	 * Constructor de la clase
@@ -49,4 +51,39 @@ public class Factura implements Cloneable{
 		abonado.agregaServicio(domicilio, s1);
 		
 	}
-}
+	
+	
+	
+	public boolean isPago() {
+		return pago;
+	}
+
+	public void setPago(boolean pago) {
+		this.pago = pago;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
+
+	
+	
+}	
+	
+	
+	
+	
+	
+	

@@ -1,5 +1,7 @@
 package state;
 
+import java.util.GregorianCalendar;
+
 import excepciones.DomicilioInvalidoException;
 import interfaces.IState;
 import modelo.AbonadoFisico;
@@ -15,9 +17,12 @@ private AbonadoFisico AbonadoF;
 		this.AbonadoF = AbonadoF;
 	}
 	
-	public void PagarFactura() {
-		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + ",quiere pagar una factura");
-		
+	public void PagarFactura(GregorianCalendar fecha, double total) {
+		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + ",quiere pagar una factura. Tendra un 30% de recargo");
+		total*=1.3;
+		this.AbonadoF.PagarFactura(fecha,total);
+		//CHEQUEAR SI ES NECESARIO CAMBIAR DE ESTADO!!
+		this.AbonadoF.setEstado( new ConContratacionesState(this.AbonadoF));
 	}
 	
 	public void ContratarNuevoServicio(String domicilio, Servicio servicio) {

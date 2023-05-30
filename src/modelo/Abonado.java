@@ -138,9 +138,19 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
-	public void PagarFactura() {
+	public void PagarFactura(GregorianCalendar fecha, double total) {
 		System.out.println("El monto a pagar es: " + this.getCostoServicios());
 		System.out.println("El abonado " + this.getNombre() + " ha pagado su factura");
+		
+		 for (int i = 0; i < listaFacturas.size(); i++) {
+			 Factura factura = listaFacturas.get(i);
+		        if (factura.getFecha().equals(fecha)) {
+		            factura.setPago(true);
+		            factura.setTotal(total);
+		            break;  // Salir del bucle si se encuentra la factura
+		        }
+		 }
+	
 	}
 
 	public void AgregarFactura(Factura factura) {
