@@ -76,4 +76,8 @@ public class SistemaFactory implements Serializable {
 
 		return respuesta;
 	}
+
+	public static Tecnico getTecnico() {
+
+	}
 }
