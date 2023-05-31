@@ -1,22 +1,30 @@
 package vista;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
-import javax.swing.JTextArea;
-import javax.swing.JList;
-import java.awt.GridLayout;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class vista extends JFrame {
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import interfaces.IAbonado;
+import modelo.Tecnico;
+
+public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
@@ -34,15 +42,18 @@ public class vista extends JFrame {
 	private JButton btnDarDeBajaS;
 	private JPanel panelDarDeBajaS;
 	private JPanel panelTecnicos;
-	private JButton btnSolicitaTec;
-	private JButton btnNewButton;
 	private JLabel lblAccionesTecnico;
-	private JList listTecnicos;
-	private JScrollPane scrollPane;
-	private JTextArea textArea;
+	private JList<Tecnico> listTecnicos;
 	private JScrollPane panelIzq;
-	private JList listAbonados;
+	private JList<IAbonado> listAbonados;
 	private JLabel lblAbonados;
+	private JPanel panelSur;
+	private JTextArea textAreaInfo;
+	private JButton btnSolicitar;
+	private JButton btnDarDeBaja;
+	private JButton btnAgregar;
+	private DefaultListModel<IAbonado> modeloListaAbonado;
+	private DefaultListModel<Tecnico> modeloListaTecnico;
 
 	/**
 	 * Launch the application.
@@ -51,7 +62,7 @@ public class vista extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vista frame = new vista();
+					VentanaPrincipal frame = new VentanaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,9 +74,9 @@ public class vista extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public vista() {
+	public VentanaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 677, 422);
+		setBounds(100, 100, 680, 422);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -79,7 +90,7 @@ public class vista extends JFrame {
 		this.panelIzq = new JScrollPane();
 		this.panelPrincipal.add(this.panelIzq);
 		
-		this.listAbonados = new JList();
+		this.listAbonados = new JList<IAbonado>();
 		this.panelIzq.setViewportView(this.listAbonados);
 		
 		this.lblAbonados = new JLabel("Abonados");
@@ -105,18 +116,21 @@ public class vista extends JFrame {
 		this.panelAccionesAbonado.add(this.panelPagaFactura);
 		
 		this.btnPagaFactura = new JButton("Paga servicio");
+		this.btnPagaFactura.addActionListener(this);
 		this.panelPagaFactura.add(this.btnPagaFactura);
 		
 		this.panelContrataNServicio = new JPanel();
 		this.panelAccionesAbonado.add(this.panelContrataNServicio);
 		
 		this.btnContrataNServicio = new JButton("Contrata nuevo servicio");
+		this.btnContrataNServicio.addActionListener(this);
 		this.panelContrataNServicio.add(this.btnContrataNServicio);
 		
 		this.panelDarDeBajaS = new JPanel();
 		this.panelAccionesAbonado.add(this.panelDarDeBajaS);
 		
 		this.btnDarDeBajaS = new JButton("Dar de baja un servicio");
+		this.btnDarDeBajaS.addActionListener(this);
 		this.panelDarDeBajaS.add(this.btnDarDeBajaS);
 		
 		this.panelC2 = new JPanel();
@@ -131,26 +145,45 @@ public class vista extends JFrame {
 		this.panelTecnicos = new JPanel();
 		this.panelC3.add(this.panelTecnicos, BorderLayout.SOUTH);
 		
-		this.btnSolicitaTec = new JButton("Solicitar tecnico");
-		this.panelTecnicos.add(this.btnSolicitaTec);
+		this.btnSolicitar = new JButton("Solicitar");
+		this.btnSolicitar.addActionListener(this);
 		
-		this.btnNewButton = new JButton("Dar de alta");
-		this.panelTecnicos.add(this.btnNewButton);
+		this.btnDarDeBaja = new JButton("Eliminar");
+		this.btnDarDeBaja.addActionListener(this);
+		this.btnDarDeBaja.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		this.btnAgregar = new JButton("Agregar");
+		this.btnAgregar.addActionListener(this);
+		this.btnAgregar.setHorizontalAlignment(SwingConstants.RIGHT);
+		this.panelTecnicos.setLayout(new BoxLayout(this.panelTecnicos, BoxLayout.X_AXIS));
+		this.panelTecnicos.add(this.btnSolicitar);
+		this.panelTecnicos.add(this.btnDarDeBaja);
+		this.panelTecnicos.add(this.btnAgregar);
 		
 		this.lblAccionesTecnico = new JLabel("Acciones de tecnico");
 		this.panelC3.add(this.lblAccionesTecnico, BorderLayout.NORTH);
 		
-		this.listTecnicos = new JList();
+		this.listTecnicos = new JList<Tecnico>();
 		this.panelC3.add(this.listTecnicos, BorderLayout.CENTER);
 		
 		this.panelDer = new JPanel();
 		this.panelPrincipal.add(this.panelDer);
 		
-		this.scrollPane = new JScrollPane();
-		this.contentPane.add(this.scrollPane, BorderLayout.SOUTH);
+		this.panelSur = new JPanel();
+		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
+		this.panelSur.setLayout(new BorderLayout(0, 0));
 		
-		this.textArea = new JTextArea();
-		this.scrollPane.setViewportView(this.textArea);
+		this.textAreaInfo = new JTextArea();
+		this.panelSur.add(this.textAreaInfo);
+		this.panelSur.setPreferredSize(new Dimension(50, 40));
+		
+		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
+		this.listAbonados.setModel(modeloListaAbonado);
+		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
+		this.listTecnicos.setModel(modeloListaTecnico);
+		
 	}
 
+	public void actionPerformed(ActionEvent e) {
+	}
 }
