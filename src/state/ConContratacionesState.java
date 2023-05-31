@@ -1,5 +1,7 @@
 package state;
 
+import java.util.GregorianCalendar;
+
 import excepciones.DomicilioInvalidoException;
 import interfaces.IState;
 import modelo.AbonadoFisico;
@@ -14,8 +16,9 @@ public class ConContratacionesState implements IState {
 		this.AbonadoF = AbonadoF;
 	}
 	
-	public void PagarFactura() {
+	public void PagarFactura(GregorianCalendar fecha, double total) {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + ",");
+		this.AbonadoF.PagarFactura(fecha,total);
 	
 	}
 	

@@ -1,5 +1,7 @@
 package state;
 
+import java.util.GregorianCalendar;
+
 import interfaces.IState;
 import modelo.AbonadoFisico;
 import modelo.Servicio;
@@ -12,7 +14,7 @@ public class SinContratacionesState implements IState {
 		this.AboandoF = AbonadoF;
 	}
 	
-	public void PagarFactura() {
+	public void PagarFactura(GregorianCalendar fecha, double total) {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede pagar la factura debido a que no tiene contrataciones hechas");
 		//no puede pagar aún”. EN LA VENTANA
 	}
