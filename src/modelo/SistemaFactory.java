@@ -15,15 +15,22 @@ import persistencia.PersistenciaXML;
  *         IAbonado
  */
 public class SistemaFactory implements Serializable {
-	static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
-	static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
+	private static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
+	private static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
 	IPersistencia persistencia = new PersistenciaXML();
+	private static SistemaFactory instance= null;
 
+	private SistemaFactory() {
+		super();
+	}
+	
 	/**
 	 * Constructor de la clase sistemaFactory
 	 */
-	public SistemaFactory() {
-		super();
+	public static SistemaFactory getInstance() {
+		if (instance == null)
+			instance = new SistemaFactory();
+		return instance;
 	}
 
 	/**

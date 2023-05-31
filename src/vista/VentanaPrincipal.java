@@ -21,10 +21,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Tecnico;
 
-public class VentanaPrincipal extends JFrame implements ActionListener {
+public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
@@ -116,21 +117,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.panelAccionesAbonado.add(this.panelPagaFactura);
 		
 		this.btnPagaFactura = new JButton("Paga servicio");
-		this.btnPagaFactura.addActionListener(this);
+		this.btnPagaFactura.addActionListener(Controlador.getInstance());
 		this.panelPagaFactura.add(this.btnPagaFactura);
 		
 		this.panelContrataNServicio = new JPanel();
 		this.panelAccionesAbonado.add(this.panelContrataNServicio);
 		
 		this.btnContrataNServicio = new JButton("Contrata nuevo servicio");
-		this.btnContrataNServicio.addActionListener(this);
+		this.btnContrataNServicio.addActionListener(Controlador.getInstance());
 		this.panelContrataNServicio.add(this.btnContrataNServicio);
 		
 		this.panelDarDeBajaS = new JPanel();
 		this.panelAccionesAbonado.add(this.panelDarDeBajaS);
 		
 		this.btnDarDeBajaS = new JButton("Dar de baja un servicio");
-		this.btnDarDeBajaS.addActionListener(this);
+		this.btnDarDeBajaS.addActionListener(Controlador.getInstance());
 		this.panelDarDeBajaS.add(this.btnDarDeBajaS);
 		
 		this.panelC2 = new JPanel();
@@ -143,17 +144,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.panelC3.setLayout(new BorderLayout(0, 0));
 		
 		this.panelTecnicos = new JPanel();
-		this.panelC3.add(this.panelTecnicos, BorderLayout.SOUTH);
+		this.panelC3.add(this.panelTecnicos, BorderLayout.SOUTH);		
 		
 		this.btnSolicitar = new JButton("Solicitar");
-		this.btnSolicitar.addActionListener(this);
+		this.btnSolicitar.addActionListener(Controlador.getInstance());
 		
 		this.btnDarDeBaja = new JButton("Eliminar");
-		this.btnDarDeBaja.addActionListener(this);
+		this.btnDarDeBaja.addActionListener(Controlador.getInstance());
 		this.btnDarDeBaja.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		this.btnAgregar = new JButton("Agregar");
-		this.btnAgregar.addActionListener(this);
+		this.btnAgregar.addActionListener(Controlador.getInstance());
 		this.btnAgregar.setHorizontalAlignment(SwingConstants.RIGHT);
 		this.panelTecnicos.setLayout(new BoxLayout(this.panelTecnicos, BoxLayout.X_AXIS));
 		this.panelTecnicos.add(this.btnSolicitar);
@@ -183,7 +184,5 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		this.listTecnicos.setModel(modeloListaTecnico);
 		
 	}
-
-	public void actionPerformed(ActionEvent e) {
-	}
+	
 }
