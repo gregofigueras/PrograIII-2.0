@@ -29,8 +29,12 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener {
 
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
@@ -55,9 +59,9 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblAbonados;
 	private JPanel panelSur;
 	private JTextArea textAreaInfo;
-	private JButton btnSolicitar;
-	private JButton btnDarDeBaja;
-	private JButton btnAgregar;
+	private JButton btnSolicitarTecnico;
+	private JButton btnEliminarTecnico;
+	private JButton btnAgregarTecnico;
 	private DefaultListModel<IAbonado> modeloListaAbonado;
 	private DefaultListModel<Tecnico> modeloListaTecnico;
 	private JTextField nombre;
@@ -179,6 +183,7 @@ public class VentanaPrincipal extends JFrame {
 		this.panelC2.add(this.panelTexto1);
 		
 		this.nombre = new JTextField();
+		this.nombre.addKeyListener(this);
 		this.panelTexto1.add(this.nombre);
 		this.nombre.setColumns(10);
 		
@@ -193,6 +198,7 @@ public class VentanaPrincipal extends JFrame {
 		this.panelC2.add(this.panelTexto2);
 		
 		this.dni = new JTextField();
+		this.dni.addKeyListener(this);
 		this.panelTexto2.add(this.dni);
 		this.dni.setColumns(10);
 		
@@ -201,10 +207,14 @@ public class VentanaPrincipal extends JFrame {
 		this.panelBotonesTipo.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		this.rdbtnJuridico = new JRadioButton("Juridico");
+		this.rdbtnJuridico.addMouseListener(this);
+		this.rdbtnJuridico.setEnabled(false);
 		buttonGroup.add(this.rdbtnJuridico);
 		this.panelBotonesTipo.add(this.rdbtnJuridico);
 		
 		this.rdbtnFisico = new JRadioButton("Fisico");
+		this.rdbtnFisico.addMouseListener(this);
+		this.rdbtnFisico.setEnabled(false);
 		buttonGroup.add(this.rdbtnFisico);
 		this.panelBotonesTipo.add(this.rdbtnFisico);
 		
@@ -213,14 +223,20 @@ public class VentanaPrincipal extends JFrame {
 		this.panelBotonesPago.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		this.rdbtnCheque = new JRadioButton("Cheque");
+		this.rdbtnCheque.addMouseListener(this);
+		this.rdbtnCheque.setEnabled(false);
 		buttonGroup_1.add(this.rdbtnCheque);
 		this.panelBotonesPago.add(this.rdbtnCheque);
 		
 		this.rdbtnEfectivo = new JRadioButton("Efectivo");
+		this.rdbtnEfectivo.addMouseListener(this);
+		this.rdbtnEfectivo.setEnabled(false);
 		buttonGroup_1.add(this.rdbtnEfectivo);
 		this.panelBotonesPago.add(this.rdbtnEfectivo);
 		
 		this.rdbtnCredito = new JRadioButton("Credito");
+		this.rdbtnCredito.addMouseListener(this);
+		this.rdbtnCredito.setEnabled(false);
 		buttonGroup_1.add(this.rdbtnCredito);
 		this.panelBotonesPago.add(this.rdbtnCredito);
 		
@@ -234,6 +250,7 @@ public class VentanaPrincipal extends JFrame {
 		this.panelC2.add(this.panelAgregarAbonado);
 		
 		this.btnAgregarAbonado = new JButton("Agregar");
+		this.btnAgregarAbonado.setEnabled(false);
 		this.panelAgregarAbonado.add(this.btnAgregarAbonado);
 		
 		this.panelC3 = new JPanel();
@@ -248,25 +265,25 @@ public class VentanaPrincipal extends JFrame {
 		this.panelSolicitar = new JPanel();
 		this.panelTecnicos.add(this.panelSolicitar);
 		
-		this.btnSolicitar = new JButton("Solicitar");
-		this.panelSolicitar.add(this.btnSolicitar);
-		this.btnSolicitar.addActionListener(Controlador.getInstance());
+		this.btnSolicitarTecnico = new JButton("Solicitar");
+		this.panelSolicitar.add(this.btnSolicitarTecnico);
+		this.btnSolicitarTecnico.addActionListener(Controlador.getInstance());
 		
 		this.panelEliminarTecnico = new JPanel();
 		this.panelTecnicos.add(this.panelEliminarTecnico);
 		
-		this.btnDarDeBaja = new JButton("Eliminar");
-		this.panelEliminarTecnico.add(this.btnDarDeBaja);
-		this.btnDarDeBaja.addActionListener(Controlador.getInstance());
-		this.btnDarDeBaja.setHorizontalAlignment(SwingConstants.LEFT);
+		this.btnEliminarTecnico = new JButton("Eliminar");
+		this.panelEliminarTecnico.add(this.btnEliminarTecnico);
+		this.btnEliminarTecnico.addActionListener(Controlador.getInstance());
+		this.btnEliminarTecnico.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		this.panelAgregarTecnico = new JPanel();
 		this.panelTecnicos.add(this.panelAgregarTecnico);
 		
-		this.btnAgregar = new JButton("Agregar");
-		this.panelAgregarTecnico.add(this.btnAgregar);
-		this.btnAgregar.addActionListener(Controlador.getInstance());
-		this.btnAgregar.setHorizontalAlignment(SwingConstants.RIGHT);
+		this.btnAgregarTecnico = new JButton("Agregar");
+		this.panelAgregarTecnico.add(this.btnAgregarTecnico);
+		this.btnAgregarTecnico.addActionListener(Controlador.getInstance());
+		this.btnAgregarTecnico.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		this.lblAccionesTecnico = new JLabel("Acciones de tecnico");
 		this.panelC3.add(this.lblAccionesTecnico, BorderLayout.NORTH);
@@ -292,4 +309,37 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		String nombre=  this.nombre.getText();
+		String dni= this.dni.getText();
+		boolean condicion = !(nombre.equals("") || nombre.equals(null))&& !(dni.equals("")|| dni.equals(null));
+		if (!condicion){
+			this.rdbtnCheque.setEnabled(condicion);
+			this.rdbtnEfectivo.setEnabled(condicion);
+			this.rdbtnCredito.setEnabled(condicion);
+			this.btnAgregarAbonado.setEnabled(condicion);
+		}
+		this.rdbtnFisico.setEnabled(condicion);
+		this.rdbtnJuridico.setEnabled(condicion);
+	}
+	public void keyTyped(KeyEvent e) {
+	}
+	public void mouseClicked(MouseEvent e) {
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+		boolean condicion1= (rdbtnJuridico.isSelected() || rdbtnFisico.isSelected()) && (rdbtnJuridico.isEnabled() && rdbtnFisico.isEnabled());
+		rdbtnCheque.setEnabled(condicion1);
+		rdbtnEfectivo.setEnabled(condicion1);
+		rdbtnCredito.setEnabled(condicion1);
+		boolean condicion2= rdbtnCheque.isSelected() || rdbtnCredito.isSelected() || rdbtnEfectivo.isSelected();
+		btnAgregarAbonado.setEnabled(condicion2);
+	}
 }
