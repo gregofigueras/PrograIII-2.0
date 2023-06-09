@@ -1,10 +1,15 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+
+import excepciones.DomicilioInvalidoException;
 import interfaces.IState;
 import state.ConContratacionesState;
+import state.SinContratacionesState;
 
 /**
  * @author 
@@ -25,6 +30,8 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	 */
 	public AbonadoFisico(String nombre, String DNI) {
 		super(nombre, DNI);
+		this.estado = new SinContratacionesState(this); 
+		
 		assert nombre != null : "nombre no valido";
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
@@ -58,7 +65,6 @@ public class AbonadoFisico extends Abonado implements Runnable{
 		return clonado;
 	}
 
-	@Override
 	public String getTipo() {
 		return "Fisico";
 	}
@@ -67,8 +73,6 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	public HashMap<String, Servicio> getServicio() {
 		return null;
 	}
-	
-	
 	
 	public void agregaServicio(String domicilio, Servicio servicio) {
 		assert domicilio != null : "domicilio no valido"; 
@@ -86,11 +90,63 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	}
 	
 	
+	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
+		assert domicilio != null : "domicilio no valido";
+		assert domicilio != "" : "domicilio no valido";
+
+		if (this.servicios.containsKey(domicilio)) {
+			servicios.remove(domicilio);
+			if (servicios.isEmpty())
+				this.estado = new SinContratacionesState(this);
+		} else
+			throw new DomicilioInvalidoException(domicilio);
+		assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
+	}
+	
 	
 	public void setEstado(IState estado)
     {
 		this.estado = estado;
     }
 	
+	
+	public void PagarFactura() 
+	{
+		this.estado.PagarFactura();
+	}
+	
+	
+	public void EfectuaPago(double d) {
+		double total=0;
+		
+		for (Factura factura: listaFacturas) {
+			if (!factura.isPago()) {
+				total+=factura.getTotal();
+				factura.setTotal(factura.getTotal()*d);
+				factura.setPago(true);
+			}
+		}
+		System.out.println("El abonado pago un total de: "+ total+" pesos");
+	}
+	
+	public void ContratarNuevoServicio(String domicilio,Servicio s) 
+	{
+		this.estado.ContratarNuevoServicio(domicilio,s);
+	}
+	
+	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException 
+	{
+		this.estado.BajaDeUnServicio(domicilio);
+	}
+	
+	
+	public void actua() 
+	{
+		this.estado.actua();
+	}
 
+	
+	public void run() {
+		this.actua();
+	}
 }

@@ -66,6 +66,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 *                   <br>
 	 *                   <b> post: </b> agrega servicio al hashmap de domicilios
 	 */
+	
 	public void agregaServicio(String domicilio, Servicio servicio) {
 		assert domicilio != null : "domicilio no valido";
 		assert domicilio != "" : "domicilio no valido";
@@ -91,7 +92,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		assert domicilio != "" : "domicilio no valido";
 
 		if (this.servicios.containsKey(domicilio)) {
-			servicios.remove(domicilio);
+			servicios.remove(domicilio);			
 		} else
 			throw new DomicilioInvalidoException(domicilio);
 
@@ -102,7 +103,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 * metodo void que imprime por pantalla cada uno de los servicios de un abonado
 	 * <b> post: </b> imprime por pantalla los servicios de un abonado
 	 */
-	@Override
+
 	public void imprimeServicios() {
 		Iterator<Entry<String, Servicio>> it = this.servicios.entrySet().iterator();
 		while (it.hasNext()) {
@@ -115,6 +116,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 */
 	public abstract double getCostoServicios();
 
+	
 	/**
 	 * metodo que clona el abonado <br>
 	 * puede lanzar una excepcion en caso que el abonado sea juridico <b> post: </b>
@@ -165,4 +167,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.libre = true;
 		notifyAll();
 	}
+	
+	
+	
 }

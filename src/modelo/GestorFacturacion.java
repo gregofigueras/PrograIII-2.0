@@ -15,6 +15,7 @@ public class GestorFacturacion {
 		this.listaAbonados = listaAbonados;
 
 	}
+	
 
 	public void Facturacion() {
 		Iterator<IAbonado> it = listaAbonados.iterator();
@@ -26,4 +27,6 @@ public class GestorFacturacion {
 		}
 	}
 
+	
+	
 }
