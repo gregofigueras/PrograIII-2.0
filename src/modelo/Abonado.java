@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import excepciones.DomicilioInvalidoException;
 import interfaces.IAbonado;
@@ -18,7 +19,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected String nombre;
 	protected String DNI;
 	private boolean libre = true;
-	private Tecnico tecnico;
+	private SistemaTecnicos sistemaTecnicos;
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
@@ -35,7 +36,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	public Abonado(String nombre, String DNI) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.tecnico = null;
+		this.sistemaTecnicos = null;
 		this.servicios = new HashMap<String, Servicio>();
 	}
 
@@ -147,22 +148,18 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		listaFacturas.add(factura);
 	}
 
-	public synchronized void ConsultaTecnica(Tecnico tecnico) {
-		while (libre == false) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void run(SistemaTecnicos sistemaTecnicos) {
+		int i;
+		i = this.sistemaTecnicos.ConsultaTecnica(this);
+		Random r = new Random();
+		int q = r.nextInt(60);
+		try {
+			Thread.sleep(q);
+			this.sistemaTecnicos.TerminaConsulta(this, i);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println("El tecnico " + this.tecnico.nombre + "esta asistiendo a " + this.nombre);
-		this.libre = false;
-	}
 
-	public synchronized void TerminaConsulta(Tecnico tecnico) {
-		System.out.println("El tecnico " + this.tecnico.nombre + " ahora esta libre");
-		this.libre = true;
-		notifyAll();
 	}
 }

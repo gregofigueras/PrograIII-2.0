@@ -16,14 +16,14 @@ import persistencia.PersistenciaXML;
  */
 public class SistemaFactory implements Serializable {
 	private static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
-	private static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
+
 	IPersistencia persistencia = new PersistenciaXML();
-	private static SistemaFactory instance= null;
+	private static SistemaFactory instance = null;
 
 	private SistemaFactory() {
 		super();
 	}
-	
+
 	/**
 	 * Constructor de la clase sistemaFactory
 	 */
@@ -86,12 +86,6 @@ public class SistemaFactory implements Serializable {
 		abonados.add(encapsulado);
 
 		return respuesta;
-	}
-
-	public Tecnico getTecnico(String nombre) {
-		Tecnico tecnico = new Tecnico(nombre);
-		tecnicos.add(tecnico);
-		return tecnico;
 	}
 
 	public void finalizaJornada() {
