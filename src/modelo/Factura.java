@@ -36,6 +36,7 @@ public class Factura implements Cloneable{
 		this.abonado.imprimeServicios();
 		total = this.abonado.getCostoServicios();
 		this.fecha = abonado.getFecha();
+		//no le falta un system.out?
 	}
 
 	/**
@@ -50,10 +51,13 @@ public class Factura implements Cloneable{
 
 	public void agregarServicio(String domicilio, Servicio s1) {
 		abonado.agregaServicio(domicilio, s1);
-
 	}
 	
 	
+	public void EfectuaPago(double total) {
+		this.total=total;
+		this.pago = true;
+	}
 	
 	public boolean isPago() {
 		return pago;

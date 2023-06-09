@@ -16,10 +16,9 @@ public class ConContratacionesState implements IState {
 		this.AbonadoF = AbonadoF;
 	}
 	
-	public void PagarFactura(GregorianCalendar fecha, double total) {
-		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + ",");
-		this.AbonadoF.PagarFactura(fecha,total);
-	
+	public void PagarFactura() {
+		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + " ,quiere pagar su factura");
+		this.AbonadoF.EfectuaPago(1);
 	}
 	
 	public void ContratarNuevoServicio(String domicilio, Servicio servicio) {
@@ -31,6 +30,11 @@ public class ConContratacionesState implements IState {
 	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + "quiere dar de baja un servicio");
 		this.AbonadoF.quitaServicio(domicilio);
+	}
+
+	
+	public void actua() {
+		System.out.println("El abonado tiene contrataciones");		
 	}
 }
 

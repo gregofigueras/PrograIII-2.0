@@ -14,7 +14,7 @@ public class SinContratacionesState implements IState {
 		this.AboandoF = AbonadoF;
 	}
 	
-	public void PagarFactura(GregorianCalendar fecha, double total) {
+	public void PagarFactura() {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede pagar la factura debido a que no tiene contrataciones hechas");
 		//no puede pagar aún”. EN LA VENTANA
 	}
@@ -27,6 +27,11 @@ public class SinContratacionesState implements IState {
 
 	public void BajaDeUnServicio(String Domicilio) {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede dar de baja un sercivio ya que no tiene servicios contratados");
+	}
+
+
+	public void actua() {
+		System.out.println("El abonado no tiene contrtaciones");	
 	}
 	
 }
