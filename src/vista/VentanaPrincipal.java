@@ -36,6 +36,7 @@ import java.awt.event.MouseEvent;
 
 public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener {
 
+	private ActionListener actionListener;
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
 	private JPanel panelCentral;
@@ -150,21 +151,18 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAccionesAbonado.add(this.panelPagaFactura);
 		
 		this.btnPagaFactura = new JButton("Paga servicio");
-		this.btnPagaFactura.addActionListener(Controlador.getInstance());
 		this.panelPagaFactura.add(this.btnPagaFactura);
 		
 		this.panelContrataNServicio = new JPanel();
 		this.panelAccionesAbonado.add(this.panelContrataNServicio);
 		
 		this.btnContrataNServicio = new JButton("Contrata nuevo servicio");
-		this.btnContrataNServicio.addActionListener(Controlador.getInstance());
 		this.panelContrataNServicio.add(this.btnContrataNServicio);
 		
 		this.panelDarDeBajaS = new JPanel();
 		this.panelAccionesAbonado.add(this.panelDarDeBajaS);
 		
 		this.btnDarDeBajaS = new JButton("Dar de baja un servicio");
-		this.btnDarDeBajaS.addActionListener(Controlador.getInstance());
 		this.panelDarDeBajaS.add(this.btnDarDeBajaS);
 		
 		this.panelC2 = new JPanel();
@@ -341,5 +339,17 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		rdbtnCredito.setEnabled(condicion1);
 		boolean condicion2= rdbtnCheque.isSelected() || rdbtnCredito.isSelected() || rdbtnEfectivo.isSelected();
 		btnAgregarAbonado.setEnabled(condicion2);
+	}
+	
+	public void setActionListener(ActionListener actionListener) {
+		this.btnPagaFactura.addActionListener(actionListener);
+		this.btnDarDeBajaS.addActionListener(actionListener);
+		this.btnContrataNServicio.addActionListener(actionListener);
+		this.btnAgregarAbonado.addActionListener(actionListener);
+		this.btnAgregarTecnico.addActionListener(actionListener);
+		this.btnEliminarAbonado.addActionListener(actionListener);
+		this.btnEliminarTecnico.addActionListener(actionListener);
+		this.btnSolicitarTecnico.addActionListener(actionListener);
+		this.actionListener=actionListener;
 	}
 }
