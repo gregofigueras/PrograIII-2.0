@@ -8,6 +8,7 @@ import interfaces.IAbonado;
 public class GestorFacturacion {
 	private IAbonado abonadoActual;
 	private Factura factura;
+	private ArrayList<IAbonado> listaAbonados;
 
 	public GestorFacturacion(ArrayList<IAbonado> listaAbonados) {
 		super();
