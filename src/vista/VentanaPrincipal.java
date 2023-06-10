@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,8 +36,6 @@ import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Tecnico;
-import javax.swing.BoxLayout;
-import javax.swing.border.MatteBorder;
 
 public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener, ListSelectionListener {
 
@@ -309,30 +308,30 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.textAreaConsola = new JTextArea();
 		this.panelSur.add(this.textAreaConsola);
 		this.panelSur.setPreferredSize(new Dimension(50, 40));
-		
+
 		this.panelAdicionales = new JPanel();
 		this.panelSur.add(this.panelAdicionales);
 		this.panelAdicionales.setLayout(new GridLayout(0, 3, 0, 0));
-		
+
 		this.panelIniciaJornada = new JPanel();
 		this.panelIniciaJornada.setBorder(new MatteBorder(1, 1, 1, 0, (Color) new Color(0, 0, 0)));
 		this.panelAdicionales.add(this.panelIniciaJornada);
-		
+
 		this.btnIniciaJornada = new JButton("Inicia jornada");
 		this.btnIniciaJornada.setActionCommand("Inicia jornada");
 		this.panelIniciaJornada.add(this.btnIniciaJornada);
-		
+
 		this.panelSimularMes = new JPanel();
 		this.panelSimularMes.setBorder(new LineBorder(new Color(0, 0, 0)));
 		this.panelAdicionales.add(this.panelSimularMes);
-		
+
 		this.btnSimularMes = new JButton("Simular mes");
 		this.panelSimularMes.add(this.btnSimularMes);
-		
+
 		this.panelFinalizaJornada = new JPanel();
 		this.panelFinalizaJornada.setBorder(new MatteBorder(1, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		this.panelAdicionales.add(this.panelFinalizaJornada);
-		
+
 		this.btnFinalizaJornada = new JButton("Finaliza jornada");
 		this.panelFinalizaJornada.add(this.btnFinalizaJornada);
 
@@ -431,12 +430,19 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 			if (this.listDomicilio.getSelectedValue() != null && this.listAbonados.getSelectedValue() != null)
 				this.actualizaServicios();
 		}
+
+		if (e.getSource() == this.listTecnicos) {
+			boolean condicion5 = !this.listTecnicos.isSelectionEmpty();
+			this.btnEliminarTecnico.setEnabled(condicion5);
+		}
+
 		boolean condicion3 = !this.listAbonados.isSelectionEmpty();
 		this.btnContrataNServicio.setEnabled(condicion3);
 		boolean condicion4 = !this.listDomicilio.isSelectionEmpty();
 		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
 		this.btnPagaFactura.setEnabled(condicion3);
 		this.btnEliminarAbonado.setEnabled(condicion3);
+
 	}
 
 	public void setActionListener(ActionListener actionListener) {
@@ -520,4 +526,24 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.textAreaServicio.setText(null);
 	}
 
+	public void bloqueaBotones() {
+		this.btnSimularMes.setEnabled(false);
+		this.btnFinalizaJornada.setEnabled(false);
+		this.nombre.setEnabled(false);
+		this.dni.setEnabled(false);
+		this.btnAgregarTecnico.setEnabled(false);
+		this.btnEliminarTecnico.setEnabled(false);
+		this.btnSolicitarTecnico.setEnabled(false);
+	}
+
+	public void DesbloqueaBotones() {
+		this.btnSimularMes.setEnabled(true);
+		this.btnFinalizaJornada.setEnabled(true);
+		this.nombre.setEnabled(true);
+		this.dni.setEnabled(true);
+		this.btnAgregarTecnico.setEnabled(true);
+		this.btnEliminarTecnico.setEnabled(true);
+		this.btnSolicitarTecnico.setEnabled(true);
+		this.btnIniciaJornada.setEnabled(false);
+	}
 }

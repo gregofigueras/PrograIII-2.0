@@ -78,6 +78,7 @@ public class Controlador implements ActionListener {
 		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			abonado.PagarFactura();
+
 		}
 	}
 
