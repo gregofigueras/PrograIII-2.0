@@ -2,7 +2,9 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,9 +21,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import java.awt.Component;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
 
 public class VentanaAgregaServicio extends JFrame implements ActionListener, KeyListener {
 
@@ -349,6 +348,28 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 
 	public String getDomicilio() {
 		return this.textFieldDomicilio.getText();
+	}
+
+	public int getCantBa() {
+		return Integer.parseInt(this.textFieldCantBA.getText());
+	}
+
+	public int getCantCamaras() {
+		return Integer.parseInt(this.textFieldCantCamaras.getText());
+	}
+
+	public boolean getAcom() {
+		return this.chckbxMovilAcomp.isSelected();
+	}
+
+	public String getPromo() {
+		if (this.rdbtnPromoDorada.isSelected()) {
+			return "Dorada";
+		} else if (this.rdbtnPromoPlatino.isSelected()) {
+			return "Platino";
+		} else
+			return null;
+
 	}
 
 }

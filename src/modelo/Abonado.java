@@ -52,7 +52,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		return DNI;
 	}
 
-	public HashMap<String, Servicio> getServicios() {
+	public HashMap<String, Servicio> getServicio() {
 		return servicios;
 	}
 

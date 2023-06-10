@@ -9,16 +9,28 @@ import modelo.Servicio;
 
 public interface IAbonado extends Cloneable {
 	double getCostoServicios();
+
 	String getNombre();
+
 	String getDNI();
+
 	String getTipo();
+
 	GregorianCalendar getFecha();
+
 	void imprimeServicios();
+
 	Object clone() throws CloneNotSupportedException;
+
 	void agregaServicio(String domicilio, Servicio servicio);
+
 	void quitaServicio(String domicilio) throws DomicilioInvalidoException;
-	HashMap<String,Servicio> getServicio();
+
+	HashMap<String, Servicio> getServicio();
+
 	void PagarFactura();
+
 	void AgregarFactura(Factura factura);
+
 	String toString();
 }
