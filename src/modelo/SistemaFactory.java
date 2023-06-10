@@ -54,6 +54,10 @@ public class SistemaFactory implements Serializable {
 		return this.abonados;
 	}
 
+	public void eliminaAbonado(IAbonado abonado) {
+		this.abonados.remove(abonado);
+	}
+	
 	public void finalizaJornada() {
 		try {
 			persistencia.abrirOutput("listaAsociada.xml");

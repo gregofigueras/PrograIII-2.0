@@ -66,6 +66,8 @@ public class AbonadoJuridico extends Abonado{
 		return null;
 	}
 	
-	
+	public String toString() {
+		return this.nombre+" - "+this.DNI;
+	}
 
 }

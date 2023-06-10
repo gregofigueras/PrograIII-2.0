@@ -3,7 +3,6 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -11,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.ButtonGroup;
@@ -27,11 +26,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controlador.Controlador;
 import interfaces.IAbonado;
+import modelo.Servicio;
 import modelo.Tecnico;
 
 public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener {
@@ -40,7 +41,6 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel contentPane;
 	private JPanel panelPrincipal;
 	private JPanel panelCentral;
-	private JPanel panelDer;
 	private JPanel panelC1;
 	private JPanel panelC2;
 	private JPanel panelC3;
@@ -57,7 +57,6 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JList<Tecnico> listTecnicos;
 	private JScrollPane panelIzq;
 	private JList<IAbonado> listAbonados;
-	private JLabel lblAbonados;
 	private JPanel panelSur;
 	private JTextArea textAreaInfo;
 	private JButton btnSolicitarTecnico;
@@ -65,6 +64,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JButton btnAgregarTecnico;
 	private DefaultListModel<IAbonado> modeloListaAbonado;
 	private DefaultListModel<Tecnico> modeloListaTecnico;
+	private DefaultListModel<HashMap<String,Servicio>> modeloListaServicio;
 	private JTextField nombre;
 	private JLabel lblNewLabel_1;
 	private JTextField dni;
@@ -90,6 +90,10 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel panelEliminarTecnico;
 	private JPanel panelAgregarTecnico;
 	private Controlador controlador ;
+	private JScrollPane scrollPaneDer;
+	private JList listServicios;
+	private JPanel panelDer;
+	private JPanel panel;
 
 
 	/**
@@ -108,14 +112,18 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.contentPane.add(this.panelPrincipal, BorderLayout.CENTER);
 		this.panelPrincipal.setLayout(new GridLayout(1, 3, 0, 0));
 		
+		this.panel = new JPanel();
+		this.panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Abonado", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		this.panelPrincipal.add(this.panel);
+		this.panel.setLayout(new BorderLayout(0, 0));
+		
 		this.panelIzq = new JScrollPane();
-		this.panelPrincipal.add(this.panelIzq);
+		this.panel.add(this.panelIzq);
 		
 		this.listAbonados = new JList<IAbonado>();
 		this.panelIzq.setViewportView(this.listAbonados);
-		
-		this.lblAbonados = new JLabel("Abonados");
-		this.panelIzq.setColumnHeaderView(this.lblAbonados);
+		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
+		this.listAbonados.setModel(modeloListaAbonado);
 		
 		this.panelCentral = new JPanel();
 		this.panelPrincipal.add(this.panelCentral);
@@ -272,9 +280,6 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.listTecnicos = new JList<Tecnico>();
 		this.panelC3.add(this.listTecnicos, BorderLayout.CENTER);
 		
-		this.panelDer = new JPanel();
-		this.panelPrincipal.add(this.panelDer);
-		
 		this.panelSur = new JPanel();
 		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
 		this.panelSur.setLayout(new BorderLayout(0, 0));
@@ -284,9 +289,19 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelSur.setPreferredSize(new Dimension(50, 40));
 		
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
-		this.listAbonados.setModel(modeloListaAbonado);
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
 		this.listTecnicos.setModel(modeloListaTecnico);
+		
+		this.panelDer = new JPanel();
+		this.panelDer.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		this.panelPrincipal.add(this.panelDer);
+		this.panelDer.setLayout(new BorderLayout(0, 0));
+		
+		this.scrollPaneDer = new JScrollPane();
+		this.panelDer.add(this.scrollPaneDer);
+		
+		this.listServicios = new JList();
+		this.scrollPaneDer.setViewportView(this.listServicios);
 		
 		this.setVisible(true);
 		
@@ -377,5 +392,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 			this.modeloListaAbonado.addElement(it.next());
 		}
 		this.repaint();
+	}
+	
+	public IAbonado getSelected() {
+		return this.listAbonados.getSelectedValue();
 	}
 }

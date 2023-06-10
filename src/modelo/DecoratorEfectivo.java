@@ -67,5 +67,8 @@ public class DecoratorEfectivo extends DecoratorPagos {
 		return encapsulado.getFecha();
 	}
 	
+	public String toString() {
+		return this.getNombre()+" - "+this.getDNI();
+	}
 	
 }

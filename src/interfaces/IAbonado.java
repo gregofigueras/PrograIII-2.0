@@ -20,4 +20,5 @@ public interface IAbonado extends Cloneable {
 	HashMap<String,Servicio> getServicio();
 	void PagarFactura();
 	void AgregarFactura(Factura factura);
+	String toString();
 }

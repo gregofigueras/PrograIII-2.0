@@ -149,4 +149,8 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	public void run() {
 		this.actua();
 	}
+	
+	public String toString() {
+		return this.nombre+" - "+this.DNI;
+	}
 }

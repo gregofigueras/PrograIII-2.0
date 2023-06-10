@@ -28,7 +28,7 @@ public class Controlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Contrata nuevo servicio")) {//Crea popup
-			this.ventanaAgregaServicio.setVisible(true);
+			this.ventanaAgregaServicio = new VentanaAgregaServicio();
 		}
 		else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {//Cierra el popup
 			this.ventanaAgregaServicio.dispose();
@@ -40,6 +40,10 @@ public class Controlador implements ActionListener {
 			String nombre = this.ventanaPrincipal.getNombre();
 			String DNI = this.ventanaPrincipal.getDNI();
 			sistema.creaAbonado(tipo, pago, nombre, DNI);
+			this.ventanaPrincipal.actualizaLista();
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Eliminar")) {
+			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelected());
 			this.ventanaPrincipal.actualizaLista();
 		}
 	}
