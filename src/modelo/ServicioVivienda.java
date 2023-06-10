@@ -40,13 +40,13 @@ public class ServicioVivienda extends Servicio {
 	@Override
 	public String toString() {
 		if (promo != null) {
-			return "Servicio a Vivienda : Precio base:" + precioBase + "$, Cantidad de camaras:" + cantCamaras
-					+ ", Cantidad de" + " botones antipanico:" + cantBotonAP + ", Movil de acompanamiento:" + movilAcomp
-					+ ", Id del servicio=" + numId + ", Promo:" + promo.getPromoNombre();
+			return "Vivienda : \n Precio base: $" + precioBase + "\n Cantidad de camaras:" + cantCamaras
+					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:" + movilAcomp
+					+ "\n Id del servicio=" + numId + "\n Promo:" + promo.getPromoNombre();
 		} else {
-			return "Servicio a Vivienda : Precio base:" + precioBase + "$, Cantidad de camaras:" + cantCamaras
-					+ ", Cantidad de" + " botones antipanico:" + cantBotonAP + ", Movil de acompanamiento:" + movilAcomp
-					+ ", Id del servicio=" + numId;
+			return "Vivienda : \n Precio base: $" + precioBase + "\n Cantidad de camaras:" + cantCamaras
+					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:" + movilAcomp
+					+ "\n Id del servicio=" + numId;
 		}
 	}
 
