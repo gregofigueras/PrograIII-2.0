@@ -6,9 +6,11 @@ public class Tecnico implements Serializable {
 	private String nombre;
 	public boolean libre;
 	private Abonado abonado;
+	private int id;
 
-	public Tecnico(String nombre) {
+	public Tecnico(String nombre, int id) {
 		this.nombre = nombre;
+		this.id = id;
 		this.abonado = null;
 		this.libre = true;
 	}

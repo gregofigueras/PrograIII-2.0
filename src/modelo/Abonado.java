@@ -74,6 +74,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		assert servicio != null : "servicio no valido";
 		assert servicio.numId != 0 : "servicio no valido";
 		servicios.put(domicilio, servicio);
+
 		assert servicios.get(domicilio) == servicio : "fallo en la postcondicion";
 		assert servicios.isEmpty() == true : "fallo invariante";
 
@@ -140,10 +141,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
-	public void PagarFactura() {
-		System.out.println("El monto a pagar es: " + this.getCostoServicios());
-		System.out.println("El abonado " + this.getNombre() + " ha pagado su factura");
-	}
+	public abstract void PagarFactura();
 
 	public void AgregarFactura(Factura factura) {
 		listaFacturas.add(factura);

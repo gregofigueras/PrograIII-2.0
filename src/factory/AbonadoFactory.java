@@ -11,9 +11,7 @@ import modelo.DecoratorEfectivo;
 import modelo.DecoratorPagos;
 
 public class AbonadoFactory {
-	
-	
-	
+
 	/**
 	 * Metodo que devuelve una nueva instancia segun los parametros dados
 	 * 
@@ -64,9 +62,7 @@ public class AbonadoFactory {
 		assert encapsulado.getTipo().equalsIgnoreCase(tipoAbonado) : "fallo en el postcondicion";
 		assert respuesta.getFormaPago().equalsIgnoreCase(formaPago) : "fallo en el postcondicion";
 
-
 		return respuesta;
 	}
-
 
 }

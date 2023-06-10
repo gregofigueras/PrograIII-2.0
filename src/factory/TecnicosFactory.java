@@ -11,15 +11,15 @@ public class TecnicosFactory {
 	private Random r;
 	private String abonado;
 
-	public void setTecnico(String nombre) {
-		Tecnico tecnico = new Tecnico(nombre);
+	public void setTecnico(String nombre, int id) {
+		Tecnico tecnico = new Tecnico(nombre, id);
 		tecnicos.add(tecnico);
 	}
 
 	public ArrayList<Tecnico> getTecnicos() {
 		return tecnicos;
 	}
-	
+
 	public synchronized int ConsultaTecnica(Abonado abonado) {
 		int i;
 		do

@@ -145,6 +145,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAccionesAbonado.add(this.panelPagaFactura);
 
 		this.btnPagaFactura = new JButton("Paga servicio");
+		this.btnPagaFactura.setEnabled(false);
 		this.panelPagaFactura.add(this.btnPagaFactura);
 
 		this.panelContrataNServicio = new JPanel();
@@ -159,6 +160,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAccionesAbonado.add(this.panelDarDeBajaS);
 
 		this.btnDarDeBajaS = new JButton("Dar de baja un servicio");
+		this.btnDarDeBajaS.setEnabled(false);
 		this.panelDarDeBajaS.add(this.btnDarDeBajaS);
 
 		this.panelC2 = new JPanel();
@@ -239,6 +241,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelC2.add(this.panelEliminarAbonado);
 
 		this.btnEliminarAbonado = new JButton("Eliminar");
+		this.btnEliminarAbonado.setEnabled(false);
 		this.panelEliminarAbonado.add(this.btnEliminarAbonado);
 
 		this.panelAgregarAbonado = new JPanel();
@@ -336,6 +339,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	}
 
 	public void mouseClicked(MouseEvent e) {
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -357,6 +361,11 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.btnAgregarAbonado.setEnabled(condicion2);
 		boolean condicion3 = !this.listAbonados.isSelectionEmpty();
 		this.btnContrataNServicio.setEnabled(condicion3);
+		boolean condicion4 = !this.listServicios.isSelectionEmpty();
+		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
+		this.btnPagaFactura.setEnabled(condicion3);
+		this.btnEliminarAbonado.setEnabled(condicion4);
+
 	}
 
 	public void setActionListener(ActionListener actionListener) {

@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -12,26 +10,25 @@ import state.ConContratacionesState;
 import state.SinContratacionesState;
 
 /**
- * @author 
- *Clase que representa un abonado de tipo fisico dentro del sistema
+ * @author Clase que representa un abonado de tipo fisico dentro del sistema
  */
-public class AbonadoFisico extends Abonado implements Runnable{
-	
-	
+public class AbonadoFisico extends Abonado implements Runnable {
+
 	private IState estado;
-	
+
 	/**
 	 * Constructor de la clase
+	 * 
 	 * @param nombre: nombre del abonado
-	 * @param DNI: DNI del abonado
-	 * <b> pre: </b> nombre tiene que ser no vacio y no null <br> 
-	 * <b> pre: </b> DNI tiene que ser no vacio y no null <br> 
-	 * <b> post: </b> Crea un objeto de tipo abonado 
+	 * @param DNI:    DNI del abonado <b> pre: </b> nombre tiene que ser no vacio y
+	 *                no null <br>
+	 *                <b> pre: </b> DNI tiene que ser no vacio y no null <br>
+	 *                <b> post: </b> Crea un objeto de tipo abonado
 	 */
 	public AbonadoFisico(String nombre, String DNI) {
 		super(nombre, DNI);
-		this.estado = new SinContratacionesState(this); 
-		
+		this.estado = new SinContratacionesState(this);
+
 		assert nombre != null : "nombre no valido";
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
@@ -39,29 +36,28 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	}
 
 	/**
-	 *metodo que calcula el costo neto de todos los vervicios
-	 * <b> pre: </b> HashMap debe ser no nulo <br>  
-	 * <b> post: </b> retorna el costo neto de los servicios de un domicilio 
+	 * metodo que calcula el costo neto de todos los vervicios <b> pre: </b> HashMap
+	 * debe ser no nulo <br>
+	 * <b> post: </b> retorna el costo neto de los servicios de un domicilio
 	 */
 	@Override
 	public double getCostoServicios() {
-		Iterator<Entry<String,Servicio>> it = this.servicios.entrySet().iterator();//Iterator del Set del HashMap
+		Iterator<Entry<String, Servicio>> it = this.servicios.entrySet().iterator();// Iterator del Set del HashMap
 		double resultado = 0;
-		
+
 		while (it.hasNext())
 			resultado += it.next().getValue().getCostoNeto();
 		return resultado;
 	}
 
-
 	/**
-	 *metodo que clona el abonado <br>
-	 *el metodo nunca va a lanzar una excepcion 
-	 *<b> post: </b> genera un clon de un abonado de tipo fisico
+	 * metodo que clona el abonado <br>
+	 * el metodo nunca va a lanzar una excepcion <b> post: </b> genera un clon de un
+	 * abonado de tipo fisico
 	 */
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		AbonadoFisico clonado= (AbonadoFisico) super.clone();
+		AbonadoFisico clonado = (AbonadoFisico) super.clone();
 		return clonado;
 	}
 
@@ -73,23 +69,22 @@ public class AbonadoFisico extends Abonado implements Runnable{
 	public HashMap<String, Servicio> getServicio() {
 		return null;
 	}
-	
+
 	public void agregaServicio(String domicilio, Servicio servicio) {
-		assert domicilio != null : "domicilio no valido"; 
-		assert domicilio != "" :  "domicilio no valido";
-		assert servicio != null : "servicio no valido"; 
-		assert servicio.numId!= 0 :  "servicio no valido";
-		
+		assert domicilio != null : "domicilio no valido";
+		assert domicilio != "" : "domicilio no valido";
+		assert servicio != null : "servicio no valido";
+		assert servicio.numId != 0 : "servicio no valido";
+
 		servicios.put(domicilio, servicio);
-		
-		this.estado = new ConContratacionesState (this);
-		
-		assert servicios.get(domicilio) == servicio: "fallo en la postcondicion";
+
+		this.estado = new ConContratacionesState(this);
+
+		assert servicios.get(domicilio) == servicio : "fallo en la postcondicion";
 		assert servicios.isEmpty() == true : "fallo invariante";
-		
+
 	}
-	
-	
+
 	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
 		assert domicilio != null : "domicilio no valido";
 		assert domicilio != "" : "domicilio no valido";
@@ -102,55 +97,45 @@ public class AbonadoFisico extends Abonado implements Runnable{
 			throw new DomicilioInvalidoException(domicilio);
 		assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
 	}
-	
-	
-	public void setEstado(IState estado)
-    {
+
+	public void setEstado(IState estado) {
 		this.estado = estado;
-    }
-	
-	
-	public void PagarFactura() 
-	{
+	}
+
+	public void PagarFactura() {
 		this.estado.PagarFactura();
 	}
-	
-	
+
 	public void EfectuaPago(double d) {
-		double total=0;
-		
-		for (Factura factura: listaFacturas) {
+		double total = 0;
+
+		for (Factura factura : listaFacturas) {
 			if (!factura.isPago()) {
-				total+=factura.getTotal();
-				factura.setTotal(factura.getTotal()*d);
+				total += factura.getTotal();
+				factura.setTotal(factura.getTotal() * d);
 				factura.setPago(true);
 			}
 		}
-		System.out.println("El abonado pago un total de: "+ total+" pesos");
+		System.out.println("El abonado pago un total de: " + total + " pesos");
 	}
-	
-	public void ContratarNuevoServicio(String domicilio,Servicio s) 
-	{
-		this.estado.ContratarNuevoServicio(domicilio,s);
+
+	public void ContratarNuevoServicio(String domicilio, Servicio s) {
+		this.estado.ContratarNuevoServicio(domicilio, s);
 	}
-	
-	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException 
-	{
+
+	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
 		this.estado.BajaDeUnServicio(domicilio);
 	}
-	
-	
-	public void actua() 
-	{
+
+	public void actua() {
 		this.estado.actua();
 	}
 
-	
 	public void run() {
 		this.actua();
 	}
-	
+
 	public String toString() {
-		return this.nombre+" - "+this.DNI;
+		return this.nombre + " - " + this.DNI;
 	}
 }

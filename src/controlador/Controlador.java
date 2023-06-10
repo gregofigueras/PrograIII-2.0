@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import factory.ServicioFactory;
 import interfaces.IAbonado;
@@ -45,7 +46,6 @@ public class Controlador implements ActionListener {
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
 			this.ventanaPrincipal.actualizaListaServicio();
-			System.out.println("hola");
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
@@ -58,6 +58,18 @@ public class Controlador implements ActionListener {
 		} else if (e.getActionCommand().equalsIgnoreCase("Eliminar")) {
 			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelected());
 			this.ventanaPrincipal.actualizaListaAbonado();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
+			IAbonado abonado = this.ventanaPrincipal.getSelected();
+			// Servicio servicio = this.ventanaPrincipal.getSelected();
+			// abonado.quitaServicio(servicio); //REVISAR EL QUITA SERVICIOS
+			this.ventanaAgregaServicio.dispose();
+			this.ventanaAgregaServicio.limpia();
+			this.ventanaPrincipal.actualizaListaServicio();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
+			IAbonado abonado = this.ventanaPrincipal.getSelected();
+			abonado.PagarFactura();
 		}
 	}
 
@@ -67,8 +79,15 @@ public class Controlador implements ActionListener {
 
 	public List<Servicio> getServicio() {
 		IAbonado abonado = this.ventanaPrincipal.getSelected();
+		abonado.imprimeServicios();
 		HashMap<String, Servicio> map = abonado.getServicio();
-		List<Servicio> list = new ArrayList<Servicio>(map.values());
+		System.out.println(map == null);
+		for (Map.Entry<String, Servicio> entry : map.entrySet()) {
+			String clave = entry.getKey();
+			Servicio servicio1 = entry.getValue();
+			System.out.println("Clave: " + clave + ", Valor: " + servicio1);
+		}
+		List<Servicio> list = new ArrayList<Servicio>(map.values()); // cambiar a que imprima hashmap para poder borrar?
 		return list;
 	}
 }

@@ -21,27 +21,25 @@ public class Sistema implements Serializable {
 	IPersistencia persistencia = new PersistenciaXML();
 	private static Sistema instance = null;
 	private TecnicosFactory tecnicos;
-	
-	
+
 	private Sistema() {
 		this.abonados = new ArrayList<IAbonado>();
 		this.tecnicos = new TecnicosFactory();
 	}
 
-	public void creaAbonado(String tipoAbonado, String formaPago, String nombre, String DNI) {//Para limpiar codigo y que no
-		IAbonado abonado;																	  //No este el factory aca metido
+	public void creaAbonado(String tipoAbonado, String formaPago, String nombre, String DNI) {// Para limpiar codigo y
+																								// que no
+		IAbonado abonado; // No este el factory aca metido
 		try {
 			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI);
 			this.abonados.add(abonado);
-		}
-		catch(TipoAbonadoInvalidoException e) {
+		} catch (TipoAbonadoInvalidoException e) {
 			e.getMessage();
-		}
-		catch(TipoPagoInvalidoException e) {
+		} catch (TipoPagoInvalidoException e) {
 			e.getMessage();
 		}
 	}
-	
+
 	/**
 	 * Constructor de la clase sistemaFactory
 	 */
@@ -50,15 +48,15 @@ public class Sistema implements Serializable {
 			instance = new Sistema();
 		return instance;
 	}
-	
-	public ArrayList<IAbonado> getAbonados(){
+
+	public ArrayList<IAbonado> getAbonados() {
 		return this.abonados;
 	}
 
 	public void eliminaAbonado(IAbonado abonado) {
 		this.abonados.remove(abonado);
 	}
-	
+
 	public void finalizaJornada() {
 		try {
 			persistencia.abrirOutput("listaAsociada.xml");
@@ -82,7 +80,7 @@ public class Sistema implements Serializable {
 			System.out.println("Archivo de lectura abierto");
 			abonados = (ArrayList<IAbonado>) persistencia.Leer();
 			System.out.println("Abonados cargados");
-			tecnicos = (TecnicosFactory)persistencia.Leer();
+			tecnicos = (TecnicosFactory) persistencia.Leer();
 			System.out.println("Tecnicos cargados");
 			persistencia.cerrarInput();
 			System.out.println("Archivo de lectura cerrado");
