@@ -256,4 +256,8 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 
 		this.btnAgregar.setEnabled(condicion1 && condicion2);
 	}
+	
+	public void setActionListener(ActionListener actionListener) {
+		this.btnAgregar.addActionListener(actionListener);
+	}
 }

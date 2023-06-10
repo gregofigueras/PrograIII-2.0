@@ -13,6 +13,10 @@ public class SistemaTecnicos {
 		tecnicos.add(tecnico);
 	}
 
+	public ArrayList<Tecnico> getTecnicos() {
+		return tecnicos;
+	}
+	
 	public synchronized int ConsultaTecnica(Abonado abonado) {
 		int i;
 		do

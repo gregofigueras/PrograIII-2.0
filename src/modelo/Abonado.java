@@ -159,10 +159,8 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 			Thread.sleep(q);
 			this.sistemaTecnicos.TerminaConsulta(this, i);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	

@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import excepciones.TipoAbonadoInvalidoException;
@@ -15,15 +16,31 @@ import persistencia.PersistenciaXML;
  *         IAbonado
  */
 public class SistemaFactory implements Serializable {
-	private static ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
-
+	private ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
 	IPersistencia persistencia = new PersistenciaXML();
 	private static SistemaFactory instance = null;
-
+	private SistemaTecnicos tecnicos;
+	
+	
 	private SistemaFactory() {
-		super();
+		this.abonados = new ArrayList<IAbonado>();
+		this.tecnicos = new SistemaTecnicos();
 	}
 
+	public void creaAbonado(String tipoAbonado, String formaPago, String nombre, String DNI) {//Para limpiar codigo y que no
+		IAbonado abonado;																	  //No este el factory aca metido
+		try {
+			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI);
+			this.abonados.add(abonado);
+		}
+		catch(TipoAbonadoInvalidoException e) {
+			e.getMessage();
+		}
+		catch(TipoPagoInvalidoException e) {
+			e.getMessage();
+		}
+	}
+	
 	/**
 	 * Constructor de la clase sistemaFactory
 	 */
@@ -32,60 +49,9 @@ public class SistemaFactory implements Serializable {
 			instance = new SistemaFactory();
 		return instance;
 	}
-
-	/**
-	 * Metodo que devuelve una nueva instancia segun los parametros dados
-	 * 
-	 * @param tipoAbonado: Tipo de abonado de la nueva instancia
-	 * @param formaPago:   Forma de pago del abonado
-	 * @param nombre:      Nombre del abonado
-	 * @param DNI:         DNI del abonado
-	 * @return: Devuelve una nueva instancia del tipo IAbonado <b>Pre: <b> el tipo
-	 *          de abonado debe ser distinto de null y no vacio <br>
-	 *          <b> Pre: <b> la forma de pago debe ser distinta de null y no vacia
-	 *          <b> <b>Pre:</b> nombre debe ser distinto de null y no vacio<br>
-	 *          <b>Pre:</b> DNI debe ser distinto de null y no vacio <b> Post: </b>
-	 *          se crea una instancia de abonado
-	 * @throws TipoAbonadoInvalidoException
-	 */
-	public static IAbonado getAbonado(String tipoAbonado, String formaPago, String nombre, String DNI)
-			throws TipoAbonadoInvalidoException, TipoPagoInvalidoException {
-		assert tipoAbonado != null : "tipo de abonado no valido";
-		assert tipoAbonado != "" : "tipo de abonado no valido";
-		assert formaPago != null : "forma de pago no valida";
-		assert formaPago != "" : "forma de pago no valida";
-		assert nombre != null : "nombre no valido";
-		assert nombre != "" : "nombre no valido";
-		assert DNI != null : "DNI no valido";
-		assert DNI != "" : "DNI no valido";
-		IAbonado encapsulado = null;
-		DecoratorPagos respuesta = null;
-
-		if (tipoAbonado.equalsIgnoreCase("Fisico"))
-			encapsulado = new AbonadoFisico(nombre, DNI);
-		else if (tipoAbonado.equalsIgnoreCase("Juridico"))
-			encapsulado = new AbonadoJuridico(nombre, DNI);
-		else
-			throw new TipoAbonadoInvalidoException();
-
-		if (encapsulado != null) {
-			if (formaPago.equalsIgnoreCase("Cheque"))
-				respuesta = new DecoratorCheque(encapsulado);
-			else if (formaPago.equalsIgnoreCase("Credito"))
-				respuesta = new DecoratorCredito(encapsulado);
-			else if (formaPago.equalsIgnoreCase("Efectivo"))
-				respuesta = new DecoratorEfectivo(encapsulado);
-			else
-				new TipoPagoInvalidoException();
-		}
-		assert encapsulado.getNombre() == nombre : "fallo en el postcondicion";
-		assert encapsulado.getDNI() == DNI : "fallo en el postcondicion";
-		assert encapsulado.getTipo().equalsIgnoreCase(tipoAbonado) : "fallo en el postcondicion";
-		assert respuesta.getFormaPago().equalsIgnoreCase(formaPago) : "fallo en el postcondicion";
-
-		abonados.add(encapsulado);
-
-		return respuesta;
+	
+	public ArrayList<IAbonado> getAbonados(){
+		return this.abonados;
 	}
 
 	public void finalizaJornada() {
@@ -109,14 +75,15 @@ public class SistemaFactory implements Serializable {
 		try {
 			persistencia.abrirInput("listaAsociada.xml");
 			System.out.println("Archivo de lectura abierto");
-			abonados = persistencia.Leer();
+			abonados = (ArrayList<IAbonado>) persistencia.Leer();
 			System.out.println("Abonados cargados");
-			tecnicos = persistencia.Leer();
+			tecnicos = (SistemaTecnicos)persistencia.Leer();
 			System.out.println("Tecnicos cargados");
 			persistencia.cerrarInput();
 			System.out.println("Archivo de lectura cerrado");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

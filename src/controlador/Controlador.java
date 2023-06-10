@@ -2,32 +2,49 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import interfaces.IAbonado;
 import modelo.SistemaFactory;
 import vista.VentanaAgregaServicio;
 import vista.VentanaPrincipal;
 
 public class Controlador implements ActionListener {
-	private SistemaFactory sistema = SistemaFactory.getInstance();
-	private static Controlador instance = null;
+	private SistemaFactory sistema;
 	private VentanaPrincipal ventanaPrincipal;
 	private VentanaAgregaServicio ventanaAgregaServicio;
 
-	private Controlador(SistemaFactory sistema) {
+	public Controlador() {
 		super();
-		this.sistema = sistema;
+		this.sistema = SistemaFactory.getInstance();
 		this.ventanaPrincipal = new VentanaPrincipal();
+		this.ventanaAgregaServicio = new VentanaAgregaServicio();
+		this.ventanaPrincipal.setActionListener(this);
+		this.ventanaPrincipal.setControlador(this);
+		this.ventanaAgregaServicio.setActionListener(this);
 	}
 
-	public static Controlador getInstance() {
-		if (instance == null) {
-			instance = new Controlador();
-		}
-		return instance;
-	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getActionCommand().equalsIgnoreCase("Contrata nuevo servicio")) {//Crea popup
+			this.ventanaAgregaServicio.setVisible(true);
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {//Cierra el popup
+			this.ventanaAgregaServicio.dispose();
+			this.ventanaAgregaServicio = null;
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
+			String tipo = this.ventanaPrincipal.getTipo();
+			String pago = this.ventanaPrincipal.getPago();
+			String nombre = this.ventanaPrincipal.getNombre();
+			String DNI = this.ventanaPrincipal.getDNI();
+			sistema.creaAbonado(tipo, pago, nombre, DNI);
+			this.ventanaPrincipal.actualizaLista();
+		}
+	}
+	
+	public ArrayList<IAbonado> getAbonados(){
+		return this.sistema.getAbonados();
 	}
 }

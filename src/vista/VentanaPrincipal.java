@@ -4,35 +4,35 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Tecnico;
-import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
 public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener {
 
@@ -89,22 +89,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel panelSolicitar;
 	private JPanel panelEliminarTecnico;
 	private JPanel panelAgregarTecnico;
+	private Controlador controlador ;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -265,14 +251,12 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		
 		this.btnSolicitarTecnico = new JButton("Solicitar");
 		this.panelSolicitar.add(this.btnSolicitarTecnico);
-		this.btnSolicitarTecnico.addActionListener(Controlador.getInstance());
 		
 		this.panelEliminarTecnico = new JPanel();
 		this.panelTecnicos.add(this.panelEliminarTecnico);
 		
 		this.btnEliminarTecnico = new JButton("Eliminar");
 		this.panelEliminarTecnico.add(this.btnEliminarTecnico);
-		this.btnEliminarTecnico.addActionListener(Controlador.getInstance());
 		this.btnEliminarTecnico.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		this.panelAgregarTecnico = new JPanel();
@@ -280,7 +264,6 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		
 		this.btnAgregarTecnico = new JButton("Agregar");
 		this.panelAgregarTecnico.add(this.btnAgregarTecnico);
-		this.btnAgregarTecnico.addActionListener(Controlador.getInstance());
 		this.btnAgregarTecnico.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		this.lblAccionesTecnico = new JLabel("Acciones de tecnico");
@@ -304,6 +287,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.listAbonados.setModel(modeloListaAbonado);
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
 		this.listTecnicos.setModel(modeloListaTecnico);
+		
+		this.setVisible(true);
 		
 	}
 	
@@ -351,5 +336,46 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.btnEliminarTecnico.addActionListener(actionListener);
 		this.btnSolicitarTecnico.addActionListener(actionListener);
 		this.actionListener=actionListener;
+	}
+	
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
+	
+	public String getNombre() {
+		return this.nombre.getText();
+	}
+	
+	public String getDNI() {
+		return this.dni.getText();
+	}
+	
+	public String getTipo() {
+		if (this.rdbtnJuridico.isSelected()) {
+			return "Juridico";
+		}
+		else
+			return "Fisico";
+	}
+	
+	public String getPago() {
+		if (this.rdbtnCheque.isSelected()) {
+			return "Cheque";
+		}
+		else if (this.rdbtnCredito.isSelected()) {
+			return "Credito";
+		}
+		else
+			return "Efectivo";
+	}
+	
+	public void actualizaLista() {
+		Iterator<IAbonado> it = this.controlador.getAbonados().iterator();
+		
+		this.modeloListaAbonado.clear();
+		while (it.hasNext()) {
+			this.modeloListaAbonado.addElement(it.next());
+		}
+		this.repaint();
 	}
 }
