@@ -58,7 +58,6 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 	 * 
 	 * @throws DomicilioInvalidoException
 	 */
-	@Override
 	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
 		assert encapsulado.getServicio().containsKey(domicilio) : "Domicilio no existente";
 		this.encapsulado.quitaServicio(domicilio);

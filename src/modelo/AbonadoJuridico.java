@@ -97,4 +97,9 @@ public class AbonadoJuridico extends Abonado {
 
 	}
 
+	@Override
+	public String getEstado() {
+		return null;
+	}
+
 }

@@ -36,5 +36,10 @@ public class ConContratacionesState implements IState {
 	public void actua() {
 		System.out.println("El abonado tiene contrataciones");		
 	}
+
+	@Override
+	public String getEstado() {
+		return "Con contrataciones";
+	}
 }
 
