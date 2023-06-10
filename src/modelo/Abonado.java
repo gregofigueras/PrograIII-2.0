@@ -113,6 +113,10 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
+	public Servicio getServicio(String domicilio) {
+		return this.servicios.get(domicilio);
+	}
+
 	/**
 	 * metodo abstracto que calcula el costo de todos los servicios de un cliente
 	 */

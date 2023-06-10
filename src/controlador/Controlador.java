@@ -60,7 +60,7 @@ public class Controlador implements ActionListener {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
-			Servicio servicio = this.ventanaPrincipal.getSelectedServicio();
+			// Servicio servicio = this.ventanaPrincipal.getSelectedServicio();
 			// abonado.quitaServicio(servicio); // REVISAR EL QUITA SERVICIOS
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
@@ -76,12 +76,16 @@ public class Controlador implements ActionListener {
 		return this.sistema.getAbonados();
 	}
 
-	public Set<String> getServicio() {
+	public Set<String> getDomicilios() {
 		IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 
 		HashMap<String, Servicio> map = abonado.getServicio();
 
 		Set<String> set = map.keySet();
 		return set;
+	}
+
+	public Servicio getServicio(String domicilio, IAbonado abonado) {
+		return abonado.getServicio(domicilio);
 	}
 }

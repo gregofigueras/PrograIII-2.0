@@ -59,7 +59,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JScrollPane panelIzq;
 	private JList<IAbonado> listAbonados;
 	private JPanel panelSur;
-	private JTextArea textAreaInfo;
+	private JTextArea textAreaServicio;
 	private JButton btnSolicitarTecnico;
 	private JButton btnEliminarTecnico;
 	private JButton btnAgregarTecnico;
@@ -96,9 +96,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel panelDer;
 	private JPanel panel;
 	private JScrollPane scrollPanelServicios;
-	private JList listServicio;
 	private JPanel Domicilio;
 	private JPanel Servicio;
+	private JTextArea TextAreaServicio;
 
 	/**
 	 * Create the frame.
@@ -297,8 +297,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
 		this.panelSur.setLayout(new BorderLayout(0, 0));
 
-		this.textAreaInfo = new JTextArea();
-		this.panelSur.add(this.textAreaInfo);
+		this.textAreaServicio = new JTextArea();
+		this.panelSur.add(this.textAreaServicio);
 		this.panelSur.setPreferredSize(new Dimension(50, 40));
 
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
@@ -322,10 +322,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 
 		this.listDomicilio = new JList<String>();
 		this.scrollPanelDomicilio.setViewportView(this.listDomicilio);
-		this.listDomicilio.setModel(modeloListaDomicilio);
-
-		this.listDomicilio.addListSelectionListener(this);
 		this.modeloListaDomicilio = new DefaultListModel<String>();
+		this.listDomicilio.setModel(modeloListaDomicilio);
+		this.listDomicilio.addListSelectionListener(this);
 
 		this.Servicio = new JPanel();
 		this.Servicio.setBorder(new TitledBorder(
@@ -337,8 +336,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.scrollPanelServicios = new JScrollPane();
 		this.Servicio.add(this.scrollPanelServicios);
 
-		this.listServicio = new JList();
-		this.scrollPanelServicios.setViewportView(this.listServicio);
+		this.TextAreaServicio = new JTextArea();
+		this.scrollPanelServicios.setViewportView(this.TextAreaServicio);
 
 		this.setVisible(true);
 
@@ -390,8 +389,10 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	public void valueChanged(ListSelectionEvent e) {
 		if (this.listAbonados.getSelectedValue() != null)
 			this.actualizaListaDomicilio();
-		if (this.listDomicilio.getSelectedValue() != null)
-			this.actualizaListaServicios();
+
+		if (this.listDomicilio.getSelectedValue() != null && this.listAbonados.getSelectedValue() != null)
+			this.actualizaServicios();
+
 		boolean condicion3 = !this.listAbonados.isSelectionEmpty();
 		this.btnContrataNServicio.setEnabled(condicion3);
 		boolean condicion4 = !this.listDomicilio.isSelectionEmpty();
@@ -451,7 +452,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	}
 
 	public void actualizaListaDomicilio() {
-		Iterator<String> it = this.controlador.getServicio().iterator();
+		Iterator<String> it = this.controlador.getDomicilios().iterator();
 		this.modeloListaDomicilio.clear();
 		while (it.hasNext()) {
 			this.modeloListaDomicilio.addElement(it.next());
@@ -459,12 +460,15 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.repaint();
 	}
 
-	public IAbonado getSelectedAbonado() {
-		return this.listAbonados.getSelectedValue();
+	public void actualizaServicios() {
+
+		Servicio servicio = this.controlador.getServicio(this.listDomicilio.getSelectedValue(),
+				this.listAbonados.getSelectedValue());
+		this.textAreaServicio.setText(servicio.toString());
 	}
 
-	public Servicio getSelectedServicio() {
-		return null; // this.listDomicilio.getSelectedValue();
+	public IAbonado getSelectedAbonado() {
+		return this.listAbonados.getSelectedValue();
 	}
 
 }

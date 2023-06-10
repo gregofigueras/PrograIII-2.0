@@ -26,6 +26,8 @@ public interface IAbonado extends Cloneable {
 
 	void quitaServicio(Servicio servicio) throws DomicilioInvalidoException;
 
+	Servicio getServicio(String domicilio);
+
 	HashMap<String, Servicio> getServicio();
 
 	void PagarFactura();
