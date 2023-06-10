@@ -300,6 +300,7 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		
 		this.textFieldCantBA.setEnabled(condicion1 && condicion2);
 		this.textFieldCantCamaras.setEnabled(condicion2 && condicion1);
+		this.textFieldDomicilio.setEnabled(condicion1 && condicion2);
 	}
 	
 	public void setActionListener(ActionListener actionListener) {
