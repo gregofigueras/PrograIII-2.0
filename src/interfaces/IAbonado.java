@@ -24,7 +24,7 @@ public interface IAbonado extends Cloneable {
 
 	void agregaServicio(String domicilio, Servicio servicio);
 
-	void quitaServicio(String domicilio) throws DomicilioInvalidoException;
+	void quitaServicio(Servicio servicio) throws DomicilioInvalidoException;
 
 	HashMap<String, Servicio> getServicio();
 

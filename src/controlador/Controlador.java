@@ -4,8 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import factory.ServicioFactory;
 import interfaces.IAbonado;
@@ -35,7 +34,7 @@ public class Controlador implements ActionListener {
 			this.ventanaAgregaServicio.setVisible(true);
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {// Cierra el popup
-			IAbonado abonado = this.ventanaPrincipal.getSelected();
+			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			String tipo = this.ventanaAgregaServicio.getTipoServicio();
 			int cantBA = this.ventanaAgregaServicio.getCantBa();
 			int cantCamaras = this.ventanaAgregaServicio.getCantCamaras();
@@ -45,7 +44,7 @@ public class Controlador implements ActionListener {
 			ServicioFactory.agregaServicio(abonado, domicilio, tipo, promo, cantBA, cantCamaras, acomp);
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
-			this.ventanaPrincipal.actualizaListaServicio();
+			this.ventanaPrincipal.actualizaListaDomicilio();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
@@ -56,19 +55,19 @@ public class Controlador implements ActionListener {
 			this.ventanaPrincipal.actualizaListaAbonado();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Eliminar")) {
-			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelected());
+			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelectedAbonado());
 			this.ventanaPrincipal.actualizaListaAbonado();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
-			IAbonado abonado = this.ventanaPrincipal.getSelected();
-			// Servicio servicio = this.ventanaPrincipal.getSelected();
-			// abonado.quitaServicio(servicio); //REVISAR EL QUITA SERVICIOS
+			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
+			Servicio servicio = this.ventanaPrincipal.getSelectedServicio();
+			// abonado.quitaServicio(servicio); // REVISAR EL QUITA SERVICIOS
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
-			this.ventanaPrincipal.actualizaListaServicio();
+			this.ventanaPrincipal.actualizaListaDomicilio();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
-			IAbonado abonado = this.ventanaPrincipal.getSelected();
+			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			abonado.PagarFactura();
 		}
 	}
@@ -77,17 +76,12 @@ public class Controlador implements ActionListener {
 		return this.sistema.getAbonados();
 	}
 
-	public List<Servicio> getServicio() {
-		IAbonado abonado = this.ventanaPrincipal.getSelected();
-		abonado.imprimeServicios();
+	public Set<String> getServicio() {
+		IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
+
 		HashMap<String, Servicio> map = abonado.getServicio();
-		System.out.println(map == null);
-		for (Map.Entry<String, Servicio> entry : map.entrySet()) {
-			String clave = entry.getKey();
-			Servicio servicio1 = entry.getValue();
-			System.out.println("Clave: " + clave + ", Valor: " + servicio1);
-		}
-		List<Servicio> list = new ArrayList<Servicio>(map.values()); // cambiar a que imprima hashmap para poder borrar?
-		return list;
+
+		Set<String> set = map.keySet();
+		return set;
 	}
 }

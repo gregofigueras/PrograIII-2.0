@@ -29,7 +29,8 @@ public class ServicioFactory {
 			estaPromo = platino;
 		} else
 			estaPromo = null;
-		if (tipo == "Comercio") {
+
+		if (tipo.equalsIgnoreCase("Comercio")) {
 			respuesta = new ServicioComercio(cantCamaras, cantBA, acomp, estaPromo);
 		} else
 			respuesta = new ServicioVivienda(cantCamaras, cantBA, acomp, estaPromo);

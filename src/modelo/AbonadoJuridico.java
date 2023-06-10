@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import excepciones.DomicilioInvalidoException;
+
 /**
  * @author Clase que representa un abonado de tipo juridico dentro del sistema
  */
@@ -61,7 +63,7 @@ public class AbonadoJuridico extends Abonado {
 
 	@Override
 	public HashMap<String, Servicio> getServicio() {
-		return null;
+		return this.servicios;
 	}
 
 	public String toString() {
@@ -80,6 +82,12 @@ public class AbonadoJuridico extends Abonado {
 			}
 		}
 		System.out.println("El abonado pago un total de: " + total + " pesos");
+	}
+
+	@Override
+	public void quitaServicio(Servicio servicio) throws DomicilioInvalidoException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

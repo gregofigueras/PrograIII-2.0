@@ -67,7 +67,7 @@ public class AbonadoFisico extends Abonado implements Runnable {
 
 	@Override
 	public HashMap<String, Servicio> getServicio() {
-		return null;
+		return this.servicios;
 	}
 
 	public void agregaServicio(String domicilio, Servicio servicio) {

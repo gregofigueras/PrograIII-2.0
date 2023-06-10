@@ -3,7 +3,6 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -80,18 +79,6 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAgregaServicio frame = new VentanaAgregaServicio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -342,6 +329,7 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 	public String getTipoServicio() {
 		if (this.rdbtnVivienda.isSelected()) {
 			return "Vivienda";
+
 		} else
 			return "Comercio";
 	}
