@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import excepciones.DomicilioInvalidoException;
 import interfaces.IState;
 import state.ConContratacionesState;
+import state.MorosoState;
 import state.SinContratacionesState;
 
 /**
@@ -14,7 +15,7 @@ import state.SinContratacionesState;
  */
 public class AbonadoFisico extends Abonado implements Runnable {
 
-	private IState estado;
+	private IState estado=new MorosoState(this);
 
 	/**
 	 * Constructor de la clase

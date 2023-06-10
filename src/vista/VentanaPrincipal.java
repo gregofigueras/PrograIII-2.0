@@ -546,4 +546,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.btnSolicitarTecnico.setEnabled(true);
 		this.btnIniciaJornada.setEnabled(false);
 	}
+
+	public void Moroso() {
+		this.textAreaConsola.append("No puede agregar servicio por ser moroso");
+		
+	}
 }

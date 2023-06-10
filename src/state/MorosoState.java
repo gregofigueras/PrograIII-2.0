@@ -37,7 +37,8 @@ public class MorosoState implements IState {
 
 	@Override
 	public String getEstado() {
-		return "Moroso";
+		String estado="Moroso";
+		return estado;
 	}
 
 }

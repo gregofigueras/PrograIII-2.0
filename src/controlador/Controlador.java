@@ -36,10 +36,22 @@ public class Controlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Contrata nuevo servicio")) {// Crea popup
+			boolean condicion1;
+			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
+			if (abonado.getTipo().equals("Fisico")) {
+				if (abonado.getEstado().equals("Moroso")) {
+					condicion1 = false;
+					this.ventanaPrincipal.Moroso();
+					
+				} else
+					condicion1 = true;
+			} else
+				condicion1 = true;
+			if (condicion1) {
 			this.ventanaAgregaServicio.setVisible(true);
+			}
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {// Cierra el popup
-			boolean condicion1;
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			String tipo = this.ventanaAgregaServicio.getTipoServicio();
 			int cantBA = this.ventanaAgregaServicio.getCantBa();
@@ -47,20 +59,11 @@ public class Controlador implements ActionListener {
 			boolean acomp = this.ventanaAgregaServicio.getAcom();
 			String promo = this.ventanaAgregaServicio.getPromo();
 			String domicilio = this.ventanaAgregaServicio.getDomicilio();
-			if (abonado.getTipo().equals("Fisico")) {
-				if (abonado.getEstado().equals("Moroso")) {
-					condicion1 = false;
-					
-				} else
-					condicion1 = true;
-			} else
-				condicion1 = true;
-			if (condicion1) {
+			
 				ServicioFactory.agregaServicio(abonado, domicilio, tipo, promo, cantBA, cantCamaras, acomp);
 				this.ventanaAgregaServicio.dispose();
 				this.ventanaAgregaServicio.limpia();
 				this.ventanaPrincipal.actualizaListaDomicilio();
-			}
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
