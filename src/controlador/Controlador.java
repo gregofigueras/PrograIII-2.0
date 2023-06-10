@@ -33,8 +33,9 @@ public class Controlador implements ActionListener {
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {// Cierra el popup
 			IAbonado abonado = this.ventanaPrincipal.getSelected();
 			String tipo = this.ventanaAgregaServicio.getTipoServicio();
-			String domicilio = this.ventanaAgregaServicio.getDomilio();
-			servicioFactory.agregaServicio(abonado, domicilio, tipo, promo, 0, 0, false);
+			// String promo = this.ventanaAgregaServicio.getPromo();
+			// String domicilio = this.ventanaAgregaServicio.getDomilio();
+			// servicioFactory.agregaServicio(abonado, domicilio, tipo, promo, 0, 0, false);
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
