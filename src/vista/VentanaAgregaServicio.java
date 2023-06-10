@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.Component;
 import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
 
 public class VentanaAgregaServicio extends JFrame implements ActionListener, KeyListener {
 
@@ -53,7 +54,6 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 	private JTextField textFieldCantBA;
 	private JPanel PanelMovil;
 	private JPanel panelTextFieldCantCamaras;
-	private JPanel panelTextFieldCantBA;
 	private final ButtonGroup buttonGroupTipoServ = new ButtonGroup();
 	private final ButtonGroup buttonGroupPromo = new ButtonGroup();
 	private JPanel panelRdbtnNinguna;
@@ -64,8 +64,19 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
-	private JLabel lblMovilAcomp;
 	private JCheckBox chckbxMovilAcomp;
+	private JLabel lblMovilAcomp;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JLabel lblDomicilio;
+	private JPanel panel_8;
+	private JPanel panel_9;
+	private JPanel panel_10;
+	private JPanel panel_11;
+	private JPanel panel_12;
+	private JTextField textFieldDomicilio;
+	private JPanel panel_13;
 
 	/**
 	 * Launch the application.
@@ -187,59 +198,91 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		this.panelLblCC = new JPanel();
 		this.panelLblCC.setBorder(new MatteBorder(1, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.panelLblCC);
-		this.panelLblCC.setLayout(new BorderLayout(0, 0));
+		this.panelLblCC.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		this.panel_10 = new JPanel();
+		this.panelLblCC.add(this.panel_10);
 
 		this.lblNewLabel = new JLabel("Cámaras");
+		this.panel_10.add(this.lblNewLabel);
 		this.lblNewLabel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		this.panelLblCC.add(this.lblNewLabel);
 
 		this.panelTextFieldCantCamaras = new JPanel();
 		this.panelTextFieldCantCamaras.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.panelTextFieldCantCamaras);
-
-		this.textFieldCantCamaras = new JTextField();
-		this.textFieldCantCamaras.addKeyListener(this);
-		this.panelTextFieldCantCamaras.setLayout(new GridLayout(3, 1, 0, 0));
+		this.panelTextFieldCantCamaras.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		this.panel_11 = new JPanel();
+		this.panelTextFieldCantCamaras.add(this.panel_11);
+		
+				this.textFieldCantCamaras = new JTextField();
+				this.panel_11.add(this.textFieldCantCamaras);
+				this.textFieldCantCamaras.addKeyListener(this);
 		this.textFieldCantCamaras.setEnabled(false);
-		this.panelTextFieldCantCamaras.add(this.textFieldCantCamaras);
 		this.textFieldCantCamaras.setColumns(10);
 
 		this.panelLblCCBA = new JPanel();
 		this.panelLblCCBA.setBorder(new MatteBorder(1, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.panelLblCCBA);
-		this.panelLblCCBA.setLayout(new BorderLayout(0, 0));
+		this.panelLblCCBA.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		this.panel_9 = new JPanel();
+		this.panelLblCCBA.add(this.panel_9);
 
 		this.lblCantBA = new JLabel("Botones antipánico");
-		this.panelLblCCBA.add(this.lblCantBA);
-
-		this.panelTextFieldCantBA = new JPanel();
-		this.panelTextFieldCantBA.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
-		this.panelDetalles.add(this.panelTextFieldCantBA);
-
-		this.textFieldCantBA = new JTextField();
-		this.textFieldCantBA.addKeyListener(this);
-		this.textFieldCantBA.setEnabled(false);
-		this.panelTextFieldCantBA.add(this.textFieldCantBA);
-		this.textFieldCantBA.setColumns(10);		
+		this.panel_9.add(this.lblCantBA);
+				
+				this.panel_7 = new JPanel();
+				this.panelDetalles.add(this.panel_7);
+				
+				this.panel_12 = new JPanel();
+				this.panel_7.add(this.panel_12);
+		
+				this.textFieldCantBA = new JTextField();
+				this.panel_12.add(this.textFieldCantBA);
+				this.textFieldCantBA.addKeyListener(this);
+				this.textFieldCantBA.setEnabled(false);
+				this.textFieldCantBA.setColumns(10);
 
 		this.PanelMovil = new JPanel();
 		this.PanelMovil.setBorder(new MatteBorder(1, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.PanelMovil);
 		
-		this.chckbxMovilAcomp = new JCheckBox("");
-		this.PanelMovil.add(this.chckbxMovilAcomp);
+		this.panel_8 = new JPanel();
+		this.PanelMovil.add(this.panel_8);
+		
+		this.lblDomicilio = new JLabel("Domicilio");
+		this.panel_8.add(this.lblDomicilio);
 		
 		this.panel_2 = new JPanel();
 		this.panelDetalles.add(this.panel_2);
 		
-		this.panel_3 = new JPanel();
-		this.panelDetalles.add(this.panel_3);
+		this.panel_13 = new JPanel();
+		this.panel_2.add(this.panel_13);
 		
-		this.lblMovilAcomp = new JLabel("Movil de acompañamiento");
-		this.panel_3.add(this.lblMovilAcomp);
+		this.textFieldDomicilio = new JTextField();
+		this.textFieldDomicilio.setEnabled(false);
+		this.panel_13.add(this.textFieldDomicilio);
+		this.textFieldDomicilio.setColumns(10);
 		
 		this.panel_4 = new JPanel();
 		this.panelDetalles.add(this.panel_4);
+		
+		this.panel_3 = new JPanel();
+		this.panelDetalles.add(this.panel_3);
+		this.panel_3.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		this.panel_5 = new JPanel();
+		this.panel_3.add(this.panel_5);
+		
+		this.lblMovilAcomp = new JLabel("Movil de acompañamiento");
+		this.panel_5.add(this.lblMovilAcomp);
+		
+		this.panel_6 = new JPanel();
+		this.panel_3.add(this.panel_6);
+		
+		this.chckbxMovilAcomp = new JCheckBox("");
+		this.panel_6.add(this.chckbxMovilAcomp);
 
 		this.panelBtnAgregar = new JPanel();
 		this.panelBtnAgregar.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
@@ -269,14 +312,15 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 	public void keyReleased(KeyEvent e) {
 		boolean condicion1 = false;
 		boolean condicion2 = false;
+		boolean condicion3 = false;
 		if (this.textFieldCantBA.getText() != null) {
 			condicion1 = Integer.parseInt(this.textFieldCantBA.getText()) >= 0;
 		}
 		if (this.textFieldCantCamaras.getText() != null) {
 			condicion2 = Integer.parseInt(this.textFieldCantCamaras.getText()) >= 0;
 		}
-		
-		this.btnAgregar.setEnabled(condicion1 && condicion2);
+		condicion3 = !this.textFieldDomicilio.getText().equals(null);
+		this.btnAgregar.setEnabled(condicion1 && condicion2 && condicion3);
 	}
 	
 	public void keyTyped(KeyEvent e) {
@@ -287,6 +331,7 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		this.buttonGroupTipoServ.clearSelection();
 		this.textFieldCantBA.setText(null);
 		this.textFieldCantCamaras.setText(null);
+		this.textFieldDomicilio.setText(null);
 		this.chckbxMovilAcomp.setSelected(false);
 		this.textFieldCantBA.setEnabled(false);
 		this.textFieldCantCamaras.setEnabled(false);
@@ -299,6 +344,10 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		}
 		else 
 			return "Comercio";
+	}
+	
+	public String getDomicilio() {
+		return this.textFieldDomicilio.getText();
 	}
 	
 }
