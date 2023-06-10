@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.ButtonGroup;
@@ -64,7 +63,6 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JButton btnAgregarTecnico;
 	private DefaultListModel<IAbonado> modeloListaAbonado;
 	private DefaultListModel<Tecnico> modeloListaTecnico;
-	private DefaultListModel<HashMap<String,Servicio>> modeloListaServicio;
 	private JTextField nombre;
 	private JLabel lblNewLabel_1;
 	private JTextField dni;
@@ -291,6 +289,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
 		this.listTecnicos.setModel(modeloListaTecnico);
+		this.listAbonados.setModel(modeloListaAbonado);
 		
 		this.panelDer = new JPanel();
 		this.panelDer.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -300,7 +299,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.scrollPaneDer = new JScrollPane();
 		this.panelDer.add(this.scrollPaneDer);
 		
-		this.listServicios = new JList();
+		this.listServicios = new JList<Servicio>();
 		this.scrollPaneDer.setViewportView(this.listServicios);
 		
 		this.setVisible(true);
