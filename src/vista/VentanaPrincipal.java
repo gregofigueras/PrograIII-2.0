@@ -35,6 +35,8 @@ import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Tecnico;
+import javax.swing.BoxLayout;
+import javax.swing.border.MatteBorder;
 
 public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener, ListSelectionListener {
 
@@ -99,6 +101,13 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel Domicilio;
 	private JPanel Servicio;
 	private JTextArea textAreaServicio;
+	private JButton btnIniciaJornada;
+	private JPanel panelAdicionales;
+	private JButton btnSimularMes;
+	private JButton btnFinalizaJornada;
+	private JPanel panelIniciaJornada;
+	private JPanel panelSimularMes;
+	private JPanel panelFinalizaJornada;
 
 	/**
 	 * Create the frame.
@@ -295,11 +304,37 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 
 		this.panelSur = new JPanel();
 		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
-		this.panelSur.setLayout(new BorderLayout(0, 0));
+		this.panelSur.setLayout(new GridLayout(0, 2, 0, 0));
 
 		this.textAreaConsola = new JTextArea();
 		this.panelSur.add(this.textAreaConsola);
 		this.panelSur.setPreferredSize(new Dimension(50, 40));
+		
+		this.panelAdicionales = new JPanel();
+		this.panelSur.add(this.panelAdicionales);
+		this.panelAdicionales.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		this.panelIniciaJornada = new JPanel();
+		this.panelIniciaJornada.setBorder(new MatteBorder(1, 1, 1, 0, (Color) new Color(0, 0, 0)));
+		this.panelAdicionales.add(this.panelIniciaJornada);
+		
+		this.btnIniciaJornada = new JButton("Inicia jornada");
+		this.btnIniciaJornada.setActionCommand("Inicia jornada");
+		this.panelIniciaJornada.add(this.btnIniciaJornada);
+		
+		this.panelSimularMes = new JPanel();
+		this.panelSimularMes.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.panelAdicionales.add(this.panelSimularMes);
+		
+		this.btnSimularMes = new JButton("Simular mes");
+		this.panelSimularMes.add(this.btnSimularMes);
+		
+		this.panelFinalizaJornada = new JPanel();
+		this.panelFinalizaJornada.setBorder(new MatteBorder(1, 0, 1, 1, (Color) new Color(0, 0, 0)));
+		this.panelAdicionales.add(this.panelFinalizaJornada);
+		
+		this.btnFinalizaJornada = new JButton("Finaliza jornada");
+		this.panelFinalizaJornada.add(this.btnFinalizaJornada);
 
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
@@ -413,6 +448,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.btnEliminarAbonado.addActionListener(actionListener);
 		this.btnEliminarTecnico.addActionListener(actionListener);
 		this.btnSolicitarTecnico.addActionListener(actionListener);
+		this.btnIniciaJornada.addActionListener(actionListener);
+		this.btnSimularMes.addActionListener(actionListener);
+		this.btnFinalizaJornada.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 
