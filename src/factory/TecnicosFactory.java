@@ -1,9 +1,12 @@
-package modelo;
+package factory;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SistemaTecnicos {
+import modelo.Abonado;
+import modelo.Tecnico;
+
+public class TecnicosFactory {
 	private static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
 	private Random r;
 	private String abonado;

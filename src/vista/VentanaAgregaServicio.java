@@ -19,8 +19,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.Component;
+import javax.swing.BoxLayout;
 
-public class VentanaAgregaServicio extends JFrame implements KeyListener, ActionListener {
+public class VentanaAgregaServicio extends JFrame implements ActionListener, KeyListener {
 
 	private JPanel contentPane;
 	private JLabel lblNuevoS;
@@ -49,8 +51,6 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 	private JTextField textFieldCantCamaras;
 	private JLabel lblCantBA;
 	private JTextField textFieldCantBA;
-	private JLabel lblMovilAcomp;
-	private JCheckBox chckbxMovilAcomp;
 	private JPanel PanelMovil;
 	private JPanel panelTextFieldCantCamaras;
 	private JPanel panelTextFieldCantBA;
@@ -61,6 +61,11 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 	private JPanel panelLblCC;
 	private JPanel panelLblCCBA;
 	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JLabel lblMovilAcomp;
+	private JCheckBox chckbxMovilAcomp;
 
 	/**
 	 * Launch the application.
@@ -83,7 +88,7 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 	 */
 	public VentanaAgregaServicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, 100, 450, 300);
+		setBounds(10, 100, 499, 327);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -177,13 +182,15 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 
 		this.panelDetalles = new JPanel();
 		this.panelDer.add(this.panelDetalles, BorderLayout.CENTER);
-		this.panelDetalles.setLayout(new GridLayout(0, 1, 0, 0));
+		this.panelDetalles.setLayout(new GridLayout(4, 2, 0, 0));
 
 		this.panelLblCC = new JPanel();
 		this.panelLblCC.setBorder(new MatteBorder(1, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.panelLblCC);
+		this.panelLblCC.setLayout(new BorderLayout(0, 0));
 
-		this.lblNewLabel = new JLabel("Cantidad de camaras");
+		this.lblNewLabel = new JLabel("Cámaras");
+		this.lblNewLabel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		this.panelLblCC.add(this.lblNewLabel);
 
 		this.panelTextFieldCantCamaras = new JPanel();
@@ -192,14 +199,17 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 
 		this.textFieldCantCamaras = new JTextField();
 		this.textFieldCantCamaras.addKeyListener(this);
+		this.panelTextFieldCantCamaras.setLayout(new GridLayout(3, 1, 0, 0));
+		this.textFieldCantCamaras.setEnabled(false);
 		this.panelTextFieldCantCamaras.add(this.textFieldCantCamaras);
 		this.textFieldCantCamaras.setColumns(10);
 
 		this.panelLblCCBA = new JPanel();
 		this.panelLblCCBA.setBorder(new MatteBorder(1, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.panelLblCCBA);
+		this.panelLblCCBA.setLayout(new BorderLayout(0, 0));
 
-		this.lblCantBA = new JLabel("Cantidad de botones antipánico");
+		this.lblCantBA = new JLabel("Botones antipánico");
 		this.panelLblCCBA.add(this.lblCantBA);
 
 		this.panelTextFieldCantBA = new JPanel();
@@ -207,57 +217,88 @@ public class VentanaAgregaServicio extends JFrame implements KeyListener, Action
 		this.panelDetalles.add(this.panelTextFieldCantBA);
 
 		this.textFieldCantBA = new JTextField();
-		this.panelTextFieldCantBA.add(this.textFieldCantBA);
-		this.textFieldCantBA.setColumns(10);
 		this.textFieldCantBA.addKeyListener(this);
+		this.textFieldCantBA.setEnabled(false);
+		this.panelTextFieldCantBA.add(this.textFieldCantBA);
+		this.textFieldCantBA.setColumns(10);		
 
 		this.PanelMovil = new JPanel();
 		this.PanelMovil.setBorder(new MatteBorder(1, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		this.panelDetalles.add(this.PanelMovil);
-
-		this.lblMovilAcomp = new JLabel("Movil de acompañamiento");
-		this.PanelMovil.add(this.lblMovilAcomp);
-
+		
 		this.chckbxMovilAcomp = new JCheckBox("");
 		this.PanelMovil.add(this.chckbxMovilAcomp);
+		
+		this.panel_2 = new JPanel();
+		this.panelDetalles.add(this.panel_2);
+		
+		this.panel_3 = new JPanel();
+		this.panelDetalles.add(this.panel_3);
+		
+		this.lblMovilAcomp = new JLabel("Movil de acompañamiento");
+		this.panel_3.add(this.lblMovilAcomp);
+		
+		this.panel_4 = new JPanel();
+		this.panelDetalles.add(this.panel_4);
 
 		this.panelBtnAgregar = new JPanel();
 		this.panelBtnAgregar.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		this.panelDer.add(this.panelBtnAgregar, BorderLayout.SOUTH);
 
 		this.btnAgregar = new JButton("Agregar servicio");
+		this.btnAgregar.setEnabled(false);
 		this.panelBtnAgregar.add(this.btnAgregar);
-	}
-
-	public void keyPressed(KeyEvent e) {
-
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int cantCamaras = 0;
-		int cantBotAntiPanico = 0;
-
-		try {
-			cantCamaras = Integer.parseInt(this.textFieldCantCamaras.getText());
-			cantBotAntiPanico = Integer.parseInt(this.textFieldCantBA.getText());
-		} catch (NumberFormatException exc) {
-
-		}
-		boolean condicion = cantCamaras >= 0 && cantBotAntiPanico >= 0;
-		this.btnAgregar.setEnabled(condicion);
-	}
-
-	public void keyTyped(KeyEvent e) {
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		boolean condicion1 = this.buttonGroupPromo.getSelection() != null;
 		boolean condicion2 = this.buttonGroupTipoServ.getSelection() != null;
-
-		this.btnAgregar.setEnabled(condicion1 && condicion2);
+		
+		this.textFieldCantBA.setEnabled(condicion1 && condicion2);
+		this.textFieldCantCamaras.setEnabled(condicion2 && condicion1);
 	}
 	
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAgregar.addActionListener(actionListener);
 	}
+	
+	public void keyPressed(KeyEvent e) {
+	}
+	
+	public void keyReleased(KeyEvent e) {
+		boolean condicion1 = false;
+		boolean condicion2 = false;
+		if (this.textFieldCantBA.getText() != null) {
+			condicion1 = Integer.parseInt(this.textFieldCantBA.getText()) >= 0;
+		}
+		if (this.textFieldCantCamaras.getText() != null) {
+			condicion2 = Integer.parseInt(this.textFieldCantCamaras.getText()) >= 0;
+		}
+		
+		this.btnAgregar.setEnabled(condicion1 && condicion2);
+	}
+	
+	public void keyTyped(KeyEvent e) {
+	}
+	
+	public void limpia() {
+		this.buttonGroupPromo.clearSelection();
+		this.buttonGroupTipoServ.clearSelection();
+		this.textFieldCantBA.setText(null);
+		this.textFieldCantCamaras.setText(null);
+		this.chckbxMovilAcomp.setSelected(false);
+		this.textFieldCantBA.setEnabled(false);
+		this.textFieldCantCamaras.setEnabled(false);
+		this.btnAgregar.setEnabled(false);
+	}
+	
+	public String getTipoServicio() {
+		if (this.rdbtnVivienda.isSelected()) {
+			return "Vivienda";
+		}
+		else 
+			return "Comercio";
+	}
+	
 }

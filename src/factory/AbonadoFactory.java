@@ -1,8 +1,14 @@
-package modelo;
+package factory;
 
 import excepciones.TipoAbonadoInvalidoException;
 import excepciones.TipoPagoInvalidoException;
 import interfaces.IAbonado;
+import modelo.AbonadoFisico;
+import modelo.AbonadoJuridico;
+import modelo.DecoratorCheque;
+import modelo.DecoratorCredito;
+import modelo.DecoratorEfectivo;
+import modelo.DecoratorPagos;
 
 public class AbonadoFactory {
 	

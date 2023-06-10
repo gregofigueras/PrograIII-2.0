@@ -2,11 +2,12 @@ package modelo;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import excepciones.TipoAbonadoInvalidoException;
 import excepciones.TipoPagoInvalidoException;
+import factory.AbonadoFactory;
+import factory.TecnicosFactory;
 import interfaces.IAbonado;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
@@ -15,16 +16,16 @@ import persistencia.PersistenciaXML;
  * @author Clase del patron factory para crear nuevos objetos de instancia
  *         IAbonado
  */
-public class SistemaFactory implements Serializable {
+public class Sistema implements Serializable {
 	private ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
 	IPersistencia persistencia = new PersistenciaXML();
-	private static SistemaFactory instance = null;
-	private SistemaTecnicos tecnicos;
+	private static Sistema instance = null;
+	private TecnicosFactory tecnicos;
 	
 	
-	private SistemaFactory() {
+	private Sistema() {
 		this.abonados = new ArrayList<IAbonado>();
-		this.tecnicos = new SistemaTecnicos();
+		this.tecnicos = new TecnicosFactory();
 	}
 
 	public void creaAbonado(String tipoAbonado, String formaPago, String nombre, String DNI) {//Para limpiar codigo y que no
@@ -44,9 +45,9 @@ public class SistemaFactory implements Serializable {
 	/**
 	 * Constructor de la clase sistemaFactory
 	 */
-	public static SistemaFactory getInstance() {
+	public static Sistema getInstance() {
 		if (instance == null)
-			instance = new SistemaFactory();
+			instance = new Sistema();
 		return instance;
 	}
 	
@@ -81,7 +82,7 @@ public class SistemaFactory implements Serializable {
 			System.out.println("Archivo de lectura abierto");
 			abonados = (ArrayList<IAbonado>) persistencia.Leer();
 			System.out.println("Abonados cargados");
-			tecnicos = (SistemaTecnicos)persistencia.Leer();
+			tecnicos = (TecnicosFactory)persistencia.Leer();
 			System.out.println("Tecnicos cargados");
 			persistencia.cerrarInput();
 			System.out.println("Archivo de lectura cerrado");

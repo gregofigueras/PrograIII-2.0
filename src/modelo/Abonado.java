@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import excepciones.DomicilioInvalidoException;
+import factory.TecnicosFactory;
 import interfaces.IAbonado;
 
 /**
@@ -19,7 +20,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected String nombre;
 	protected String DNI;
 	private boolean libre = true;
-	private SistemaTecnicos sistemaTecnicos;
+	private TecnicosFactory sistemaTecnicos;
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
@@ -150,7 +151,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		listaFacturas.add(factura);
 	}
 
-	public void run(SistemaTecnicos sistemaTecnicos) {
+	public void run(TecnicosFactory sistemaTecnicos) {
 		int i;
 		i = this.sistemaTecnicos.ConsultaTecnica(this);
 		Random r = new Random();

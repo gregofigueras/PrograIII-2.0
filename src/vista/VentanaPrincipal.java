@@ -63,6 +63,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JButton btnAgregarTecnico;
 	private DefaultListModel<IAbonado> modeloListaAbonado;
 	private DefaultListModel<Tecnico> modeloListaTecnico;
+	private DefaultListModel<Servicio> modeloListaServicio;
 	private JTextField nombre;
 	private JLabel lblNewLabel_1;
 	private JTextField dni;
@@ -89,7 +90,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	private JPanel panelAgregarTecnico;
 	private Controlador controlador ;
 	private JScrollPane scrollPaneDer;
-	private JList listServicios;
+	private JList<Servicio> listServicios;
 	private JPanel panelDer;
 	private JPanel panel;
 
@@ -301,6 +302,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		
 		this.listServicios = new JList<Servicio>();
 		this.scrollPaneDer.setViewportView(this.listServicios);
+		this.modeloListaServicio = new DefaultListModel<Servicio>();
+		this.listServicios.setModel(modeloListaServicio);
 		
 		this.setVisible(true);
 		
@@ -383,7 +386,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 			return "Efectivo";
 	}
 	
-	public void actualizaLista() {
+	public void actualizaListaAbonado() {
 		Iterator<IAbonado> it = this.controlador.getAbonados().iterator();
 		
 		this.modeloListaAbonado.clear();

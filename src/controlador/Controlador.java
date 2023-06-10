@@ -5,18 +5,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import interfaces.IAbonado;
-import modelo.SistemaFactory;
+import modelo.Sistema;
 import vista.VentanaAgregaServicio;
 import vista.VentanaPrincipal;
 
 public class Controlador implements ActionListener {
-	private SistemaFactory sistema;
+	private Sistema sistema;
 	private VentanaPrincipal ventanaPrincipal;
 	private VentanaAgregaServicio ventanaAgregaServicio;
 
 	public Controlador() {
 		super();
-		this.sistema = SistemaFactory.getInstance();
+		this.sistema = Sistema.getInstance();
 		this.ventanaPrincipal = new VentanaPrincipal();
 		this.ventanaAgregaServicio = new VentanaAgregaServicio();
 		this.ventanaPrincipal.setActionListener(this);
@@ -28,11 +28,16 @@ public class Controlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Contrata nuevo servicio")) {//Crea popup
-			this.ventanaAgregaServicio = new VentanaAgregaServicio();
+			this.ventanaAgregaServicio.setVisible(true);
 		}
 		else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {//Cierra el popup
+			IAbonado abonado = this.ventanaPrincipal.getSelected();
+			String tipo = this.ventanaAgregaServicio.getTipoServicio();
+			System.out.println(tipo);
+			System.out.println(abonado);
+			
 			this.ventanaAgregaServicio.dispose();
-			this.ventanaAgregaServicio = null;
+			this.ventanaAgregaServicio.limpia();
 		}
 		else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
@@ -40,11 +45,11 @@ public class Controlador implements ActionListener {
 			String nombre = this.ventanaPrincipal.getNombre();
 			String DNI = this.ventanaPrincipal.getDNI();
 			sistema.creaAbonado(tipo, pago, nombre, DNI);
-			this.ventanaPrincipal.actualizaLista();
+			this.ventanaPrincipal.actualizaListaAbonado();
 		}
 		else if (e.getActionCommand().equalsIgnoreCase("Eliminar")) {
 			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelected());
-			this.ventanaPrincipal.actualizaLista();
+			this.ventanaPrincipal.actualizaListaAbonado();
 		}
 	}
 	
