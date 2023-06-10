@@ -35,4 +35,9 @@ public class MorosoState implements IState {
 		System.out.println("El abonado se encuentra en estado MOROSO");
 	}
 
+	@Override
+	public String getEstado() {
+		return "Moroso";
+	}
+
 }

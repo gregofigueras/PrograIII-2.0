@@ -33,6 +33,11 @@ public class SinContratacionesState implements IState {
 	public void actua() {
 		System.out.println("El abonado no tiene contrtaciones");	
 	}
+
+	@Override
+	public String getEstado() {
+		return "Sin contrataciones";
+	}
 	
 }
 

@@ -71,4 +71,8 @@ public class DecoratorEfectivo extends DecoratorPagos {
 		return this.getNombre()+" - "+this.getDNI();
 	}
 	
+	@Override
+	public String getEstado() {
+		return this.encapsulado.getEstado();
+	}
 }

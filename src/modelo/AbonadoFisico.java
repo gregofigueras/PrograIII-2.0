@@ -102,6 +102,10 @@ public class AbonadoFisico extends Abonado implements Runnable {
 	public void setEstado(IState estado) {
 		this.estado = estado;
 	}
+	
+	public String getEstado() {
+		return this.estado.getEstado();
+	}
 
 	public void PagarFactura() {
 		this.estado.PagarFactura();

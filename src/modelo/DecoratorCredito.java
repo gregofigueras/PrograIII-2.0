@@ -69,4 +69,9 @@ public class DecoratorCredito extends DecoratorPagos{
 	public String toString() {
 		return this.getNombre()+" - "+this.getDNI();
 	}
+	
+	@Override
+	public String getEstado() {
+		return this.encapsulado.getEstado();
+	}
 }

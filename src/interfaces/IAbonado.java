@@ -35,4 +35,6 @@ public interface IAbonado extends Cloneable {
 	void AgregarFactura(Factura factura);
 
 	String toString();
+	
+	String getEstado();
 }
