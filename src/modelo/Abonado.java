@@ -19,7 +19,6 @@ import interfaces.IAbonado;
 public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected String nombre;
 	protected String DNI;
-	private boolean libre = true;
 	private TecnicosFactory sistemaTecnicos;
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
@@ -68,7 +67,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 *                   <br>
 	 *                   <b> post: </b> agrega servicio al hashmap de domicilios
 	 */
-	
+
 	public void agregaServicio(String domicilio, Servicio servicio) {
 		assert domicilio != null : "domicilio no valido";
 		assert domicilio != "" : "domicilio no valido";
@@ -94,7 +93,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		assert domicilio != "" : "domicilio no valido";
 
 		if (this.servicios.containsKey(domicilio)) {
-			servicios.remove(domicilio);			
+			servicios.remove(domicilio);
 		} else
 			throw new DomicilioInvalidoException(domicilio);
 
@@ -118,7 +117,6 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 */
 	public abstract double getCostoServicios();
 
-	
 	/**
 	 * metodo que clona el abonado <br>
 	 * puede lanzar una excepcion en caso que el abonado sea juridico <b> post: </b>
@@ -163,7 +161,5 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }
