@@ -1,7 +1,6 @@
 package vista;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,25 +27,6 @@ public class VentanaAgregaTecnico extends JFrame implements ActionListener {
 	private JTextField textFieldIDTecnico;
 	private JTextField textFieldNombreTecnico;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAgregaTecnico frame = new VentanaAgregaTecnico();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaAgregaTecnico() {
 		setTitle("Nuevo Tecnico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +70,8 @@ public class VentanaAgregaTecnico extends JFrame implements ActionListener {
 		this.panelAbajo.add(this.btnCancelarAgregar);
 
 		this.btnCancelarAgregar.addActionListener(this);
+
+		this.setVisible(false);
 	}
 
 	public void setActionListener(ActionListener actionListener) {

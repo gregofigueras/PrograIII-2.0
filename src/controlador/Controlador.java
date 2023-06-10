@@ -12,21 +12,25 @@ import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Sistema;
 import vista.VentanaAgregaServicio;
+import vista.VentanaAgregaTecnico;
 import vista.VentanaPrincipal;
 
 public class Controlador implements ActionListener {
 	private Sistema sistema;
 	private VentanaPrincipal ventanaPrincipal;
 	private VentanaAgregaServicio ventanaAgregaServicio;
+	private VentanaAgregaTecnico ventanaAgregaTecnico;
 
 	public Controlador() {
 		super();
 		this.sistema = Sistema.getInstance();
 		this.ventanaPrincipal = new VentanaPrincipal();
+		this.ventanaAgregaTecnico = new VentanaAgregaTecnico();
 		this.ventanaAgregaServicio = new VentanaAgregaServicio();
 		this.ventanaPrincipal.setActionListener(this);
 		this.ventanaPrincipal.setControlador(this);
 		this.ventanaAgregaServicio.setActionListener(this);
+		this.ventanaAgregaTecnico.setActionListener(this);
 	}
 
 	@Override
