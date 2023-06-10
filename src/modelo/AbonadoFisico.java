@@ -50,11 +50,25 @@ public class AbonadoFisico extends Abonado implements Runnable {
 		return resultado;
 	}
 
+	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
+		assert domicilio != null : "domicilio no valido";
+		assert domicilio != "" : "domicilio no valido";
+
+		if (this.servicios.containsKey(domicilio)) {
+			servicios.remove(domicilio);
+			if (servicios.isEmpty())
+				this.estado = new SinContratacionesState(this);
+		} else
+			throw new DomicilioInvalidoException(domicilio);
+		assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
+	}
+
 	/**
 	 * metodo que clona el abonado <br>
 	 * el metodo nunca va a lanzar una excepcion <b> post: </b> genera un clon de un
 	 * abonado de tipo fisico
 	 */
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		AbonadoFisico clonado = (AbonadoFisico) super.clone();
@@ -83,19 +97,6 @@ public class AbonadoFisico extends Abonado implements Runnable {
 		assert servicios.get(domicilio) == servicio : "fallo en la postcondicion";
 		assert servicios.isEmpty() == true : "fallo invariante";
 
-	}
-
-	public void quitaServicio(String domicilio) throws DomicilioInvalidoException {
-		assert domicilio != null : "domicilio no valido";
-		assert domicilio != "" : "domicilio no valido";
-
-		if (this.servicios.containsKey(domicilio)) {
-			servicios.remove(domicilio);
-			if (servicios.isEmpty())
-				this.estado = new SinContratacionesState(this);
-		} else
-			throw new DomicilioInvalidoException(domicilio);
-		assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
 	}
 
 	public void setEstado(IState estado) {

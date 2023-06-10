@@ -89,17 +89,8 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 *                   <b> post: </b> elimina un servicio del hashmap de
 	 *                   domicilios
 	 */
-	public void quitaServicio(Servicio servicio) throws DomicilioInvalidoException {
-		// assert domicilio != null : "domicilio no valido";
-		// assert domicilio != "" : "domicilio no valido";
 
-		if (this.servicios.containsValue(servicio)) {
-			servicios.remove(servicio);
-		} else
-			throw new DomicilioInvalidoException("hola");
-
-		// assert servicios.containsKey(domicilio) : "fallo en el postcodigo";
-	}
+	public abstract void quitaServicio(String domicilio) throws DomicilioInvalidoException;
 
 	/**
 	 * metodo void que imprime por pantalla cada uno de los servicios de un abonado

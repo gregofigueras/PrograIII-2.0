@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import excepciones.DomicilioInvalidoException;
 import factory.ServicioFactory;
 import interfaces.IAbonado;
 import modelo.Servicio;
@@ -60,9 +61,13 @@ public class Controlador implements ActionListener {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
-			// Servicio servicio = this.ventanaPrincipal.getSelectedServicio();
-			// abonado.quitaServicio(servicio); // REVISAR EL QUITA SERVICIOS
-			this.ventanaAgregaServicio.dispose();
+			String domicilio = this.ventanaPrincipal.getSelectedDomicilio();
+			try {
+				abonado.quitaServicio(domicilio);
+			} catch (DomicilioInvalidoException e1) {
+				e1.printStackTrace();
+			}
+			this.ventanaPrincipal.limpiaTextAreaServicio();
 			this.ventanaAgregaServicio.limpia();
 			this.ventanaPrincipal.actualizaListaDomicilio();
 
