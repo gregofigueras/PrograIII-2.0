@@ -116,7 +116,7 @@ public class Sistema implements Serializable {
 		this.fecha.add(Calendar.MONTH, +1);
 		while (it.hasNext()) {
 			IAbonado abonadoActual = it.next();
-			abonadoActual.simularMes(fecha);
+			abonadoActual.simularMes(this.fecha);
 		}
 	}
 

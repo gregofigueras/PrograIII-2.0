@@ -23,7 +23,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
-	protected GregorianCalendar fechaInicial;
+	protected int mesPago;
 
 	/**
 	 * constructor de la clase
@@ -43,7 +43,8 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.sistemaTecnicos = sistemaTecnicos;
 		this.servicios = new HashMap<String, Servicio>();
 		this.fecha = fecha;
-		this.fechaInicial = fecha;
+		this.mesPago = fecha.MONTH;
+		this.listaFacturas= new ArrayList<Factura>();
 	}
 
 	public GregorianCalendar getFecha() {
@@ -166,10 +167,12 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
-		if (this.fecha.getTimeInMillis()-this.fechaInicial.getTimeInMillis()>) {
-			this.fechaInicial = this.fecha;
-			Factura factura = new Factura(this);
-			this.AgregarFactura(factura);
+		if (this.servicios != null) {
+			if (this.fecha.MONTH - this.mesPago != 0) {
+				this.mesPago = this.fecha.MONTH;
+				Factura factura = new Factura(this);
+				this.AgregarFactura(factura);
+			}
 		}
 
 	}
@@ -177,14 +180,16 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	@Override
 	public void sumarDia(GregorianCalendar fecha) {
 		this.fecha = fecha;
-		if (this.fecha.DAY_OF_YEAR - this.fechaInicial.DAY_OF_YEAR > 29) {
-			this.fechaInicial = this.fecha;
-			Factura factura = new Factura(this);
-			this.AgregarFactura(factura);
+		if (this.servicios != null) {
+			if (this.fecha.MONTH - this.mesPago != 0) {
+				this.mesPago = this.fecha.MONTH;
+				Factura factura = new Factura(this);
+				this.AgregarFactura(factura);
+			}
 		}
 	}
-	
-	public ArrayList<Factura> getFactura(){
+
+	public ArrayList<Factura> getFactura() {
 		return this.listaFacturas;
 	}
 
