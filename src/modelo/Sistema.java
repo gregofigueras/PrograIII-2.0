@@ -35,7 +35,7 @@ public class Sistema implements Serializable {
 																								// que no
 		IAbonado abonado; // No este el factory aca metido
 		try {
-			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI, fecha);
+			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI, fecha, tecnicos);
 			this.abonados.add(abonado);
 		} catch (TipoAbonadoInvalidoException e) {
 			e.getMessage();

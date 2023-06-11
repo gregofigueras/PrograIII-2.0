@@ -30,7 +30,8 @@ public class AbonadoFactory {
 	 * @throws TipoAbonadoInvalidoException
 	 */
 	public static IAbonado getAbonado(String tipoAbonado, String formaPago, String nombre, String DNI,
-			GregorianCalendar fecha) throws TipoAbonadoInvalidoException, TipoPagoInvalidoException {
+			GregorianCalendar fecha, TecnicosFactory tecnicosFactory)
+			throws TipoAbonadoInvalidoException, TipoPagoInvalidoException {
 		assert tipoAbonado != null : "tipo de abonado no valido";
 		assert tipoAbonado != "" : "tipo de abonado no valido";
 		assert formaPago != null : "forma de pago no valida";
@@ -43,9 +44,9 @@ public class AbonadoFactory {
 		DecoratorPagos respuesta = null;
 
 		if (tipoAbonado.equalsIgnoreCase("Fisico"))
-			encapsulado = new AbonadoFisico(nombre, DNI, fecha, null);
+			encapsulado = new AbonadoFisico(nombre, DNI, fecha, tecnicosFactory);
 		else if (tipoAbonado.equalsIgnoreCase("Juridico"))
-			encapsulado = new AbonadoJuridico(nombre, DNI, fecha, null);
+			encapsulado = new AbonadoJuridico(nombre, DNI, fecha, tecnicosFactory);
 		else
 			throw new TipoAbonadoInvalidoException();
 
