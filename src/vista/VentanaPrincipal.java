@@ -596,5 +596,8 @@ public class VentanaPrincipal extends JFrame
 			this.listDomicilio.clearSelection();
 		}
 	}
+	public void escribirConsola(String escritura) {
+		this.textAreaConsola.append(escritura + "\n");
+	}
 
 }

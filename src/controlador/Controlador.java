@@ -72,6 +72,7 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaAgregaServicio.dispose();
 			this.ventanaAgregaServicio.limpia();
 			this.ventanaPrincipal.actualizaListaDomicilio();
+			this.ventanaPrincipal.escribirConsola("Servicio agregado correctamente");
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
