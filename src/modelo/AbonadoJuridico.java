@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -21,8 +22,8 @@ public class AbonadoJuridico extends Abonado {
 	 *                <b> pre: </b> DNI tiene que ser no vacio y no null <br>
 	 *                <b> post: </b> Crea un objeto de tipo abonado
 	 */
-	public AbonadoJuridico(String nombre, String DNI) {
-		super(nombre, DNI);
+	public AbonadoJuridico(String nombre, String DNI, GregorianCalendar fecha) {
+		super(nombre, DNI, fecha);
 		assert nombre != null : "nombre no valido";
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
@@ -101,17 +102,6 @@ public class AbonadoJuridico extends Abonado {
 	@Override
 	public String getEstado() {
 		return null;
-	}
-
-	@Override
-	public void simularMes() {
-		this.fecha.add(Calendar.MONTH, +1);
-		
-	}
-
-	@Override
-	public void sumarDia() {
-		this.fecha.add(Calendar.DAY_OF_YEAR, +1);
 	}
 	
 }

@@ -23,6 +23,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
+	protected GregorianCalendar fechaInicial;
 
 	/**
 	 * constructor de la clase
@@ -33,12 +34,13 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 *                <b> pre: </b> DNI tiene que ser no vacio y no null <br>
 	 *                <b> post: </b> Crea un objeto de tipo abonado
 	 */
-	public Abonado(String nombre, String DNI) {
+	public Abonado(String nombre, String DNI, GregorianCalendar fecha) {
 		this.DNI = DNI;
 		this.nombre = nombre;
 		this.sistemaTecnicos = null;
 		this.servicios = new HashMap<String, Servicio>();
-		this.fecha= new GregorianCalendar();
+		this.fecha= fecha;
+		this.fechaInicial=fecha;
 	}
 
 	public GregorianCalendar getFecha() {
@@ -156,4 +158,25 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
+	@Override
+	public void simularMes(GregorianCalendar fecha) {
+		this.fecha=fecha;
+		if(this.fecha.DAY_OF_YEAR-this.fechaInicial.DAY_OF_YEAR>29) {
+			this.fechaInicial=this.fecha;
+			Factura factura= new Factura(this);
+			this.AgregarFactura(factura);
+		}
+		
+	}
+
+	@Override
+	public void sumarDia(GregorianCalendar fecha) {
+		this.fecha=fecha;
+		if(this.fecha.DAY_OF_YEAR-this.fechaInicial.DAY_OF_YEAR>29) {
+			this.fechaInicial=this.fecha;
+			Factura factura= new Factura(this);
+			this.AgregarFactura(factura);
+		}
+	}
+	
 }

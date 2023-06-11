@@ -3,6 +3,8 @@ package modelo;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import excepciones.TipoAbonadoInvalidoException;
@@ -22,6 +24,7 @@ public class Sistema implements Serializable {
 	IPersistencia persistencia = new PersistenciaXML();
 	private static Sistema instance = null;
 	private TecnicosFactory tecnicos;
+	private GregorianCalendar fecha= new GregorianCalendar();
 
 	private Sistema() {
 		this.abonados = new ArrayList<IAbonado>();
@@ -32,7 +35,7 @@ public class Sistema implements Serializable {
 																								// que no
 		IAbonado abonado; // No este el factory aca metido
 		try {
-			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI);
+			abonado = AbonadoFactory.getAbonado(tipoAbonado, formaPago, nombre, DNI, fecha);
 			this.abonados.add(abonado);
 		} catch (TipoAbonadoInvalidoException e) {
 			e.getMessage();
@@ -94,18 +97,22 @@ public class Sistema implements Serializable {
 
 	public void simularMes() {
 		Iterator<IAbonado> it = this.abonados.iterator();
+		this.fecha.add(Calendar.MONTH, +1);
 		while (it.hasNext()) {
 			IAbonado abonadoActual = it.next();
-			abonadoActual.simularMes();
+			abonadoActual.simularMes(fecha);
 		}
 	}
 
 	public void sumarDia() {
 		Iterator<IAbonado> it = this.abonados.iterator();
+		this.fecha.add(Calendar.DAY_OF_YEAR, +1);
 		while (it.hasNext()) {
 			IAbonado abonadoActual = it.next();
-			abonadoActual.sumarDia();
+			abonadoActual.sumarDia(this.fecha);
 			System.out.println(abonadoActual.getFecha());
+			System.out.println(this.fecha);
+			
 		}
 	}
 }

@@ -38,7 +38,7 @@ public interface IAbonado extends Cloneable {
 	
 	String getEstado();
 	
-	void simularMes();
+	void simularMes(GregorianCalendar fecha);
 	
-	void sumarDia();
+	void sumarDia(GregorianCalendar fecha);
 }

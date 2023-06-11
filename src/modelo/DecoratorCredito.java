@@ -76,12 +76,12 @@ public class DecoratorCredito extends DecoratorPagos{
 	}
 	
 	@Override
-	public void simularMes() {
-		this.encapsulado.simularMes();
+	public void simularMes(GregorianCalendar fecha) {
+		this.encapsulado.simularMes(fecha);
 	}
 
 	@Override
-	public void sumarDia() {
-		this.encapsulado.sumarDia();
+	public void sumarDia(GregorianCalendar fecha) {
+		this.encapsulado.sumarDia(fecha);
 	}
 }

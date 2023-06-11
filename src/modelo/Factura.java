@@ -36,7 +36,6 @@ public class Factura implements Cloneable{
 		this.abonado.imprimeServicios();
 		total = this.abonado.getCostoServicios();
 		this.fecha = abonado.getFecha();
-		//no le falta un system.out?
 	}
 
 	/**

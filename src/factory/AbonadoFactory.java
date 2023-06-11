@@ -1,5 +1,7 @@
 package factory;
 
+import java.util.GregorianCalendar;
+
 import excepciones.TipoAbonadoInvalidoException;
 import excepciones.TipoPagoInvalidoException;
 import interfaces.IAbonado;
@@ -27,7 +29,7 @@ public class AbonadoFactory {
 	 *          se crea una instancia de abonado
 	 * @throws TipoAbonadoInvalidoException
 	 */
-	public static IAbonado getAbonado(String tipoAbonado, String formaPago, String nombre, String DNI)
+	public static IAbonado getAbonado(String tipoAbonado, String formaPago, String nombre, String DNI, GregorianCalendar fecha)
 			throws TipoAbonadoInvalidoException, TipoPagoInvalidoException {
 		assert tipoAbonado != null : "tipo de abonado no valido";
 		assert tipoAbonado != "" : "tipo de abonado no valido";
@@ -41,9 +43,9 @@ public class AbonadoFactory {
 		DecoratorPagos respuesta = null;
 
 		if (tipoAbonado.equalsIgnoreCase("Fisico"))
-			encapsulado = new AbonadoFisico(nombre, DNI);
+			encapsulado = new AbonadoFisico(nombre, DNI, fecha);
 		else if (tipoAbonado.equalsIgnoreCase("Juridico"))
-			encapsulado = new AbonadoJuridico(nombre, DNI);
+			encapsulado = new AbonadoJuridico(nombre, DNI, fecha);
 		else
 			throw new TipoAbonadoInvalidoException();
 
