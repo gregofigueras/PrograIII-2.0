@@ -166,7 +166,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
-		if (this.fecha.DAY_OF_YEAR - this.fechaInicial.DAY_OF_YEAR > 29) {
+		if (this.fecha.getTimeInMillis()-this.fechaInicial.getTimeInMillis()>) {
 			this.fechaInicial = this.fecha;
 			Factura factura = new Factura(this);
 			this.AgregarFactura(factura);
