@@ -19,7 +19,7 @@ import interfaces.IAbonado;
 public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected String nombre;
 	protected String DNI;
-	private TecnicosFactory sistemaTecnicos;
+	private TecnicosFactory tecnicosFactory;
 	protected HashMap<String, Servicio> servicios; // Hashmap asi no hay domicilios repetidos
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
@@ -37,10 +37,10 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	 *                        <br>
 	 *                        <b> post: </b> Crea un objeto de tipo abonado
 	 */
-	public Abonado(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory sistemaTecnicos) {
+	public Abonado(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory tecnicosFactory) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.sistemaTecnicos = sistemaTecnicos;
+		this.tecnicosFactory = tecnicosFactory;
 		this.servicios = new HashMap<String, Servicio>();
 		this.fecha = fecha;
 		this.mesPago = fecha.MONTH;
@@ -153,12 +153,12 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	public void run() {
 		System.out.println("corriendo");
 		int i;
-		i = this.sistemaTecnicos.ConsultaTecnica(this);
+		i = this.tecnicosFactory.ConsultaTecnica(this);
 		Random r = new Random();
-		int q = r.nextInt(60);
+		int q = r.nextInt(6000);
 		try {
 			Thread.sleep(q);
-			this.sistemaTecnicos.TerminaConsulta(this, i);
+			this.tecnicosFactory.TerminaConsulta(this, i);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -167,12 +167,19 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
+<<<<<<< Updated upstream
 		if (this.servicios != null) {
 			if (this.fecha.MONTH - this.mesPago != 0) {
 				this.mesPago = this.fecha.MONTH;
 				Factura factura = new Factura(this);
 				this.AgregarFactura(factura);
 			}
+=======
+		if (this.fecha.getTimeInMillis() - this.fechaInicial.getTimeInMillis()) {
+			this.fechaInicial = this.fecha;
+			Factura factura = new Factura(this);
+			this.AgregarFactura(factura);
+>>>>>>> Stashed changes
 		}
 
 	}
