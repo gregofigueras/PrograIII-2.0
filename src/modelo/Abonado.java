@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,7 +45,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.tecnicosFactory = tecnicosFactory;
 		this.servicios = new HashMap<String, Servicio>();
 		this.fecha = fecha;
-		this.mesPago = fecha.MONTH;
+		this.mesPago = fecha.get(Calendar.MONTH);
 		this.listaFacturas = new ArrayList<Factura>();
 	}
 
@@ -173,8 +174,8 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
 		if (this.servicios != null) {
-			if (this.fecha.MONTH - this.mesPago != 0) {
-				this.mesPago = this.fecha.MONTH;
+			if (this.fecha.get(Calendar.MONTH) - this.mesPago != 0) {
+				this.mesPago = this.fecha.get(Calendar.MONTH);
 				Factura factura = new Factura(this);
 				this.AgregarFactura(factura);
 			}
@@ -186,8 +187,8 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	public void sumarDia(GregorianCalendar fecha) {
 		this.fecha = fecha;
 		if (this.servicios != null) {
-			if (this.fecha.MONTH - this.mesPago != 0) {
-				this.mesPago = this.fecha.MONTH;
+			if (this.fecha.get(Calendar.MONTH) - this.mesPago != 0) {
+				this.mesPago = this.fecha.get(Calendar.MONTH);
 				Factura factura = new Factura(this);
 				this.AgregarFactura(factura);
 			}
