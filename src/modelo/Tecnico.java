@@ -2,11 +2,14 @@ package modelo;
 
 import java.io.Serializable;
 
+import controlador.Controlador;
+
 public class Tecnico implements Serializable {
 	private String nombre;
 	public boolean libre;
 	private Abonado abonado;
 	private String id;
+	public Controlador controlador;
 
 	public Tecnico(String nombre, String id) {
 		this.nombre = nombre;
