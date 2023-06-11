@@ -11,11 +11,13 @@ import java.util.Set;
 import excepciones.DomicilioInvalidoException;
 import factory.ServicioFactory;
 import interfaces.IAbonado;
+import modelo.Factura;
 import modelo.Servicio;
 import modelo.Sistema;
 import modelo.Tecnico;
 import vista.VentanaAgregaServicio;
 import vista.VentanaAgregaTecnico;
+import vista.VentanaFacturas;
 import vista.VentanaPrincipal;
 
 public class Controlador implements ActionListener, Observer {
@@ -23,6 +25,7 @@ public class Controlador implements ActionListener, Observer {
 	private VentanaPrincipal ventanaPrincipal;
 	private VentanaAgregaServicio ventanaAgregaServicio;
 	private VentanaAgregaTecnico ventanaAgregaTecnico;
+	private VentanaFacturas ventanaFacturas;
 
 	public Controlador() {
 		super();
@@ -30,6 +33,7 @@ public class Controlador implements ActionListener, Observer {
 		this.ventanaPrincipal = new VentanaPrincipal();
 		this.ventanaAgregaTecnico = new VentanaAgregaTecnico();
 		this.ventanaAgregaServicio = new VentanaAgregaServicio();
+		this.ventanaFacturas = new VentanaFacturas();
 		this.ventanaPrincipal.setActionListener(this);
 		this.ventanaPrincipal.setControlador(this);
 		this.ventanaAgregaServicio.setActionListener(this);
@@ -124,6 +128,7 @@ public class Controlador implements ActionListener, Observer {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { // abre popup
 			this.ventanaAgregaTecnico.setVisible(true);
+
 		}
 	}
 
@@ -153,4 +158,19 @@ public class Controlador implements ActionListener, Observer {
 		System.out.println("actualizanding");
 		this.ventanaPrincipal.actualizaTecnicos();
 	}
+
+	public void abreFacturas() {
+		this.ventanaFacturas.setVisible(true);
+	}
+
+	public ArrayList<Factura> getFacturas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getDomicilioValue() {
+		this.ventanaPrincipal.getSelectedDomicilio();
+		return null;
+	}
+
 }

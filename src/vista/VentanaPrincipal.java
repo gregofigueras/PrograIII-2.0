@@ -414,6 +414,10 @@ public class VentanaPrincipal extends JFrame
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == listDomicilio && e.getClickCount() == 2) {
+			System.out.println("hola");
+			this.abreFacturas();
+		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -439,8 +443,11 @@ public class VentanaPrincipal extends JFrame
 	public void valueChanged(ListSelectionEvent e) {
 
 		if (e.getSource() == this.listAbonados) {
-			if (this.listAbonados.getSelectedValue() != null)
+			if (this.listAbonados.getSelectedValue() != null) {
 				this.actualizaListaDomicilio();
+				this.listDomicilio.clearSelection();
+				this.textAreaServicio.setText(null);
+			}
 		}
 		if (e.getSource() == this.listDomicilio) {
 			if (this.listDomicilio.getSelectedValue() != null && this.listAbonados.getSelectedValue() != null)
@@ -539,6 +546,11 @@ public class VentanaPrincipal extends JFrame
 		Servicio servicio = this.controlador.getServicio(this.listDomicilio.getSelectedValue(),
 				this.listAbonados.getSelectedValue());
 		this.textAreaServicio.setText(servicio.toString());
+
+	}
+
+	public void abreFacturas() {
+		this.controlador.abreFacturas();
 	}
 
 	public IAbonado getSelectedAbonado() {
@@ -580,6 +592,8 @@ public class VentanaPrincipal extends JFrame
 			this.btnAgregarTecnico.setEnabled(false);
 			this.btnSolicitarTecnico.setEnabled(false);
 			this.btnEliminarTecnico.setEnabled(false);
+			this.listAbonados.clearSelection();
+			this.listDomicilio.clearSelection();
 		}
 	}
 
