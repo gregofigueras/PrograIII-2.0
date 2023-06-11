@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,7 +18,7 @@ import controlador.Controlador;
 import modelo.Factura;
 import javax.swing.JButton;
 
-public class VentanaFacturas extends JFrame {
+public class VentanaFacturas extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private Controlador controlador;
@@ -49,6 +51,7 @@ public class VentanaFacturas extends JFrame {
 		
 		this.btnCerrar = new JButton("Cerrar");
 		this.btnCerrar.setActionCommand("Cerrar");
+		this.btnCerrar.addActionListener(this);
 		this.panelSur.add(this.btnCerrar);
 
 		this.setVisible(false);
@@ -74,6 +77,14 @@ public class VentanaFacturas extends JFrame {
 		this.textAreaDomicilio.setText(null);
 		this.modeloListaFactura.clear();
 		this.listFacturas.repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equalsIgnoreCase("Cerrar")) {
+			this.dispose();
+			this.limpia();
+		}
 	}
 
 }

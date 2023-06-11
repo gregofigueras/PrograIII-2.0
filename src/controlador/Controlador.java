@@ -33,13 +33,18 @@ public class Controlador implements ActionListener, Observer {
 		super();
 		this.sistema = Sistema.getInstance();
 		this.ventanaPrincipal = new VentanaPrincipal();
-		this.ventanaAgregaTecnico = new VentanaAgregaTecnico();
-		this.ventanaAgregaServicio = new VentanaAgregaServicio();
-		this.ventanaFacturas = new VentanaFacturas();
 		this.ventanaPrincipal.setActionListener(this);
 		this.ventanaPrincipal.setControlador(this);
+		this.ventanaPrincipal.setControlador(this);
+		
+		this.ventanaAgregaTecnico = new VentanaAgregaTecnico();
+		this.ventanaAgregaServicio = new VentanaAgregaServicio();
 		this.ventanaAgregaServicio.setActionListener(this);
 		this.ventanaAgregaTecnico.setActionListener(this);
+		
+		this.ventanaFacturas = new VentanaFacturas();
+		this.ventanaFacturas.setControlador(this);
+
 		this.sistema.getTecnicoFactory().addObserver(this);
 	}
 
@@ -150,8 +155,8 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaAgregaTecnico.setVisible(true);
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Mostrar facturas")) { // Abre popup de facturas
-			System.out.println(this.ventanaPrincipal.getSelectedAbonado().getFactura());
-			if (this.ventanaPrincipal.getSelectedAbonado().getFactura() != null) {
+			System.out.println(this.ventanaPrincipal.getSelectedAbonado().getFactura().size());
+			if (this.ventanaPrincipal.getSelectedAbonado().getFactura().size() != 0) {
 				this.ventanaFacturas.ActualizaListaFacturas();
 				this.ventanaFacturas.setVisible(true);
 			} else
