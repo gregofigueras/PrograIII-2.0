@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -144,4 +145,17 @@ public class AbonadoFisico extends Abonado implements Runnable {
 	public String toString() {
 		return this.nombre + " - " + this.DNI;
 	}
+
+	@Override
+	public void simularMes() {
+		this.fecha.add(Calendar.MONTH, +1);
+		
+	}
+
+	@Override
+	public void sumarDia() {
+		this.fecha.add(Calendar.DAY_OF_YEAR, +1);
+	}
+	
+	
 }

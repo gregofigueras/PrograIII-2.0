@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -75,6 +76,16 @@ public class DecoratorCheque extends DecoratorPagos {
 	@Override
 	public String getEstado() {
 		return this.encapsulado.getEstado();
+	}
+	
+	@Override
+	public void simularMes() {
+		this.encapsulado.simularMes();
+	}
+
+	@Override
+	public void sumarDia() {
+		this.encapsulado.sumarDia();
 	}
 	
 }

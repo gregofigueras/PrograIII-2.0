@@ -37,4 +37,8 @@ public interface IAbonado extends Cloneable {
 	String toString();
 	
 	String getEstado();
+	
+	void simularMes();
+	
+	void sumarDia();
 }

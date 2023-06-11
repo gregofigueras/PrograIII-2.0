@@ -93,6 +93,10 @@ public class Controlador implements ActionListener {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			abonado.PagarFactura();
 
+		} else if (e.getActionCommand().equalsIgnoreCase("Simular mes")) {
+			sistema.simularMes();
+		} else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
+			sistema.sumarDia();
 		}
 	}
 

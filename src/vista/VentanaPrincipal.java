@@ -36,8 +36,9 @@ import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Tecnico;
+import java.awt.event.ActionEvent;
 
-public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener, ListSelectionListener {
+public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener, ListSelectionListener, ActionListener {
 
 	private ActionListener actionListener;
 	private JPanel contentPane;
@@ -195,6 +196,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelC2.add(this.panelTexto1);
 
 		this.nombre = new JTextField();
+		this.nombre.setEnabled(false);
 		this.nombre.addKeyListener(this);
 		this.panelTexto1.add(this.nombre);
 		this.nombre.setColumns(10);
@@ -210,6 +212,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelC2.add(this.panelTexto2);
 
 		this.dni = new JTextField();
+		this.dni.setEnabled(false);
 		this.dni.addKeyListener(this);
 		this.panelTexto2.add(this.dni);
 		this.dni.setColumns(10);
@@ -318,6 +321,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAdicionales.add(this.panelIniciaJornada);
 
 		this.btnIniciaJornada = new JButton("Inicia jornada");
+		this.btnIniciaJornada.addActionListener(this);
 		this.btnIniciaJornada.setActionCommand("Inicia jornada");
 		this.panelIniciaJornada.add(this.btnIniciaJornada);
 
@@ -326,6 +330,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAdicionales.add(this.panelSimularMes);
 
 		this.btnSimularMes = new JButton("Simular mes");
+		this.btnSimularMes.setEnabled(false);
+		this.btnSimularMes.addActionListener(this);
 		this.panelSimularMes.add(this.btnSimularMes);
 
 		this.panelFinalizaJornada = new JPanel();
@@ -333,6 +339,9 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelAdicionales.add(this.panelFinalizaJornada);
 
 		this.btnFinalizaJornada = new JButton("Finaliza jornada");
+		this.btnFinalizaJornada.addActionListener(this);
+		this.btnFinalizaJornada.setActionCommand("Finalizar jornada");
+		this.btnFinalizaJornada.setEnabled(false);
 		this.panelFinalizaJornada.add(this.btnFinalizaJornada);
 
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
@@ -440,7 +449,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.btnContrataNServicio.setEnabled(condicion3);
 		boolean condicion4 = !this.listDomicilio.isSelectionEmpty();
 		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
-		this.btnPagaFactura.setEnabled(condicion3);
+		this.btnPagaFactura.setEnabled(condicion3 && condicion4);
 		this.btnEliminarAbonado.setEnabled(condicion3);
 
 	}
@@ -550,5 +559,21 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 	public void Moroso() {
 		this.textAreaConsola.append("No puede agregar servicio por ser moroso");
 		
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equalsIgnoreCase("Inicia jornada")) {
+			this.btnIniciaJornada.setEnabled(false);
+			this.nombre.setEnabled(true);
+			this.dni.setEnabled(true);
+			this.btnFinalizaJornada.setEnabled(true);
+			this.btnSimularMes.setEnabled(true);
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
+			this.btnIniciaJornada.setEnabled(true);
+			this.nombre.setEnabled(false);
+			this.dni.setEnabled(false);
+			this.btnFinalizaJornada.setEnabled(false);
+			this.btnSimularMes.setEnabled(false);
+		}
 	}
 }

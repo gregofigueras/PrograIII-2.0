@@ -74,4 +74,14 @@ public class DecoratorCredito extends DecoratorPagos{
 	public String getEstado() {
 		return this.encapsulado.getEstado();
 	}
+	
+	@Override
+	public void simularMes() {
+		this.encapsulado.simularMes();
+	}
+
+	@Override
+	public void sumarDia() {
+		this.encapsulado.sumarDia();
+	}
 }

@@ -38,6 +38,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.nombre = nombre;
 		this.sistemaTecnicos = null;
 		this.servicios = new HashMap<String, Servicio>();
+		this.fecha= new GregorianCalendar();
 	}
 
 	public GregorianCalendar getFecha() {

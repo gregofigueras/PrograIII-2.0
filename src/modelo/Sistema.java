@@ -3,6 +3,7 @@ package modelo;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import excepciones.TipoAbonadoInvalidoException;
 import excepciones.TipoPagoInvalidoException;
@@ -88,6 +89,23 @@ public class Sistema implements Serializable {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void simularMes() {
+		Iterator<IAbonado> it = this.abonados.iterator();
+		while (it.hasNext()) {
+			IAbonado abonadoActual = it.next();
+			abonadoActual.simularMes();
+		}
+	}
+
+	public void sumarDia() {
+		Iterator<IAbonado> it = this.abonados.iterator();
+		while (it.hasNext()) {
+			IAbonado abonadoActual = it.next();
+			abonadoActual.sumarDia();
+			System.out.println(abonadoActual.getFecha());
 		}
 	}
 }
