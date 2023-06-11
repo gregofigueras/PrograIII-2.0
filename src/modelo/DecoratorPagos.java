@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.GregorianCalendar;
+
 import excepciones.DomicilioInvalidoException;
 import interfaces.IAbonado;
 
@@ -103,4 +105,21 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 	public Servicio getServicio(String domicilio) {
 		return this.encapsulado.getServicio(domicilio);
 	}
+
+	@Override
+	public void simularMes(GregorianCalendar fecha) {
+		this.encapsulado.simularMes(fecha);
+		;
+	}
+
+	@Override
+	public void sumarDia(GregorianCalendar fecha) {
+		this.encapsulado.sumarDia(fecha);
+	}
+
+	@Override
+	public void run() {
+		this.encapsulado.run();
+	}
+
 }

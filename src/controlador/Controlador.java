@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
 import excepciones.DomicilioInvalidoException;
@@ -11,11 +13,12 @@ import factory.ServicioFactory;
 import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Sistema;
+import modelo.Tecnico;
 import vista.VentanaAgregaServicio;
 import vista.VentanaAgregaTecnico;
 import vista.VentanaPrincipal;
 
-public class Controlador implements ActionListener {
+public class Controlador implements ActionListener, Observer {
 	private Sistema sistema;
 	private VentanaPrincipal ventanaPrincipal;
 	private VentanaAgregaServicio ventanaAgregaServicio;
@@ -31,6 +34,7 @@ public class Controlador implements ActionListener {
 		this.ventanaPrincipal.setControlador(this);
 		this.ventanaAgregaServicio.setActionListener(this);
 		this.ventanaAgregaTecnico.setActionListener(this);
+		this.sistema.getTecnicoFactory().addObserver(this);
 	}
 
 	@Override
@@ -42,13 +46,13 @@ public class Controlador implements ActionListener {
 				if (abonado.getEstado().equals("Moroso")) {
 					condicion1 = false;
 					this.ventanaPrincipal.Moroso();
-					
+
 				} else
 					condicion1 = true;
 			} else
 				condicion1 = true;
 			if (condicion1) {
-			this.ventanaAgregaServicio.setVisible(true);
+				this.ventanaAgregaServicio.setVisible(true);
 			}
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar servicio")) {// Cierra el popup
@@ -59,11 +63,11 @@ public class Controlador implements ActionListener {
 			boolean acomp = this.ventanaAgregaServicio.getAcom();
 			String promo = this.ventanaAgregaServicio.getPromo();
 			String domicilio = this.ventanaAgregaServicio.getDomicilio();
-			
-				ServicioFactory.agregaServicio(abonado, domicilio, tipo, promo, cantBA, cantCamaras, acomp);
-				this.ventanaAgregaServicio.dispose();
-				this.ventanaAgregaServicio.limpia();
-				this.ventanaPrincipal.actualizaListaDomicilio();
+
+			ServicioFactory.agregaServicio(abonado, domicilio, tipo, promo, cantBA, cantCamaras, acomp);
+			this.ventanaAgregaServicio.dispose();
+			this.ventanaAgregaServicio.limpia();
+			this.ventanaPrincipal.actualizaListaDomicilio();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Agregar")) {
 			String tipo = this.ventanaPrincipal.getTipo();
@@ -95,9 +99,36 @@ public class Controlador implements ActionListener {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Simular mes")) {
 			sistema.simularMes();
+
 		} else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
 			sistema.sumarDia();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("Solicitar")) {
+			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
+			Thread thread = new Thread(abonado);
+			thread.start();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("EliminarTecnico")) {
+			Tecnico tecnico = this.ventanaPrincipal.getSelectedTecnico();
+			this.sistema.eliminaTecnico(tecnico);
+			this.ventanaPrincipal.actualizaTecnicos();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("agregarTecnico")) { // cierra popup
+			String nombre = this.ventanaAgregaTecnico.getNombreTecnico();
+			String ID = this.ventanaAgregaTecnico.getIDTecnico();
+			this.ventanaAgregaTecnico.limpia();
+			sistema.agregaTecnico(nombre, ID);
+			this.ventanaAgregaTecnico.dispose();
+			this.ventanaAgregaTecnico.limpia();
+			this.ventanaPrincipal.actualizaTecnicos();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { // abre popup
+			this.ventanaAgregaTecnico.setVisible(true);
 		}
+	}
+
+	public ArrayList<Tecnico> getTecnicos() {
+		return this.sistema.getTecnicos();
 	}
 
 	public ArrayList<IAbonado> getAbonados() {
@@ -115,5 +146,11 @@ public class Controlador implements ActionListener {
 
 	public Servicio getServicio(String domicilio, IAbonado abonado) {
 		return abonado.getServicio(domicilio);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("actualizanding");
+		this.ventanaPrincipal.actualizaTecnicos();
 	}
 }

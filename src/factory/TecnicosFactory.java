@@ -1,19 +1,24 @@
 package factory;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 import modelo.Abonado;
 import modelo.Tecnico;
 
-public class TecnicosFactory {
+public class TecnicosFactory extends Observable {
 	private static ArrayList<Tecnico> tecnicos = new ArrayList<Tecnico>();
 	private Random r;
 	private String abonado;
 
-	public void setTecnico(String nombre, int id) {
+	public void agregaTecnico(String nombre, String id) {
 		Tecnico tecnico = new Tecnico(nombre, id);
 		tecnicos.add(tecnico);
+	}
+
+	public void eliminaTecnico(Tecnico tecnico) {
+		tecnicos.remove(tecnico);
 	}
 
 	public ArrayList<Tecnico> getTecnicos() {
@@ -28,6 +33,8 @@ public class TecnicosFactory {
 
 		System.out.println("El tecnico " + tecnicos.get(i).getNombre() + "esta asistiendo a " + this.abonado);
 		tecnicos.get(i).libre = false;
+		this.setChanged();
+		this.notifyObservers(this);
 		return i;
 	}
 

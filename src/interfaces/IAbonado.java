@@ -7,7 +7,7 @@ import excepciones.DomicilioInvalidoException;
 import modelo.Factura;
 import modelo.Servicio;
 
-public interface IAbonado extends Cloneable {
+public interface IAbonado extends Cloneable, Runnable {
 	double getCostoServicios();
 
 	String getNombre();
@@ -35,10 +35,11 @@ public interface IAbonado extends Cloneable {
 	void AgregarFactura(Factura factura);
 
 	String toString();
-	
+
 	String getEstado();
-	
+
 	void simularMes(GregorianCalendar fecha);
-	
+
 	void sumarDia(GregorianCalendar fecha);
+
 }

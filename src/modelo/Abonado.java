@@ -28,19 +28,22 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	/**
 	 * constructor de la clase
 	 * 
-	 * @param nombre: es el nombre del abonado
-	 * @param DNI:    DNI del abonado <b> pre: </b> nombre tiene que ser no vacio y
-	 *                no null <br>
-	 *                <b> pre: </b> DNI tiene que ser no vacio y no null <br>
-	 *                <b> post: </b> Crea un objeto de tipo abonado
+	 * @param sistemaTecnicos
+	 * 
+	 * @param nombre:         es el nombre del abonado
+	 * @param DNI:            DNI del abonado <b> pre: </b> nombre tiene que ser no
+	 *                        vacio y no null <br>
+	 *                        <b> pre: </b> DNI tiene que ser no vacio y no null
+	 *                        <br>
+	 *                        <b> post: </b> Crea un objeto de tipo abonado
 	 */
-	public Abonado(String nombre, String DNI, GregorianCalendar fecha) {
+	public Abonado(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory sistemaTecnicos) {
 		this.DNI = DNI;
 		this.nombre = nombre;
-		this.sistemaTecnicos = null;
+		this.sistemaTecnicos = sistemaTecnicos;
 		this.servicios = new HashMap<String, Servicio>();
-		this.fecha= fecha;
-		this.fechaInicial=fecha;
+		this.fecha = fecha;
+		this.fechaInicial = fecha;
 	}
 
 	public GregorianCalendar getFecha() {
@@ -145,7 +148,9 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		listaFacturas.add(factura);
 	}
 
-	public void run(TecnicosFactory sistemaTecnicos) {
+	@Override
+	public void run() {
+		System.out.println("corriendo");
 		int i;
 		i = this.sistemaTecnicos.ConsultaTecnica(this);
 		Random r = new Random();
@@ -160,23 +165,23 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
-		this.fecha=fecha;
-		if(this.fecha.DAY_OF_YEAR-this.fechaInicial.DAY_OF_YEAR>29) {
-			this.fechaInicial=this.fecha;
-			Factura factura= new Factura(this);
+		this.fecha = fecha;
+		if (this.fecha.DAY_OF_YEAR - this.fechaInicial.DAY_OF_YEAR > 29) {
+			this.fechaInicial = this.fecha;
+			Factura factura = new Factura(this);
 			this.AgregarFactura(factura);
 		}
-		
+
 	}
 
 	@Override
 	public void sumarDia(GregorianCalendar fecha) {
-		this.fecha=fecha;
-		if(this.fecha.DAY_OF_YEAR-this.fechaInicial.DAY_OF_YEAR>29) {
-			this.fechaInicial=this.fecha;
-			Factura factura= new Factura(this);
+		this.fecha = fecha;
+		if (this.fecha.DAY_OF_YEAR - this.fechaInicial.DAY_OF_YEAR > 29) {
+			this.fechaInicial = this.fecha;
+			Factura factura = new Factura(this);
 			this.AgregarFactura(factura);
 		}
 	}
-	
+
 }

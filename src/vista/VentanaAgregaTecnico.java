@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class VentanaAgregaTecnico extends JFrame implements ActionListener {
+public class VentanaAgregaTecnico extends JFrame implements ActionListener, KeyListener {
 
 	private JPanel contentPane;
 	private JPanel panelAbajo;
@@ -62,7 +63,7 @@ public class VentanaAgregaTecnico extends JFrame implements ActionListener {
 		this.contentPane.add(this.panelAbajo);
 		this.panelAbajo.setLayout(new GridLayout(2, 2, 0, 0));
 
-		this.btnAgregarTecnico = new JButton("Agregar");
+		this.btnAgregarTecnico = new JButton("agregarTecnico");
 		this.btnAgregarTecnico.setEnabled(false);
 		this.panelAbajo.add(this.btnAgregarTecnico);
 
@@ -70,6 +71,8 @@ public class VentanaAgregaTecnico extends JFrame implements ActionListener {
 		this.panelAbajo.add(this.btnCancelarAgregar);
 
 		this.btnCancelarAgregar.addActionListener(this);
+		this.textFieldNombreTecnico.addKeyListener(this);
+		this.textFieldIDTecnico.addKeyListener(this);
 
 		this.setVisible(false);
 	}
@@ -82,8 +85,10 @@ public class VentanaAgregaTecnico extends JFrame implements ActionListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		boolean condicion1 = Integer.parseInt(this.textFieldNombreTecnico.getText()) >= 0;
-		boolean condicion2 = Integer.parseInt(this.textFieldIDTecnico.getText()) >= 0;
+		boolean condicion1 = (!this.textFieldNombreTecnico.getText().equals(null)
+				&& !this.textFieldNombreTecnico.getText().equals(""));
+		boolean condicion2 = (!this.textFieldIDTecnico.getText().equals(null)
+				&& !this.textFieldIDTecnico.getText().equals(""));
 
 		this.btnAgregarTecnico.setEnabled(condicion1 && condicion2);
 	}

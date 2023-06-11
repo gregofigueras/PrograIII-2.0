@@ -24,7 +24,7 @@ public class Sistema implements Serializable {
 	IPersistencia persistencia = new PersistenciaXML();
 	private static Sistema instance = null;
 	private TecnicosFactory tecnicos;
-	private GregorianCalendar fecha= new GregorianCalendar();
+	private GregorianCalendar fecha = new GregorianCalendar();
 
 	private Sistema() {
 		this.abonados = new ArrayList<IAbonado>();
@@ -42,6 +42,22 @@ public class Sistema implements Serializable {
 		} catch (TipoPagoInvalidoException e) {
 			e.getMessage();
 		}
+	}
+
+	public void agregaTecnico(String nombre, String id) {
+		tecnicos.agregaTecnico(nombre, id);
+	}
+
+	public void eliminaTecnico(Tecnico tecnico) {
+		tecnicos.eliminaTecnico(tecnico);
+	}
+
+	public ArrayList<Tecnico> getTecnicos() {
+		return tecnicos.getTecnicos();
+	}
+
+	public TecnicosFactory getTecnicoFactory() {
+		return this.tecnicos;
 	}
 
 	/**
@@ -112,7 +128,7 @@ public class Sistema implements Serializable {
 			abonadoActual.sumarDia(this.fecha);
 			System.out.println(abonadoActual.getFecha());
 			System.out.println(this.fecha);
-			
+
 		}
 	}
 }

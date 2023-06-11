@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -36,9 +37,9 @@ import controlador.Controlador;
 import interfaces.IAbonado;
 import modelo.Servicio;
 import modelo.Tecnico;
-import java.awt.event.ActionEvent;
 
-public class VentanaPrincipal extends JFrame implements KeyListener, MouseListener, ListSelectionListener, ActionListener {
+public class VentanaPrincipal extends JFrame
+		implements KeyListener, MouseListener, ListSelectionListener, ActionListener {
 
 	private ActionListener actionListener;
 	private JPanel contentPane;
@@ -282,12 +283,15 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelTecnicos.add(this.panelSolicitar);
 
 		this.btnSolicitarTecnico = new JButton("Solicitar");
+		this.btnSolicitarTecnico.setEnabled(false);
 		this.panelSolicitar.add(this.btnSolicitarTecnico);
 
 		this.panelEliminarTecnico = new JPanel();
 		this.panelTecnicos.add(this.panelEliminarTecnico);
 
 		this.btnEliminarTecnico = new JButton("Eliminar");
+		this.btnEliminarTecnico.setActionCommand("EliminarTecnico");
+		this.btnEliminarTecnico.setEnabled(false);
 		this.panelEliminarTecnico.add(this.btnEliminarTecnico);
 		this.btnEliminarTecnico.setHorizontalAlignment(SwingConstants.LEFT);
 
@@ -295,6 +299,8 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.panelTecnicos.add(this.panelAgregarTecnico);
 
 		this.btnAgregarTecnico = new JButton("Agregar");
+		this.btnAgregarTecnico.setEnabled(false);
+		this.btnAgregarTecnico.setActionCommand("AgregarNuevoTecnico");
 		this.panelAgregarTecnico.add(this.btnAgregarTecnico);
 		this.btnAgregarTecnico.setHorizontalAlignment(SwingConstants.RIGHT);
 
@@ -348,6 +354,7 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
 		this.listTecnicos.setModel(modeloListaTecnico);
 		this.listAbonados.setModel(modeloListaAbonado);
+		this.listTecnicos.addListSelectionListener(this);
 
 		this.panelDer = new JPanel();
 		this.panelPrincipal.add(this.panelDer);
@@ -447,10 +454,12 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 
 		boolean condicion3 = !this.listAbonados.isSelectionEmpty();
 		this.btnContrataNServicio.setEnabled(condicion3);
+		this.btnEliminarAbonado.setEnabled(condicion3);
 		boolean condicion4 = !this.listDomicilio.isSelectionEmpty();
 		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
 		this.btnPagaFactura.setEnabled(condicion3 && condicion4);
-		this.btnEliminarAbonado.setEnabled(condicion3);
+		boolean condicion6 = this.modeloListaTecnico.size() > 0;
+		this.btnSolicitarTecnico.setEnabled(condicion3 && condicion6);
 
 	}
 
@@ -516,6 +525,15 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		this.repaint();
 	}
 
+	public void actualizaTecnicos() {
+		Iterator<Tecnico> it = this.controlador.getTecnicos().iterator();
+		this.modeloListaTecnico.clear();
+		while (it.hasNext()) {
+			this.modeloListaTecnico.addElement(it.next());
+		}
+		this.repaint();
+	}
+
 	public void actualizaServicios() {
 
 		Servicio servicio = this.controlador.getServicio(this.listDomicilio.getSelectedValue(),
@@ -531,35 +549,19 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 		return this.listDomicilio.getSelectedValue();
 	}
 
+	public Tecnico getSelectedTecnico() {
+		return this.listTecnicos.getSelectedValue();
+	}
+
 	public void limpiaTextAreaServicio() {
 		this.textAreaServicio.setText(null);
 	}
 
-	public void bloqueaBotones() {
-		this.btnSimularMes.setEnabled(false);
-		this.btnFinalizaJornada.setEnabled(false);
-		this.nombre.setEnabled(false);
-		this.dni.setEnabled(false);
-		this.btnAgregarTecnico.setEnabled(false);
-		this.btnEliminarTecnico.setEnabled(false);
-		this.btnSolicitarTecnico.setEnabled(false);
-	}
-
-	public void DesbloqueaBotones() {
-		this.btnSimularMes.setEnabled(true);
-		this.btnFinalizaJornada.setEnabled(true);
-		this.nombre.setEnabled(true);
-		this.dni.setEnabled(true);
-		this.btnAgregarTecnico.setEnabled(true);
-		this.btnEliminarTecnico.setEnabled(true);
-		this.btnSolicitarTecnico.setEnabled(true);
-		this.btnIniciaJornada.setEnabled(false);
-	}
-
 	public void Moroso() {
 		this.textAreaConsola.append("No puede agregar servicio por ser moroso");
-		
+
 	}
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Inicia jornada")) {
 			this.btnIniciaJornada.setEnabled(false);
@@ -567,13 +569,18 @@ public class VentanaPrincipal extends JFrame implements KeyListener, MouseListen
 			this.dni.setEnabled(true);
 			this.btnFinalizaJornada.setEnabled(true);
 			this.btnSimularMes.setEnabled(true);
-		}
-		else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
+			this.btnAgregarTecnico.setEnabled(true);
+			this.btnSolicitarTecnico.setEnabled(false);
+		} else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
 			this.btnIniciaJornada.setEnabled(true);
 			this.nombre.setEnabled(false);
 			this.dni.setEnabled(false);
 			this.btnFinalizaJornada.setEnabled(false);
 			this.btnSimularMes.setEnabled(false);
+			this.btnAgregarTecnico.setEnabled(false);
+			this.btnSolicitarTecnico.setEnabled(false);
+			this.btnEliminarTecnico.setEnabled(false);
 		}
 	}
+
 }

@@ -6,9 +6,9 @@ public class Tecnico implements Serializable {
 	private String nombre;
 	public boolean libre;
 	private Abonado abonado;
-	private int id;
+	private String id;
 
-	public Tecnico(String nombre, int id) {
+	public Tecnico(String nombre, String id) {
 		this.nombre = nombre;
 		this.id = id;
 		this.abonado = null;
@@ -27,4 +27,11 @@ public class Tecnico implements Serializable {
 		return nombre;
 	}
 
+	@Override
+	public String toString() {
+		if (libre)
+			return "[" + id + "] " + nombre;
+		else
+			return "[" + id + "] " + nombre + " [ocupado]";
+	}
 }

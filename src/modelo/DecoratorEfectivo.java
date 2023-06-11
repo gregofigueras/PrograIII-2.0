@@ -6,37 +6,37 @@ import java.util.HashMap;
 import interfaces.IAbonado;
 
 /**
- * @author
- *Clase del patron Decorator que representa un abonado que paga en efectivo
+ * @author Clase del patron Decorator que representa un abonado que paga en
+ *         efectivo
  */
 public class DecoratorEfectivo extends DecoratorPagos {
 
-	
-	
 	/**
 	 * Constructor de la clase DecoratorEfectivo
+	 * 
 	 * @param encapsulado: Encapsulado de la clase
 	 */
 	public DecoratorEfectivo(IAbonado encapsulado) {
 		super(encapsulado);
-		assert encapsulado !=null : "encapsulado no valido";
+		assert encapsulado != null : "encapsulado no valido";
 	}
 
 	/**
-	 *Devuelve el costo de los servicios con un descuento del 20%
+	 * Devuelve el costo de los servicios con un descuento del 20%
 	 */
 	@Override
-	public double getCostoServicios() { 
-		return this.encapsulado.getCostoServicios()*0.8;//Aplica promo sobre el TOTAL que debe pagar un abonado por todos sus servicios
+	public double getCostoServicios() {
+		return this.encapsulado.getCostoServicios() * 0.8;// Aplica promo sobre el TOTAL que debe pagar un abonado por
+															// todos sus servicios
 	}
 
 	/**
-	 *Devuelve un clon de la clase DecoratorEfectivo
+	 * Devuelve un clon de la clase DecoratorEfectivo
 	 */
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		DecoratorEfectivo clonado= (DecoratorEfectivo) super.clone();
-		clonado.encapsulado=(IAbonado) encapsulado.clone();
+		DecoratorEfectivo clonado = (DecoratorEfectivo) super.clone();
+		clonado.encapsulado = (IAbonado) encapsulado.clone();
 		return clonado;
 	}
 
@@ -53,36 +53,27 @@ public class DecoratorEfectivo extends DecoratorPagos {
 	@Override
 	public void PagarFactura() {
 		encapsulado.PagarFactura();
-		
+
 	}
 
 	@Override
 	public void AgregarFactura(Factura factura) {
 		encapsulado.AgregarFactura(factura);
-		
+
 	}
 
 	@Override
 	public GregorianCalendar getFecha() {
 		return encapsulado.getFecha();
 	}
-	
+
 	public String toString() {
-		return this.getNombre()+" - "+this.getDNI();
+		return this.getNombre() + " - " + this.getDNI();
 	}
-	
+
 	@Override
 	public String getEstado() {
 		return this.encapsulado.getEstado();
 	}
-	
-	@Override
-	public void simularMes(GregorianCalendar fecha) {
-		this.encapsulado.simularMes(fecha);
-	}
 
-	@Override
-	public void sumarDia(GregorianCalendar fecha) {
-		this.encapsulado.sumarDia(fecha);
-	}
 }
