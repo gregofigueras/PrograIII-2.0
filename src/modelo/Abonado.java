@@ -44,7 +44,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.servicios = new HashMap<String, Servicio>();
 		this.fecha = fecha;
 		this.mesPago = fecha.MONTH;
-		this.listaFacturas= new ArrayList<Factura>();
+		this.listaFacturas = new ArrayList<Factura>();
 	}
 
 	public GregorianCalendar getFecha() {
@@ -167,19 +167,12 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
-<<<<<<< Updated upstream
 		if (this.servicios != null) {
 			if (this.fecha.MONTH - this.mesPago != 0) {
 				this.mesPago = this.fecha.MONTH;
 				Factura factura = new Factura(this);
 				this.AgregarFactura(factura);
 			}
-=======
-		if (this.fecha.getTimeInMillis() - this.fechaInicial.getTimeInMillis()) {
-			this.fechaInicial = this.fecha;
-			Factura factura = new Factura(this);
-			this.AgregarFactura(factura);
->>>>>>> Stashed changes
 		}
 
 	}
