@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -483,7 +482,8 @@ public class VentanaPrincipal extends JFrame
 		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
 		this.btnPagaFactura.setEnabled(condicion3 && condicion4);
 		boolean condicion6 = this.modeloListaTecnico.size() > 0;
-		this.btnSolicitarTecnico.setEnabled(condicion3 && condicion6);
+		boolean condicion7 = this.modeloListaDomicilio.size() > 0;
+		this.btnSolicitarTecnico.setEnabled(condicion3 && condicion6 && condicion7);
 
 	}
 

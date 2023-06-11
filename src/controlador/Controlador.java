@@ -134,7 +134,7 @@ public class Controlador implements ActionListener, Observer {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Solicitar")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
-			this.ventanaPrincipal.escribirConsola("El usuario " + abonado.getNombre() + "  ");
+			this.ventanaPrincipal.escribirConsola("El usuario " + abonado.getNombre() + "  esta siendo atendido");
 			Thread thread = new Thread(abonado);
 			thread.start();
 
