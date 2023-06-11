@@ -35,7 +35,7 @@ public class TecnicosFactory extends Observable {
 			i = r.nextInt(tecnicos.size());
 		while (tecnicos.get(i).libre == false);
 
-		System.out.println("Tecnico ID:" + tecnicos.get(i).getID() + "esta asistiendo a " + abonado.getNombre());
+		System.out.println("Tecnico ID: " + tecnicos.get(i).getID() + " esta asistiendo a " + abonado.getNombre());
 		tecnicos.get(i).libre = false;
 		this.setChanged();
 		this.notifyObservers();

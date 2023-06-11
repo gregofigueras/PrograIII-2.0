@@ -62,7 +62,6 @@ public class VentanaPrincipal extends JFrame
 	private JScrollPane panelIzq;
 	private JList<IAbonado> listAbonados;
 	private JPanel panelSur;
-	private JTextArea textAreaConsola;
 	private JButton btnSolicitarTecnico;
 	private JButton btnEliminarTecnico;
 	private JButton btnAgregarTecnico;
@@ -111,6 +110,8 @@ public class VentanaPrincipal extends JFrame
 	private JPanel panelFinalizaJornada;
 	private JPanel panelMuestraFactura;
 	private JButton btnMuestraFactura;
+	private JScrollPane scrollPane;
+	private JTextArea textAreaConsola;
 
 	/**
 	 * Create the frame.
@@ -318,10 +319,13 @@ public class VentanaPrincipal extends JFrame
 		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
 		this.panelSur.setLayout(new GridLayout(0, 2, 0, 0));
 
+		this.scrollPane = new JScrollPane();
+		this.panelSur.add(this.scrollPane);
+
 		this.textAreaConsola = new JTextArea();
-		this.panelSur.add(this.textAreaConsola);
-		this.panelSur.setPreferredSize(new Dimension(50, 40));
 		this.textAreaConsola.setEditable(false);
+		this.scrollPane.setViewportView(this.textAreaConsola);
+		this.panelSur.setPreferredSize(new Dimension(50, 40));
 
 		this.panelAdicionales = new JPanel();
 		this.panelSur.add(this.panelAdicionales);
@@ -588,7 +592,7 @@ public class VentanaPrincipal extends JFrame
 	}
 
 	public void escribirConsola(String string) {
-		this.textAreaConsola.append(string);
+		this.textAreaConsola.append(string + "\n");
 	}
 
 	public void actionPerformed(ActionEvent e) {
