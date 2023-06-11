@@ -116,7 +116,10 @@ public class Controlador implements ActionListener, Observer {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
-			abonado.PagarFactura();
+			if (abonado.getFactura() == null) {
+				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no puede pagar aun");
+			}
+			else abonado.PagarFactura();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Simular mes")) {
 			sistema.simularMes();

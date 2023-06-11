@@ -120,14 +120,16 @@ public class AbonadoFisico extends Abonado implements Runnable {
 	public void EfectuaPago(double d) {
 		double total = 0;
 
-		for (Factura factura : listaFacturas) {
-			if (!factura.isPago()) {
-				total += factura.getTotal();
-				factura.setTotal(factura.getTotal() * d);
-				factura.setPago(true);
+		if (listaFacturas != null) {
+			for (Factura factura : listaFacturas) {
+				if (!factura.isPago()) {
+					total += factura.getTotal();
+					factura.setTotal(factura.getTotal() * d);
+					factura.setPago(true);
+				}
 			}
+			System.out.println("El abonado pago un total de: " + total + " pesos");
 		}
-		System.out.println("El abonado pago un total de: " + total + " pesos");
 	}
 
 	public void ContratarNuevoServicio(String domicilio, Servicio s) {
