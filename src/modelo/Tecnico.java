@@ -30,6 +30,10 @@ public class Tecnico implements Serializable {
 		return nombre;
 	}
 
+	public String getID() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		if (libre)

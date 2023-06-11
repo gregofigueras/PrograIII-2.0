@@ -36,12 +36,12 @@ public class Controlador implements ActionListener, Observer {
 		this.ventanaPrincipal.setActionListener(this);
 		this.ventanaPrincipal.setControlador(this);
 		this.ventanaPrincipal.setControlador(this);
-		
+
 		this.ventanaAgregaTecnico = new VentanaAgregaTecnico();
 		this.ventanaAgregaServicio = new VentanaAgregaServicio();
 		this.ventanaAgregaServicio.setActionListener(this);
 		this.ventanaAgregaTecnico.setActionListener(this);
-		
+
 		this.ventanaFacturas = new VentanaFacturas();
 		this.ventanaFacturas.setControlador(this);
 
@@ -134,6 +134,7 @@ public class Controlador implements ActionListener, Observer {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Solicitar")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
+			this.ventanaPrincipal.escribirConsola("El usuario " + abonado.getNombre() + "  ");
 			Thread thread = new Thread(abonado);
 			thread.start();
 
