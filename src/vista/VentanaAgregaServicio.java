@@ -307,7 +307,7 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		if (this.textFieldCantCamaras.getText() != null) {
 			condicion2 = Integer.parseInt(this.textFieldCantCamaras.getText()) >= 0;
 		}
-		condicion3 = !this.textFieldDomicilio.getText().equals(null);
+		condicion3 = (!this.textFieldDomicilio.getText().equals(null) && !this.textFieldDomicilio.getText().equals(""));
 		this.btnAgregar.setEnabled(condicion1 && condicion2 && condicion3);
 	}
 
