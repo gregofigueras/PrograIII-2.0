@@ -53,7 +53,7 @@ public class Sistema implements Serializable {
 	}
 
 	public ArrayList<Tecnico> getTecnicos() {
-		return tecnicos.getTecnicos();
+		return tecnicos.getListaTecnicos();
 	}
 
 	public TecnicosFactory getTecnicoFactory() {

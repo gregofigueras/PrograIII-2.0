@@ -24,6 +24,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected ArrayList<Factura> listaFacturas;
 	protected GregorianCalendar fecha;
 	protected int mesPago;
+	protected Tecnico tecnico = null;
 
 	/**
 	 * constructor de la clase
@@ -153,14 +154,18 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	public void run() {
 		System.out.println("corriendo");
 		int i;
-		i = this.tecnicosFactory.ConsultaTecnica(this);
-		Random r = new Random();
-		int q = r.nextInt(6000);
-		try {
-			Thread.sleep(q);
-			this.tecnicosFactory.TerminaConsulta(this, i);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (this.tecnico == null) {
+			i = this.tecnicosFactory.ConsultaTecnica(this);
+			this.tecnico = this.tecnicosFactory.getTecnico(i);
+			Random r = new Random();
+			int q = r.nextInt(2000);
+			try {
+				Thread.sleep(q);
+				this.tecnicosFactory.TerminaConsulta(this, i);
+				this.tecnico = null;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

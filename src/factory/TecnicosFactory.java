@@ -20,8 +20,12 @@ public class TecnicosFactory extends Observable {
 		tecnicos.remove(tecnico);
 	}
 
-	public ArrayList<Tecnico> getTecnicos() {
+	public ArrayList<Tecnico> getListaTecnicos() {
 		return tecnicos;
+	}
+
+	public Tecnico getTecnico(int i) {
+		return tecnicos.get(i);
 	}
 
 	public synchronized int ConsultaTecnica(Abonado abonado) {
