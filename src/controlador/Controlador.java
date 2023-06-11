@@ -51,7 +51,8 @@ public class Controlador implements ActionListener, Observer {
 			if (abonado.getTipo().equals("Fisico")) {
 				if (abonado.getEstado().equals("Moroso")) {
 					condicion1 = false;
-					this.ventanaPrincipal.Moroso();
+					this.ventanaPrincipal.escribirConsola("No puede agregar servicio por ser moroso");
+					;
 
 				} else
 					condicion1 = true;
@@ -89,16 +90,29 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaPrincipal.actualizaListaAbonado();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
+			boolean condicion1;
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			String domicilio = this.ventanaPrincipal.getSelectedDomicilio();
-			try {
-				abonado.quitaServicio(domicilio);
-			} catch (DomicilioInvalidoException e1) {
-				e1.printStackTrace();
+			if (abonado.getTipo().equals("Fisico")) {
+				if (abonado.getEstado().equals("Moroso")) {
+					condicion1 = false;
+					this.ventanaPrincipal.escribirConsola("No puede agregar servicio por ser moroso");
+					;
+
+				} else
+					condicion1 = true;
+			} else
+				condicion1 = true;
+			if (condicion1) {
+				try {
+					abonado.quitaServicio(domicilio);
+				} catch (DomicilioInvalidoException e1) {
+					e1.printStackTrace();
+				}
+				this.ventanaPrincipal.limpiaTextAreaServicio();
+				this.ventanaAgregaServicio.limpia();
+				this.ventanaPrincipal.actualizaListaDomicilio();
 			}
-			this.ventanaPrincipal.limpiaTextAreaServicio();
-			this.ventanaAgregaServicio.limpia();
-			this.ventanaPrincipal.actualizaListaDomicilio();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
@@ -120,7 +134,7 @@ public class Controlador implements ActionListener, Observer {
 			this.sistema.eliminaTecnico(tecnico);
 			this.ventanaPrincipal.actualizaTecnicos();
 
-		} else if (e.getActionCommand().equalsIgnoreCase("agregarTecnico")) { //Cierra el popup de facturas
+		} else if (e.getActionCommand().equalsIgnoreCase("agregarTecnico")) { // Cierra el popup de facturas
 			String nombre = this.ventanaAgregaTecnico.getNombreTecnico();
 			String ID = this.ventanaAgregaTecnico.getIDTecnico();
 			this.ventanaAgregaTecnico.limpia();
@@ -129,19 +143,17 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaAgregaTecnico.limpia();
 			this.ventanaPrincipal.actualizaTecnicos();
 
-		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { //Abre el popup de facturas
+		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { // Abre el popup de facturas
 			this.ventanaAgregaTecnico.setVisible(true);
 
-		}
-		else if (e.getActionCommand().equalsIgnoreCase("Mostrar facturas")) { //Abre popup de facturas
+		} else if (e.getActionCommand().equalsIgnoreCase("Mostrar facturas")) { // Abre popup de facturas
 			System.out.println(this.ventanaPrincipal.getSelectedAbonado().getFactura());
 			if (this.ventanaPrincipal.getSelectedAbonado().getFactura() != null) {
 				this.ventanaFacturas.ActualizaListaFacturas();
 				this.ventanaFacturas.setVisible(true);
 			} else
 				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");
-		}
-		else if (e.getActionCommand().equalsIgnoreCase("Cerrar")) {	//Cierra el popup de facturas
+		} else if (e.getActionCommand().equalsIgnoreCase("Cerrar")) { // Cierra el popup de facturas
 			this.ventanaAgregaTecnico.setVisible(false);
 			this.ventanaAgregaTecnico.limpia();
 		}

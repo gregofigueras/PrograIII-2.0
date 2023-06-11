@@ -587,9 +587,8 @@ public class VentanaPrincipal extends JFrame
 		this.textAreaServicio.setText(null);
 	}
 
-	public void Moroso() {
-		this.textAreaConsola.append("No puede agregar servicio por ser moroso");
-
+	public void escribirConsola(String string) {
+		this.textAreaConsola.append(string);
 	}
 
 	public void actionPerformed(ActionEvent e) {
