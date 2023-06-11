@@ -183,5 +183,9 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 			this.AgregarFactura(factura);
 		}
 	}
+	
+	public ArrayList<Factura> getFactura(){
+		return this.listaFacturas;
+	}
 
 }

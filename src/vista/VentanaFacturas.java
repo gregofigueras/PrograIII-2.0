@@ -2,12 +2,15 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import controlador.Controlador;
 import modelo.Factura;
@@ -15,30 +18,32 @@ import modelo.Factura;
 public class VentanaFacturas extends JFrame {
 
 	private JPanel contentPane;
-	private JScrollBar scrollBar;
 	private Controlador controlador;
-	private Object modeloListaFactura;
+	private DefaultListModel<Factura> modeloListaFactura;
 	private JTextArea textAreaDomicilio;
-	private JTextArea textAreaFacturas;
+	private JScrollBar scrollBar;
+	private JList<Factura> listFacturas;
 
 	public VentanaFacturas() {
 		setTitle("Facturas - Domicilio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 445, 300);
 		this.contentPane = new JPanel();
-		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setBorder(new TitledBorder(null, "Facturas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new BorderLayout(0, 0));
 
-		this.scrollBar = new JScrollBar();
-		this.contentPane.add(this.scrollBar, BorderLayout.EAST);
-
 		this.textAreaDomicilio = new JTextArea();
 		this.contentPane.add(this.textAreaDomicilio, BorderLayout.NORTH);
-
-		this.textAreaFacturas = new JTextArea();
-		this.contentPane.add(this.textAreaFacturas, BorderLayout.CENTER);
+		
+		this.scrollBar = new JScrollBar();
+		this.contentPane.add(this.scrollBar, BorderLayout.EAST);
+		
+		this.listFacturas = new JList<Factura>();
+		this.contentPane.add(this.listFacturas, BorderLayout.CENTER);
+		this.modeloListaFactura = new DefaultListModel<Factura>();
+		this.listFacturas.setModel(modeloListaFactura);
 
 		this.setVisible(false);
 
@@ -52,13 +57,17 @@ public class VentanaFacturas extends JFrame {
 		String domicilio = this.controlador.getDomicilioValue();
 		this.textAreaDomicilio.setText(domicilio);
 		ArrayList<Factura> listaFacturas = controlador.getFacturas();
-		for (Factura elemento : listaFacturas)
-			this.textAreaFacturas.append(elemento.toString());
+		Iterator<Factura> it = listaFacturas.iterator();
+		while (it.hasNext()) {
+			this.modeloListaFactura.addElement(it.next());
+		}
+		this.listFacturas.repaint();
 	}
 
 	public void limpia() {
 		this.textAreaDomicilio.setText(null);
-		this.textAreaFacturas.setText(null);
+		this.modeloListaFactura.clear();
+		this.listFacturas.repaint();
 	}
 
 }

@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -33,6 +34,8 @@ public interface IAbonado extends Cloneable, Runnable {
 	void PagarFactura();
 
 	void AgregarFactura(Factura factura);
+	
+	ArrayList<Factura> getFactura();
 
 	String toString();
 

@@ -164,8 +164,7 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	public ArrayList<Factura> getFacturas() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.ventanaPrincipal.getSelectedAbonado().getFactura();
 	}
 
 	public String getDomicilioValue() {

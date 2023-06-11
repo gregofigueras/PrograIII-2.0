@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import excepciones.DomicilioInvalidoException;
@@ -122,4 +123,7 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 		this.encapsulado.run();
 	}
 
+	public ArrayList<Factura> getFactura(){
+		return this.encapsulado.getFactura();
+	}
 }
