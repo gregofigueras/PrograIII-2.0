@@ -14,6 +14,7 @@ import javax.swing.border.TitledBorder;
 
 import controlador.Controlador;
 import modelo.Factura;
+import javax.swing.JButton;
 
 public class VentanaFacturas extends JFrame {
 
@@ -21,8 +22,9 @@ public class VentanaFacturas extends JFrame {
 	private Controlador controlador;
 	private DefaultListModel<Factura> modeloListaFactura;
 	private JTextArea textAreaDomicilio;
-	private JScrollBar scrollBar;
 	private JList<Factura> listFacturas;
+	private JPanel panelSur;
+	private JButton btnCerrar;
 
 	public VentanaFacturas() {
 		setTitle("Facturas - Domicilio");
@@ -37,13 +39,17 @@ public class VentanaFacturas extends JFrame {
 		this.textAreaDomicilio = new JTextArea();
 		this.contentPane.add(this.textAreaDomicilio, BorderLayout.NORTH);
 		
-		this.scrollBar = new JScrollBar();
-		this.contentPane.add(this.scrollBar, BorderLayout.EAST);
-		
 		this.listFacturas = new JList<Factura>();
 		this.contentPane.add(this.listFacturas, BorderLayout.CENTER);
 		this.modeloListaFactura = new DefaultListModel<Factura>();
 		this.listFacturas.setModel(modeloListaFactura);
+		
+		this.panelSur = new JPanel();
+		this.contentPane.add(this.panelSur, BorderLayout.SOUTH);
+		
+		this.btnCerrar = new JButton("Cerrar");
+		this.btnCerrar.setActionCommand("Cerrar");
+		this.panelSur.add(this.btnCerrar);
 
 		this.setVisible(false);
 

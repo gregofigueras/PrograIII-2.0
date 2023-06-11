@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -109,6 +110,8 @@ public class VentanaPrincipal extends JFrame
 	private JPanel panelIniciaJornada;
 	private JPanel panelSimularMes;
 	private JPanel panelFinalizaJornada;
+	private JPanel panelMuestraFactura;
+	private JButton btnMuestraFactura;
 
 	/**
 	 * Create the frame.
@@ -141,6 +144,7 @@ public class VentanaPrincipal extends JFrame
 		this.panelIzq.setViewportView(this.listAbonados);
 		this.modeloListaAbonado = new DefaultListModel<IAbonado>();
 		this.listAbonados.setModel(modeloListaAbonado);
+		this.listAbonados.setEnabled(false);
 
 		this.panelCentral = new JPanel();
 		this.panelPrincipal.add(this.panelCentral);
@@ -308,6 +312,7 @@ public class VentanaPrincipal extends JFrame
 		this.panelC3.add(this.lblAccionesTecnico, BorderLayout.NORTH);
 
 		this.listTecnicos = new JList<Tecnico>();
+		this.listTecnicos.setEnabled(false);
 		this.panelC3.add(this.listTecnicos, BorderLayout.CENTER);
 
 		this.panelSur = new JPanel();
@@ -317,6 +322,7 @@ public class VentanaPrincipal extends JFrame
 		this.textAreaConsola = new JTextArea();
 		this.panelSur.add(this.textAreaConsola);
 		this.panelSur.setPreferredSize(new Dimension(50, 40));
+		this.textAreaConsola.setEditable(false);
 
 		this.panelAdicionales = new JPanel();
 		this.panelSur.add(this.panelAdicionales);
@@ -354,7 +360,14 @@ public class VentanaPrincipal extends JFrame
 		this.modeloListaTecnico = new DefaultListModel<Tecnico>();
 		this.listTecnicos.setModel(modeloListaTecnico);
 		this.listAbonados.setModel(modeloListaAbonado);
+
+		this.panelMuestraFactura = new JPanel();
+		this.panel.add(this.panelMuestraFactura, BorderLayout.SOUTH);
+
+		this.btnMuestraFactura = new JButton("Mostrar facturas");
+		this.panelMuestraFactura.add(this.btnMuestraFactura);
 		this.listTecnicos.addListSelectionListener(this);
+		this.btnMuestraFactura.setEnabled(false);
 
 		this.panelDer = new JPanel();
 		this.panelPrincipal.add(this.panelDer);
@@ -371,6 +384,7 @@ public class VentanaPrincipal extends JFrame
 		this.Domicilio.add(this.scrollPanelDomicilio);
 
 		this.listDomicilio = new JList<String>();
+		this.listDomicilio.setEnabled(false);
 		this.scrollPanelDomicilio.setViewportView(this.listDomicilio);
 		this.modeloListaDomicilio = new DefaultListModel<String>();
 		this.listDomicilio.setModel(modeloListaDomicilio);
@@ -387,7 +401,9 @@ public class VentanaPrincipal extends JFrame
 		this.Servicio.add(this.scrollPanelServicios);
 
 		this.textAreaServicio = new JTextArea();
+		this.textAreaServicio.setEnabled(false);
 		this.scrollPanelServicios.setViewportView(this.textAreaServicio);
+		this.textAreaServicio.setEditable(false);
 
 		this.setVisible(true);
 
@@ -447,6 +463,7 @@ public class VentanaPrincipal extends JFrame
 				this.actualizaListaDomicilio();
 				this.listDomicilio.clearSelection();
 				this.textAreaServicio.setText(null);
+				this.btnMuestraFactura.setEnabled(true);
 			}
 		}
 		if (e.getSource() == this.listDomicilio) {
@@ -482,6 +499,7 @@ public class VentanaPrincipal extends JFrame
 		this.btnIniciaJornada.addActionListener(actionListener);
 		this.btnSimularMes.addActionListener(actionListener);
 		this.btnFinalizaJornada.addActionListener(actionListener);
+		this.btnMuestraFactura.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 
@@ -583,6 +601,12 @@ public class VentanaPrincipal extends JFrame
 			this.btnSimularMes.setEnabled(true);
 			this.btnAgregarTecnico.setEnabled(true);
 			this.btnSolicitarTecnico.setEnabled(false);
+			this.listAbonados.setEnabled(true);
+			this.listDomicilio.setEnabled(true);
+			this.listTecnicos.setEnabled(true);
+			this.textAreaServicio.setEnabled(true);
+			this.textAreaConsola.setText(null);
+			this.textAreaConsola.setText("Se inicio la jornada\n");
 		} else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
 			this.btnIniciaJornada.setEnabled(true);
 			this.nombre.setEnabled(false);
@@ -592,12 +616,14 @@ public class VentanaPrincipal extends JFrame
 			this.btnAgregarTecnico.setEnabled(false);
 			this.btnSolicitarTecnico.setEnabled(false);
 			this.btnEliminarTecnico.setEnabled(false);
+			this.btnMuestraFactura.setEnabled(false);
 			this.listAbonados.clearSelection();
 			this.listDomicilio.clearSelection();
+			this.listAbonados.setEnabled(false);
+			this.listDomicilio.setEnabled(false);
+			this.listTecnicos.setEnabled(false);
+			this.textAreaServicio.setEnabled(false);
+			this.textAreaConsola.setText("Se finalizo la jornada\n");
 		}
 	}
-	public void escribirConsola(String escritura) {
-		this.textAreaConsola.append(escritura + "\n");
-	}
-
 }

@@ -8,6 +8,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import excepciones.DomicilioInvalidoException;
 import factory.ServicioFactory;
 import interfaces.IAbonado;
@@ -118,7 +120,7 @@ public class Controlador implements ActionListener, Observer {
 			this.sistema.eliminaTecnico(tecnico);
 			this.ventanaPrincipal.actualizaTecnicos();
 
-		} else if (e.getActionCommand().equalsIgnoreCase("agregarTecnico")) { // cierra popup
+		} else if (e.getActionCommand().equalsIgnoreCase("agregarTecnico")) { //Cierra el popup de facturas
 			String nombre = this.ventanaAgregaTecnico.getNombreTecnico();
 			String ID = this.ventanaAgregaTecnico.getIDTecnico();
 			this.ventanaAgregaTecnico.limpia();
@@ -127,9 +129,21 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaAgregaTecnico.limpia();
 			this.ventanaPrincipal.actualizaTecnicos();
 
-		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { // abre popup
+		} else if (e.getActionCommand().equalsIgnoreCase("AgregarNuevoTecnico")) { //Abre el popup de facturas
 			this.ventanaAgregaTecnico.setVisible(true);
 
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Mostrar facturas")) { //Abre popup de facturas
+			System.out.println(this.ventanaPrincipal.getSelectedAbonado().getFactura());
+			if (this.ventanaPrincipal.getSelectedAbonado().getFactura() != null) {
+				this.ventanaFacturas.ActualizaListaFacturas();
+				this.ventanaFacturas.setVisible(true);
+			} else
+				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");
+		}
+		else if (e.getActionCommand().equalsIgnoreCase("Cerrar")) {	//Cierra el popup de facturas
+			this.ventanaAgregaTecnico.setVisible(false);
+			this.ventanaAgregaTecnico.limpia();
 		}
 	}
 
