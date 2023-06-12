@@ -34,7 +34,7 @@ public interface IAbonado extends Cloneable, Runnable {
 	void PagarFactura();
 
 	void AgregarFactura(Factura factura);
-	
+
 	ArrayList<Factura> getFactura();
 
 	String toString();
@@ -45,4 +45,5 @@ public interface IAbonado extends Cloneable, Runnable {
 
 	void sumarDia(GregorianCalendar fecha);
 
+	double getTotalPagado();
 }
