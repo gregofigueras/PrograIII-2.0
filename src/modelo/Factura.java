@@ -1,6 +1,7 @@
 package modelo;
 
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 import interfaces.IAbonado;
 
@@ -10,8 +11,7 @@ import interfaces.IAbonado;
 public class Factura implements Cloneable {
 
 	private IAbonado abonado;
-	SimpleDateFormat fechaSimple = new SimpleDateFormat("dd/MM/yyyy");
-	String fechaFormato;
+	private String fecha;
 	private double total;
 	private boolean pago = false;
 
@@ -26,7 +26,8 @@ public class Factura implements Cloneable {
 		super();
 		this.abonado = abonado;
 		this.total = this.abonado.getCostoServicios();
-		this.fechaFormato = fechaSimple.format(this.abonado.getFecha().getTime());
+		SimpleDateFormat fechaSimple = new SimpleDateFormat("dd/MM/yyyy");
+		this.fecha = fechaSimple.format(this.abonado.getFecha().getTime());
 	}
 
 	/**
@@ -36,7 +37,6 @@ public class Factura implements Cloneable {
 		System.out.println(this.abonado.getNombre() + "     " + this.abonado.getDNI() + "\n");
 		this.abonado.imprimeServicios();
 		total = this.abonado.getCostoServicios();
-
 	}
 
 	/**
@@ -74,40 +74,22 @@ public class Factura implements Cloneable {
 		this.total = total;
 	}
 
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
+
 	@Override
 	public String toString() {
+		
+
 		if (pago)
-			return "[" + fechaFormato + "]: $" + total;
+			return "[" + this.fecha + "]: $" + total;
 		else
-			return "[" + fechaFormato + "]: $" + total + "  --ADEUDADO--";
-	}
-
-	public IAbonado getAbonado() {
-		return abonado;
-	}
-
-	public void setAbonado(IAbonado abonado) {
-		this.abonado = abonado;
-	}
-
-	public SimpleDateFormat getFechaSimple() {
-		return fechaSimple;
-	}
-
-	public void setFechaSimple(SimpleDateFormat fechaSimple) {
-		this.fechaSimple = fechaSimple;
-	}
-
-	public String getFechaFormato() {
-		return fechaFormato;
-	}
-
-	public void setFechaFormato(String fechaFormato) {
-		this.fechaFormato = fechaFormato;
-	}
-
-	public Factura() {
-		super();
+			return "[" + this.fecha + "]: $" + total + "  --ADEUDADO--";
 	}
 
 }
