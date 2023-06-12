@@ -118,17 +118,18 @@ public class AbonadoFisico extends Abonado {
 	}
 
 	public void EfectuaPago() {
-		int i = this.listaFacturas.size();
+		int i = this.listaFacturas.size() - 1;
 
 		double d = 1.0;
 		this.totalPagado = 0;
 
-		while (!this.listaFacturas.get(i).isPago()) {
+		while (i >= 0 && !this.listaFacturas.get(i).isPago()) {
 
 			if (i < this.listaFacturas.size() - 2) {
 				d = 1.3;
 			}
 			this.totalPagado += this.listaFacturas.get(i).getTotal() * d;
+			this.listaFacturas.get(i).setPago(true);
 			i--;
 		}
 	}

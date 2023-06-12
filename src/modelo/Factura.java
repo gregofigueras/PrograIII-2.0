@@ -1,7 +1,6 @@
 package modelo;
 
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import interfaces.IAbonado;
 
@@ -11,7 +10,8 @@ import interfaces.IAbonado;
 public class Factura implements Cloneable {
 
 	private IAbonado abonado;
-	private GregorianCalendar fecha;
+	SimpleDateFormat fechaSimple = new SimpleDateFormat("dd/MM/yyyy");
+	String fechaFormato;
 	private double total;
 	private boolean pago = false;
 
@@ -26,6 +26,7 @@ public class Factura implements Cloneable {
 		super();
 		this.abonado = abonado;
 		this.total = this.abonado.getCostoServicios();
+		this.fechaFormato = fechaSimple.format(this.abonado.getFecha().getTime());
 	}
 
 	/**
@@ -35,7 +36,7 @@ public class Factura implements Cloneable {
 		System.out.println(this.abonado.getNombre() + "     " + this.abonado.getDNI() + "\n");
 		this.abonado.imprimeServicios();
 		total = this.abonado.getCostoServicios();
-		this.fecha = abonado.getFecha();
+
 	}
 
 	/**
@@ -73,19 +74,8 @@ public class Factura implements Cloneable {
 		this.total = total;
 	}
 
-	public GregorianCalendar getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(GregorianCalendar fecha) {
-		this.fecha = fecha;
-	}
-
 	@Override
 	public String toString() {
-		SimpleDateFormat fechaSimple = new SimpleDateFormat("dd/MM/yyyy");
-		String fechaFormato = fechaSimple.format(fecha.getTime());
-
 		if (pago)
 			return "[" + fechaFormato + "]: $" + total;
 		else

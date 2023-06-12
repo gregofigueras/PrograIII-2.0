@@ -127,6 +127,10 @@ public class Controlador implements ActionListener, Observer {
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Finalizar jornada")) {
 			sistema.sumarDia();
+			sistema.finalizaJornada();
+
+		} else if (e.getActionCommand().equalsIgnoreCase("Inicia jornada")) {
+			sistema.iniciaJornada();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Solicitar")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
@@ -156,7 +160,7 @@ public class Controlador implements ActionListener, Observer {
 				this.ventanaFacturas.ActualizaListaFacturas();
 				this.ventanaFacturas.setVisible(true);
 			} else
-				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");			
+				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");
 		} else if (e.getActionCommand().equalsIgnoreCase("Cerrar")) { // Cierra el popup de facturas
 			this.ventanaAgregaTecnico.setVisible(false);
 			this.ventanaAgregaTecnico.limpia();

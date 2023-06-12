@@ -78,16 +78,15 @@ public class AbonadoJuridico extends Abonado {
 
 	@Override
 	public void pagarFactura() {
-		double total = 0;
+		int i = this.listaFacturas.size() - 1;
 
-		for (Factura factura : listaFacturas) {
-			if (!factura.isPago()) {
-				total += factura.getTotal();
-				factura.setTotal(factura.getTotal());
-				factura.setPago(true);
-			}
+		this.totalPagado = 0;
+
+		while (i >= 0 && !this.listaFacturas.get(i).isPago()) {
+			this.totalPagado += this.listaFacturas.get(i).getTotal();
+			this.listaFacturas.get(i).setPago(true);
+			i--;
 		}
-		System.out.println("El abonado pago un total de: " + total + " pesos");
 	}
 
 	@Override
@@ -107,10 +106,10 @@ public class AbonadoJuridico extends Abonado {
 	public String getEstado() {
 		return null;
 	}
-	
+
 	@Override
 	public void actualizaEstado() {
-		//No hace nada :)
+		// No hace nada :)
 	}
 
 }
