@@ -626,6 +626,7 @@ public class VentanaPrincipal extends JFrame
 			this.listDomicilio.setEnabled(false);
 			this.listTecnicos.setEnabled(false);
 			this.textAreaServicio.setEnabled(false);
+			this.btnPagaFactura.setEnabled(false);
 			this.textAreaConsola.setText("Se finalizo la jornada\n");
 		}
 	}
