@@ -12,6 +12,7 @@ import factory.TecnicosFactory;
  * @author Clase que representa un abonado de tipo juridico dentro del sistema
  */
 public class AbonadoJuridico extends Abonado {
+
 	/**
 	 * Constructor de la clase
 	 * 
@@ -105,6 +106,11 @@ public class AbonadoJuridico extends Abonado {
 	@Override
 	public String getEstado() {
 		return null;
+	}
+	
+	@Override
+	public void actualizaEstado() {
+		//No hace nada :)
 	}
 
 }

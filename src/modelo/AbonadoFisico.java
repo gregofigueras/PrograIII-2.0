@@ -145,4 +145,21 @@ public class AbonadoFisico extends Abonado {
 		return this.nombre + " - " + this.DNI;
 	}
 
+	@Override
+	public void actualizaEstado() {
+		Iterator<Factura> it = this.listaFacturas.iterator();
+		int i = 0;
+		
+		while (it.hasNext()) {
+			if (!it.next().isPago()) {
+				i++;
+			}
+		}
+		if (i > 2) {
+			this.estado = new MorosoState(this);
+		}
+	}
+	
+	
+
 }

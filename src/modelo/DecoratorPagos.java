@@ -131,5 +131,10 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 	public double getTotalPagado() {
 		return this.encapsulado.getTotalPagado();
 	}
+
+	@Override
+	public void actualizaEstado() {
+		this.encapsulado.actualizaEstado();
+	}
 	
 }

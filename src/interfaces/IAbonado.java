@@ -46,4 +46,6 @@ public interface IAbonado extends Cloneable, Runnable {
 	void sumarDia(GregorianCalendar fecha);
 
 	double getTotalPagado();
+	
+	void actualizaEstado();
 }
