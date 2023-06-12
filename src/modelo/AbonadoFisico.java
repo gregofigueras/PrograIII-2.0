@@ -17,7 +17,7 @@ import state.SinContratacionesState;
  */
 public class AbonadoFisico extends Abonado {
 
-	private IState estado = new MorosoState(this);
+	private IState estado;
 
 	/**
 	 * Constructor de la clase
