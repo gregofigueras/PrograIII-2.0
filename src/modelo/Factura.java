@@ -7,13 +7,12 @@ import interfaces.IAbonado;
 /**
  * @author Clase que representa una factura dentro del sistema
  */
-public class Factura implements Cloneable{ 
-	
+public class Factura implements Cloneable {
+
 	private IAbonado abonado;
 	private GregorianCalendar fecha;
 	private double total;
-	private boolean pago=false;
-
+	private boolean pago = false;
 
 	/**
 	 * Constructor de la clase
@@ -51,13 +50,12 @@ public class Factura implements Cloneable{
 	public void agregarServicio(String domicilio, Servicio s1) {
 		abonado.agregaServicio(domicilio, s1);
 	}
-	
-	
+
 	public void EfectuaPago(double total) {
-		this.total=total;
+		this.total = total;
 		this.pago = true;
 	}
-	
+
 	public boolean isPago() {
 		return pago;
 	}
@@ -82,12 +80,12 @@ public class Factura implements Cloneable{
 		this.fecha = fecha;
 	}
 
-	
-	
-}	
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		if (pago)
+			return "[" + fecha.DAY_OF_MONTH + "/" + fecha.MONTH + "/" + fecha.YEAR + "]: $" + total;
+		else
+			return "[" + fecha.DAY_OF_MONTH + "/" + fecha.MONTH + "/" + fecha.YEAR + "]: $" + total + "  --ADEUDADO--";
+	}
+
+}
