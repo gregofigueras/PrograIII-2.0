@@ -117,6 +117,7 @@ public class VentanaPrincipal extends JFrame
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+		setTitle("Sistema de Seguridad");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 787, 575);
 		this.contentPane = new JPanel();
@@ -533,6 +534,17 @@ public class VentanaPrincipal extends JFrame
 			return "Credito";
 		} else
 			return "Efectivo";
+	}
+
+	public void limpiaAbonado() {
+		this.rdbtnJuridico.setEnabled(false);
+		this.rdbtnFisico.setEnabled(false);
+		this.rdbtnCheque.setEnabled(false);
+		this.rdbtnCredito.setEnabled(false);
+		this.rdbtnEfectivo.setEnabled(false);
+		this.nombre.setText(null);
+		this.dni.setText(null);
+		this.btnAgregarAbonado.setEnabled(false);
 	}
 
 	public void actualizaListaAbonado() {

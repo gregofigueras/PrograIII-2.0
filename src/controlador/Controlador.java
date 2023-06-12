@@ -89,7 +89,7 @@ public class Controlador implements ActionListener, Observer {
 			String DNI = this.ventanaPrincipal.getDNI();
 			sistema.creaAbonado(tipo, pago, nombre, DNI);
 			this.ventanaPrincipal.actualizaListaAbonado();
-
+			this.ventanaPrincipal.limpiaAbonado();
 		} else if (e.getActionCommand().equalsIgnoreCase("Eliminar")) {
 			this.sistema.eliminaAbonado(this.ventanaPrincipal.getSelectedAbonado());
 			this.ventanaPrincipal.actualizaListaAbonado();
