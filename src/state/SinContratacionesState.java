@@ -29,11 +29,6 @@ public class SinContratacionesState implements IState {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede dar de baja un sercivio ya que no tiene servicios contratados");
 	}
 
-
-	public void actua() {
-		System.out.println("El abonado no tiene contrtaciones");	
-	}
-
 	@Override
 	public String getEstado() {
 		return "Sin contrataciones";

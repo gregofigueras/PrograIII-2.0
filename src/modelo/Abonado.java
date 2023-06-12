@@ -26,6 +26,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 	protected GregorianCalendar fecha;
 	protected int mesPago;
 	protected Tecnico tecnico = null;
+	protected double totalPagado;
 
 	/**
 	 * constructor de la clase
@@ -47,6 +48,11 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		this.fecha = fecha;
 		this.mesPago = fecha.get(Calendar.MONTH);
 		this.listaFacturas = new ArrayList<Factura>();
+		this.totalPagado = 0;
+	}
+
+	public double getTotalPagado() {
+		return totalPagado;
 	}
 
 	public GregorianCalendar getFecha() {

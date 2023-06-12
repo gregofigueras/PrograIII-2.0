@@ -15,7 +15,7 @@ import state.SinContratacionesState;
 /**
  * @author Clase que representa un abonado de tipo fisico dentro del sistema
  */
-public class AbonadoFisico extends Abonado implements Runnable {
+public class AbonadoFisico extends Abonado {
 
 	private IState estado = new MorosoState(this);
 
@@ -117,18 +117,19 @@ public class AbonadoFisico extends Abonado implements Runnable {
 		this.estado.PagarFactura();
 	}
 
-	public void EfectuaPago(double d) {
-		double total = 0;
-
-		if (listaFacturas != null) {
-			for (Factura factura : listaFacturas) {
-				if (!factura.isPago()) {
-					total += factura.getTotal();
-					factura.setTotal(factura.getTotal() * d);
-					factura.setPago(true);
-				}
+	public void EfectuaPago() {
+		int i = this.listaFacturas.size();
+		
+		double d = 1.0;
+		this.totalPagado = 0;
+		
+		while (!this.listaFacturas.get(i).isPago()) {
+			
+			if (i < this.listaFacturas.size() - 2) {
+				d = 1.3;
 			}
-			System.out.println("El abonado pago un total de: " + total + " pesos");
+			this.totalPagado += this.listaFacturas.get(i).getTotal()*d; 
+			i--;
 		}
 	}
 
@@ -138,14 +139,6 @@ public class AbonadoFisico extends Abonado implements Runnable {
 
 	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
 		this.estado.BajaDeUnServicio(domicilio);
-	}
-
-	public void actua() {
-		this.estado.actua();
-	}
-
-	public void run() {
-		this.actua();
 	}
 
 	public String toString() {

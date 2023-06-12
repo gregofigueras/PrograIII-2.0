@@ -11,6 +11,5 @@ public interface IState {
 	void PagarFactura();
 	void ContratarNuevoServicio(String domicilio, Servicio servicio);
 	void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException;
-	void actua();
 	String getEstado();
 }
