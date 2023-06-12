@@ -34,8 +34,6 @@ public class TecnicosFactory extends Observable {
 		do
 			i = r.nextInt(tecnicos.size());
 		while (tecnicos.get(i).libre == false);
-
-		System.out.println("Tecnico ID: " + tecnicos.get(i).getID() + " esta asistiendo a " + abonado.getNombre());
 		tecnicos.get(i).libre = false;
 		this.setChanged();
 		this.notifyObservers();
@@ -43,7 +41,6 @@ public class TecnicosFactory extends Observable {
 	}
 
 	public synchronized void TerminaConsulta(Abonado abonado, int i) {
-		System.out.println("El tecnico " + tecnicos.get(i).getNombre() + " ahora esta libre");
 		tecnicos.get(i).libre = true;
 		this.setChanged();
 		this.notifyObservers();
