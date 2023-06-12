@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import interfaces.IAbonado;
@@ -82,10 +83,13 @@ public class Factura implements Cloneable {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat fechaSimple = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaFormato = fechaSimple.format(fecha.getTime());
+
 		if (pago)
-			return "[" + fecha.DAY_OF_MONTH + "/" + fecha.MONTH + "/" + fecha.YEAR + "]: $" + total;
+			return "[" + fechaFormato + "]: $" + total;
 		else
-			return "[" + fecha.DAY_OF_MONTH + "/" + fecha.MONTH + "/" + fecha.YEAR + "]: $" + total + "  --ADEUDADO--";
+			return "[" + fechaFormato + "]: $" + total + "  --ADEUDADO--";
 	}
 
 }
