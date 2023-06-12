@@ -117,6 +117,7 @@ public class Sistema implements Serializable {
 		while (it.hasNext()) {
 			IAbonado abonadoActual = it.next();
 			abonadoActual.simularMes(this.fecha);
+			abonadoActual.actualizaEstado();
 		}
 	}
 
@@ -126,8 +127,7 @@ public class Sistema implements Serializable {
 		while (it.hasNext()) {
 			IAbonado abonadoActual = it.next();
 			abonadoActual.sumarDia(this.fecha);
-			System.out.println(abonadoActual.getFecha());
-			System.out.println(this.fecha);
+			abonadoActual.actualizaEstado();
 
 		}
 	}
