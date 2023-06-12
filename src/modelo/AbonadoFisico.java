@@ -119,16 +119,16 @@ public class AbonadoFisico extends Abonado {
 
 	public void EfectuaPago() {
 		int i = this.listaFacturas.size();
-		
+
 		double d = 1.0;
 		this.totalPagado = 0;
-		
+
 		while (!this.listaFacturas.get(i).isPago()) {
-			
+
 			if (i < this.listaFacturas.size() - 2) {
 				d = 1.3;
 			}
-			this.totalPagado += this.listaFacturas.get(i).getTotal()*d; 
+			this.totalPagado += this.listaFacturas.get(i).getTotal() * d;
 			i--;
 		}
 	}
@@ -149,17 +149,19 @@ public class AbonadoFisico extends Abonado {
 	public void actualizaEstado() {
 		Iterator<Factura> it = this.listaFacturas.iterator();
 		int i = 0;
-		
-		while (it.hasNext()) {
-			if (!it.next().isPago()) {
-				i++;
+
+		if (this.listaFacturas.isEmpty()) {
+			this.estado = new SinContratacionesState(this);
+		} else {
+			while (it.hasNext()) {
+				if (!it.next().isPago()) {
+					i++;
+				}
 			}
 		}
 		if (i > 2) {
 			this.estado = new MorosoState(this);
 		}
 	}
-	
-	
 
 }

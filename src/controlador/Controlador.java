@@ -95,23 +95,16 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaPrincipal.actualizaListaAbonado();
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Dar de baja un servicio")) {
-			boolean condicion1;
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
 			String domicilio = this.ventanaPrincipal.getSelectedDomicilio();
-			if (abonado.getTipo().equals("Fisico")) {
-				if (abonado.getEstado().equals("Moroso")) {
-					condicion1 = false;
-					this.ventanaPrincipal.escribirConsola("No puede agregar servicio por ser moroso");
-					;
 
-				} else
-					condicion1 = true;
-			} else
-				condicion1 = true;
-			if (condicion1) {
+			if (abonado.getTipo().equalsIgnoreCase("Fisico") && abonado.getEstado().equalsIgnoreCase("Moroso")) {
+				this.ventanaPrincipal.escribirConsola("No se puede agregar un servicio por ser moroso");
+			} else {
 				try {
 					abonado.quitaServicio(domicilio);
 				} catch (DomicilioInvalidoException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				this.ventanaPrincipal.limpiaTextAreaServicio();
