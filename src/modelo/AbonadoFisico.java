@@ -17,7 +17,7 @@ import state.SinContratacionesState;
  */
 public class AbonadoFisico extends Abonado {
 
-	private IState estado = new MorosoState(this);
+	private IState estado;
 
 	/**
 	 * Constructor de la clase
@@ -31,6 +31,7 @@ public class AbonadoFisico extends Abonado {
 	 *                        <br>
 	 *                        <b> post: </b> Crea un objeto de tipo abonado
 	 */
+
 	public AbonadoFisico(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory sistemaTecnicos) {
 		super(nombre, DNI, fecha, sistemaTecnicos);
 		this.estado = new SinContratacionesState(this);
@@ -39,6 +40,10 @@ public class AbonadoFisico extends Abonado {
 		assert nombre != "" : "nombre no valido";
 		assert DNI != null : "DNI no valido";
 		assert DNI != "" : "DNI no valido";
+	}
+
+	public AbonadoFisico() {
+		super();
 	}
 
 	/**

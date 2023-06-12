@@ -30,6 +30,11 @@ public class DecoratorEfectivo extends DecoratorPagos {
 															// todos sus servicios
 	}
 
+	public DecoratorEfectivo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Devuelve un clon de la clase DecoratorEfectivo
 	 */

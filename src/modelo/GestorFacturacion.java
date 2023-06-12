@@ -15,7 +15,6 @@ public class GestorFacturacion {
 		this.listaAbonados = listaAbonados;
 
 	}
-	
 
 	public void Facturacion() {
 		Iterator<IAbonado> it = listaAbonados.iterator();
@@ -27,6 +26,32 @@ public class GestorFacturacion {
 		}
 	}
 
-	
-	
+	public GestorFacturacion() {
+		super();
+	}
+
+	public IAbonado getAbonadoActual() {
+		return abonadoActual;
+	}
+
+	public void setAbonadoActual(IAbonado abonadoActual) {
+		this.abonadoActual = abonadoActual;
+	}
+
+	public Factura getFactura() {
+		return factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+
+	public ArrayList<IAbonado> getListaAbonados() {
+		return listaAbonados;
+	}
+
+	public void setListaAbonados(ArrayList<IAbonado> listaAbonados) {
+		this.listaAbonados = listaAbonados;
+	}
+
 }

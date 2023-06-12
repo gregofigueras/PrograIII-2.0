@@ -18,9 +18,15 @@ public class DecoratorCheque extends DecoratorPagos {
 	 *                     ser distinto de null <b>Post:</b> Crea un objeto de tipo
 	 *                     DecoratorCheque
 	 */
+
 	public DecoratorCheque(IAbonado encapsulado) {
 		super(encapsulado);
 		assert encapsulado != null : "encapsulado no valido";
+	}
+
+	public DecoratorCheque() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

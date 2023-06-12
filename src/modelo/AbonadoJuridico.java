@@ -26,6 +26,11 @@ public class AbonadoJuridico extends Abonado {
 	 *                        <br>
 	 *                        <b> post: </b> Crea un objeto de tipo abonado
 	 */
+
+	public AbonadoJuridico() {
+		super();
+	}
+
 	public AbonadoJuridico(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory sistemaTecnicos) {
 		super(nombre, DNI, fecha, sistemaTecnicos);
 		assert nombre != null : "nombre no valido";

@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -19,12 +18,14 @@ import persistencia.PersistenciaXML;
  * @author Clase del patron factory para crear nuevos objetos de instancia
  *         IAbonado
  */
-public class Sistema implements Serializable {
+public class Sistema {
 	private ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
+	private ArrayList<Abonado> abonadosprueba = new ArrayList<Abonado>();
 	IPersistencia persistencia = new PersistenciaXML();
 	private static Sistema instance = null;
 	private TecnicosFactory tecnicos;
 	private GregorianCalendar fecha = new GregorianCalendar();
+	private int contador = 0;
 
 	private Sistema() {
 		this.abonados = new ArrayList<IAbonado>();
@@ -52,10 +53,6 @@ public class Sistema implements Serializable {
 		tecnicos.eliminaTecnico(tecnico);
 	}
 
-	public ArrayList<Tecnico> getTecnicos() {
-		return tecnicos.getListaTecnicos();
-	}
-
 	public TecnicosFactory getTecnicoFactory() {
 		return this.tecnicos;
 	}
@@ -69,6 +66,10 @@ public class Sistema implements Serializable {
 		return instance;
 	}
 
+	public ArrayList<Tecnico> getTecnicos() {
+		return tecnicos.getListaTecnicos();
+	}
+
 	public ArrayList<IAbonado> getAbonados() {
 		return this.abonados;
 	}
@@ -78,12 +79,15 @@ public class Sistema implements Serializable {
 	}
 
 	public void finalizaJornada() {
+
+		// this.abonadosprueba.add(new AbonadoFisico("juan", "4526", this.fecha,
+		// this.tecnicos));
 		try {
 			persistencia.abrirOutput("listaAsociada.xml");
 			System.out.println("Archivo de escritura creado");
-			persistencia.escribir(abonados);
+			persistencia.escribir(this.getAbonados());
 			System.out.println("Lista de abonados cargada");
-			persistencia.escribir(tecnicos);
+			persistencia.escribir(this.getTecnicos());
 			System.out.println("Lista de tecnicos cargada");
 			persistencia.cerrarOutput();
 			System.out.println("Archivo de escritura cerrado");
@@ -95,20 +99,23 @@ public class Sistema implements Serializable {
 	}
 
 	public void iniciaJornada() {
-		try {
-			persistencia.abrirInput("listaAsociada.xml");
-			System.out.println("Archivo de lectura abierto");
-			abonados = (ArrayList<IAbonado>) persistencia.Leer();
-			System.out.println("Abonados cargados");
-			tecnicos = (TecnicosFactory) persistencia.Leer();
-			System.out.println("Tecnicos cargados");
-			persistencia.cerrarInput();
-			System.out.println("Archivo de lectura cerrado");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		if (this.contador > 0) {
+			try {
+				persistencia.abrirInput("listaAsociada.xml");
+				System.out.println("Archivo de lectura abierto");
+				this.abonados = (ArrayList<IAbonado>) persistencia.Leer();
+				System.out.println("Abonados cargados");
+				this.tecnicos.setTecnicos((ArrayList<Tecnico>) persistencia.Leer());
+				System.out.println("Tecnicos cargados");
+				persistencia.cerrarInput();
+				System.out.println("Archivo de lectura cerrado");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else
+			this.contador++;
 	}
 
 	public void simularMes() {

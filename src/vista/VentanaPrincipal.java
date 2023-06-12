@@ -604,6 +604,7 @@ public class VentanaPrincipal extends JFrame
 			this.btnSimularMes.setEnabled(true);
 			this.btnAgregarTecnico.setEnabled(true);
 			this.btnSolicitarTecnico.setEnabled(false);
+			this.btnMuestraFactura.setEnabled(false);
 			this.listAbonados.setEnabled(true);
 			this.listDomicilio.setEnabled(true);
 			this.listTecnicos.setEnabled(true);
@@ -626,6 +627,7 @@ public class VentanaPrincipal extends JFrame
 			this.listDomicilio.setEnabled(false);
 			this.listTecnicos.setEnabled(false);
 			this.textAreaServicio.setEnabled(false);
+			this.btnPagaFactura.setEnabled(false);
 			this.textAreaConsola.setText("Se finalizo la jornada\n");
 		}
 	}

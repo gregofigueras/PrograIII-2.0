@@ -109,4 +109,40 @@ public abstract class Servicio implements Cloneable {
 				+ ", movilAcomp=" + movilAcomp + ", promo=" + promo + "]";
 	}
 
+	public static int getSigNumId() {
+		return sigNumId;
+	}
+
+	public static void setSigNumId(int sigNumId) {
+		Servicio.sigNumId = sigNumId;
+	}
+
+	public void setPrecioBase(float precioBase) {
+		this.precioBase = precioBase;
+	}
+
+	public void setCantCamaras(int cantCamaras) {
+		this.cantCamaras = cantCamaras;
+	}
+
+	public void setCantBotonAP(int cantBotonAP) {
+		this.cantBotonAP = cantBotonAP;
+	}
+
+	public void setMovilAcomp(boolean movilAcomp) {
+		this.movilAcomp = movilAcomp;
+	}
+
+	public void setNumId(int numId) {
+		this.numId = numId;
+	}
+
+	public void setPromo(IPromocion promo) {
+		this.promo = promo;
+	}
+
+	public Servicio() {
+		super();
+	}
+
 }

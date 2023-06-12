@@ -123,7 +123,7 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 		this.encapsulado.run();
 	}
 
-	public ArrayList<Factura> getFactura(){
+	public ArrayList<Factura> getFactura() {
 		return this.encapsulado.getFactura();
 	}
 
@@ -136,5 +136,17 @@ public abstract class DecoratorPagos implements IAbonado, Cloneable {
 	public void actualizaEstado() {
 		this.encapsulado.actualizaEstado();
 	}
-	
+
+	public IAbonado getEncapsulado() {
+		return encapsulado;
+	}
+
+	public void setEncapsulado(IAbonado encapsulado) {
+		this.encapsulado = encapsulado;
+	}
+
+	public DecoratorPagos() {
+		super();
+	}
+
 }

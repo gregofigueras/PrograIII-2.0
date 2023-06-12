@@ -22,6 +22,11 @@ public class DecoratorCredito extends DecoratorPagos {
 		assert encapsulado != null : "encapsulado no valido";
 	}
 
+	public DecoratorCredito() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Devuelve el costo de todos los servicios del encapsulado con un recargo del
 	 * 5%

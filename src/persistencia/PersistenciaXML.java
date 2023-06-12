@@ -2,6 +2,8 @@ package persistencia;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,12 +18,14 @@ public class PersistenciaXML implements IPersistencia {
 	@Override
 	public void abrirInput(String nombre) throws IOException {
 		fileinput = new FileInputStream(nombre);
-		xmlDecoder = new XMLDecoder(fileinput);
+		BufferedInputStream buffer = new BufferedInputStream(fileinput);
+		xmlDecoder = new XMLDecoder(buffer);
 	}
 
 	@Override
 	public void abrirOutput(String nombre) throws IOException {
 		fileoutput = new FileOutputStream(nombre);
+		BufferedOutputStream buffer = new BufferedOutputStream(fileoutput);
 		xmlEncoder = new XMLEncoder(fileoutput);
 	}
 

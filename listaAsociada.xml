@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.6" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="modelo.DecoratorEfectivo">
+    <void property="encapsulado">
+     <object class="modelo.AbonadoJuridico" id="AbonadoJuridico0">
+      <void property="DNI">
+       <string>awd</string>
+      </void>
+      <void property="fecha">
+       <object class="java.util.GregorianCalendar">
+        <void property="time">
+         <object class="java.util.Date">
+          <long>1702615145592</long>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void property="listaFacturas">
+       <object class="java.util.ArrayList">
+        <void method="add">
+         <object class="modelo.Factura" id="Factura0">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>12/07/2023</string>
+          </void>
+          <void id="SimpleDateFormat0" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063237055</long>
+            </object>
+           </void>
+           <void id="GregorianCalendar0" property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1689136745592</long>
+             </object>
+            </void>
+            <void id="Boolean0" method="isLenient"/>
+           </void>
+           <void id="DateFormatSymbols0" property="dateFormatSymbols">
+            <void id="StringArray0" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray0"/>
+            </void>
+            <void id="StringArray1" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray1"/>
+            </void>
+            <void id="StringArray2" property="months"/>
+            <void property="months">
+             <object idref="StringArray2"/>
+            </void>
+            <void id="StringArray3" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray3"/>
+            </void>
+            <void id="StringArray4" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray4"/>
+            </void>
+            <void id="StringArray5" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray5"/>
+            </void>
+            <void id="StringArrayArray0" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray0"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="modelo.Factura" id="Factura1">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>13/08/2023</string>
+          </void>
+          <void id="SimpleDateFormat1" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063217195</long>
+            </object>
+           </void>
+           <void property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1691901545592</long>
+             </object>
+            </void>
+           </void>
+           <void id="DateFormatSymbols1" property="dateFormatSymbols">
+            <void id="StringArray6" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray6"/>
+            </void>
+            <void id="StringArray7" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray7"/>
+            </void>
+            <void id="StringArray8" property="months"/>
+            <void property="months">
+             <object idref="StringArray8"/>
+            </void>
+            <void id="StringArray9" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray9"/>
+            </void>
+            <void id="StringArray10" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray10"/>
+            </void>
+            <void id="StringArray11" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray11"/>
+            </void>
+            <void id="StringArrayArray1" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray1"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="modelo.Factura" id="Factura2">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>14/09/2023</string>
+          </void>
+          <void id="SimpleDateFormat2" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063203823</long>
+            </object>
+           </void>
+           <void property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1694666345592</long>
+             </object>
+            </void>
+           </void>
+           <void id="DateFormatSymbols2" property="dateFormatSymbols">
+            <void id="StringArray12" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray12"/>
+            </void>
+            <void id="StringArray13" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray13"/>
+            </void>
+            <void id="StringArray14" property="months"/>
+            <void property="months">
+             <object idref="StringArray14"/>
+            </void>
+            <void id="StringArray15" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray15"/>
+            </void>
+            <void id="StringArray16" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray16"/>
+            </void>
+            <void id="StringArray17" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray17"/>
+            </void>
+            <void id="StringArrayArray2" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray2"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="modelo.Factura" id="Factura3">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>14/10/2023</string>
+          </void>
+          <void id="SimpleDateFormat3" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063199081</long>
+            </object>
+           </void>
+           <void property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1697258345592</long>
+             </object>
+            </void>
+           </void>
+           <void id="DateFormatSymbols3" property="dateFormatSymbols">
+            <void id="StringArray18" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray18"/>
+            </void>
+            <void id="StringArray19" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray19"/>
+            </void>
+            <void id="StringArray20" property="months"/>
+            <void property="months">
+             <object idref="StringArray20"/>
+            </void>
+            <void id="StringArray21" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray21"/>
+            </void>
+            <void id="StringArray22" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray22"/>
+            </void>
+            <void id="StringArray23" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray23"/>
+            </void>
+            <void id="StringArrayArray3" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray3"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="modelo.Factura" id="Factura4">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>14/11/2023</string>
+          </void>
+          <void id="SimpleDateFormat4" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063198902</long>
+            </object>
+           </void>
+           <void property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1699936745592</long>
+             </object>
+            </void>
+           </void>
+           <void id="DateFormatSymbols4" property="dateFormatSymbols">
+            <void id="StringArray24" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray24"/>
+            </void>
+            <void id="StringArray25" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray25"/>
+            </void>
+            <void id="StringArray26" property="months"/>
+            <void property="months">
+             <object idref="StringArray26"/>
+            </void>
+            <void id="StringArray27" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray27"/>
+            </void>
+            <void id="StringArray28" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray28"/>
+            </void>
+            <void id="StringArray29" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray29"/>
+            </void>
+            <void id="StringArrayArray4" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray4"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="modelo.Factura" id="Factura5">
+          <void property="abonado">
+           <object idref="AbonadoJuridico0"/>
+          </void>
+          <void property="fechaFormato">
+           <string>14/12/2023</string>
+          </void>
+          <void id="SimpleDateFormat5" property="fechaSimple">
+           <void property="2DigitYearStart">
+            <object class="java.util.Date">
+             <long>-838063198745</long>
+            </object>
+           </void>
+           <void property="calendar">
+            <void property="time">
+             <object class="java.util.Date">
+              <long>1702528745592</long>
+             </object>
+            </void>
+           </void>
+           <void id="DateFormatSymbols5" property="dateFormatSymbols">
+            <void id="StringArray30" property="amPmStrings"/>
+            <void property="amPmStrings">
+             <object idref="StringArray30"/>
+            </void>
+            <void id="StringArray31" property="eras"/>
+            <void property="eras">
+             <object idref="StringArray31"/>
+            </void>
+            <void id="StringArray32" property="months"/>
+            <void property="months">
+             <object idref="StringArray32"/>
+            </void>
+            <void id="StringArray33" property="shortMonths"/>
+            <void property="shortMonths">
+             <object idref="StringArray33"/>
+            </void>
+            <void id="StringArray34" property="shortWeekdays"/>
+            <void property="shortWeekdays">
+             <object idref="StringArray34"/>
+            </void>
+            <void id="StringArray35" property="weekdays"/>
+            <void property="weekdays">
+             <object idref="StringArray35"/>
+            </void>
+            <void id="StringArrayArray5" property="zoneStrings"/>
+            <void property="zoneStrings">
+             <object idref="StringArrayArray5"/>
+            </void>
+           </void>
+          </void>
+          <void property="total">
+           <double>9800.0</double>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void property="mesPago">
+       <int>11</int>
+      </void>
+      <void property="name">
+       <string>Thread-0</string>
+      </void>
+      <void property="nombre">
+       <string>ad</string>
+      </void>
+      <void property="servicios">
+       <object class="java.util.HashMap">
+        <void method="put">
+         <string>ad</string>
+         <object class="modelo.ServicioVivienda">
+          <void property="cantBotonAP">
+           <int>3</int>
+          </void>
+          <void property="cantCamaras">
+           <int>2</int>
+          </void>
+          <void property="movilAcomp">
+           <boolean>true</boolean>
+          </void>
+          <void property="numId">
+           <int>1</int>
+          </void>
+          <void property="precioBase">
+           <float>8500.0</float>
+          </void>
+          <void property="promo">
+           <object class="modelo.PromoPlatino"/>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void property="tecnicosFactory">
+       <object class="factory.TecnicosFactory"/>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="modelo.Tecnico" id="Tecnico0">
+    <void class="modelo.Tecnico" method="getField">
+     <string>libre</string>
+     <void method="set">
+      <object idref="Tecnico0"/>
+      <object idref="Boolean0"/>
+     </void>
+    </void>
+    <void property="id">
+     <string>2</string>
+    </void>
+    <void property="nombre">
+     <string>1</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

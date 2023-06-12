@@ -41,13 +41,18 @@ public class ServicioVivienda extends Servicio {
 	public String toString() {
 		if (promo != null) {
 			return "Vivienda : \n Precio base: $" + precioBase + "\n Cantidad de camaras:" + cantCamaras
-					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:" + movilAcomp
-					+ "\n Id del servicio=" + numId + "\n Promo:" + promo.getPromoNombre();
+					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:"
+					+ movilAcomp + "\n Id del servicio=" + numId + "\n Promo:" + promo.getPromoNombre();
 		} else {
 			return "Vivienda : \n Precio base: $" + precioBase + "\n Cantidad de camaras:" + cantCamaras
-					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:" + movilAcomp
-					+ "\n Id del servicio=" + numId;
+					+ "\n Cantidad de" + " botones antipanico:" + cantBotonAP + "\n Movil de acompanamiento:"
+					+ movilAcomp + "\n Id del servicio=" + numId;
 		}
+	}
+
+	public ServicioVivienda() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -1,6 +1,5 @@
 package modelo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -17,7 +16,7 @@ import interfaces.IAbonado;
 /**
  * @author clase abstracta que representa un abonado dentro de un sistema
  */
-public abstract class Abonado extends Thread implements IAbonado, Serializable {
+public abstract class Abonado extends Thread implements IAbonado {
 	protected String nombre;
 	protected String DNI;
 	private TecnicosFactory tecnicosFactory;
@@ -201,8 +200,68 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
+	public Abonado() {
+		super();
+	}
+
 	public ArrayList<Factura> getFactura() {
 		return this.listaFacturas;
+	}
+
+	public TecnicosFactory getTecnicosFactory() {
+		return tecnicosFactory;
+	}
+
+	public void setTecnicosFactory(TecnicosFactory tecnicosFactory) {
+		this.tecnicosFactory = tecnicosFactory;
+	}
+
+	public HashMap<String, Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(HashMap<String, Servicio> servicios) {
+		this.servicios = servicios;
+	}
+
+	public ArrayList<Factura> getListaFacturas() {
+		return listaFacturas;
+	}
+
+	public void setListaFacturas(ArrayList<Factura> listaFacturas) {
+		this.listaFacturas = listaFacturas;
+	}
+
+	public int getMesPago() {
+		return mesPago;
+	}
+
+	public void setMesPago(int mesPago) {
+		this.mesPago = mesPago;
+	}
+
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setTotalPagado(double totalPagado) {
+		this.totalPagado = totalPagado;
 	}
 
 }

@@ -46,4 +46,24 @@ public class TecnicosFactory extends Observable {
 		this.notifyObservers();
 	}
 
+	public TecnicosFactory() {
+		super();
+	}
+
+	public static ArrayList<Tecnico> getTecnicos() {
+		return tecnicos;
+	}
+
+	public static void setTecnicos(ArrayList<Tecnico> tecnicos) {
+		TecnicosFactory.tecnicos = tecnicos;
+	}
+
+	public String getAbonado() {
+		return abonado;
+	}
+
+	public void setAbonado(String abonado) {
+		this.abonado = abonado;
+	}
+
 }

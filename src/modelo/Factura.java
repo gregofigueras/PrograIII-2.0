@@ -82,4 +82,32 @@ public class Factura implements Cloneable {
 			return "[" + fechaFormato + "]: $" + total + "  --ADEUDADO--";
 	}
 
+	public IAbonado getAbonado() {
+		return abonado;
+	}
+
+	public void setAbonado(IAbonado abonado) {
+		this.abonado = abonado;
+	}
+
+	public SimpleDateFormat getFechaSimple() {
+		return fechaSimple;
+	}
+
+	public void setFechaSimple(SimpleDateFormat fechaSimple) {
+		this.fechaSimple = fechaSimple;
+	}
+
+	public String getFechaFormato() {
+		return fechaFormato;
+	}
+
+	public void setFechaFormato(String fechaFormato) {
+		this.fechaFormato = fechaFormato;
+	}
+
+	public Factura() {
+		super();
+	}
+
 }
