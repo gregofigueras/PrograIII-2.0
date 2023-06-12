@@ -301,6 +301,7 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		boolean condicion1 = false;
 		boolean condicion2 = false;
 		boolean condicion3 = false;
+
 		if (this.textFieldCantBA.getText() != null) {
 			condicion1 = Integer.parseInt(this.textFieldCantBA.getText()) >= 0;
 		}
