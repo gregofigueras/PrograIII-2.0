@@ -74,11 +74,11 @@ public class Factura implements Cloneable {
 		this.total = total;
 	}
 
-	public GregorianCalendar getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

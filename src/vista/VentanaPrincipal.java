@@ -489,7 +489,6 @@ public class VentanaPrincipal extends JFrame
 		boolean condicion6 = this.modeloListaTecnico.size() > 0;
 		boolean condicion7 = this.modeloListaDomicilio.size() > 0;
 		this.btnSolicitarTecnico.setEnabled(condicion3 && condicion6 && condicion7);
-
 	}
 
 	public void setActionListener(ActionListener actionListener) {
