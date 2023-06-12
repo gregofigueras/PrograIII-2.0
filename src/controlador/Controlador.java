@@ -112,12 +112,12 @@ public class Controlador implements ActionListener, Observer {
 				this.ventanaPrincipal.actualizaListaDomicilio();
 			}
 
-		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicio")) {
+		} else if (e.getActionCommand().equalsIgnoreCase("Paga Servicios")) {
 			IAbonado abonado = this.ventanaPrincipal.getSelectedAbonado();
-			if (abonado.getFactura() == null) {
+			if (abonado.getFactura().size() == 0) {
 				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no puede pagar aun");
 			} else {
-				abonado.PagarFactura();
+				abonado.pagarFactura();
 				this.ventanaPrincipal.escribirConsola(
 						"El abonado " + abonado.getNombre() + " pago un total de $" + abonado.getTotalPagado());
 			}
@@ -152,13 +152,11 @@ public class Controlador implements ActionListener, Observer {
 			this.ventanaAgregaTecnico.setVisible(true);
 
 		} else if (e.getActionCommand().equalsIgnoreCase("Mostrar facturas")) { // Abre popup de facturas
-			System.out.println(this.ventanaPrincipal.getSelectedAbonado().getFactura().size());
 			if (this.ventanaPrincipal.getSelectedAbonado().getFactura().size() != 0) {
 				this.ventanaFacturas.ActualizaListaFacturas();
 				this.ventanaFacturas.setVisible(true);
 			} else
-				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");
-
+				JOptionPane.showMessageDialog(ventanaPrincipal, "El abonado no tiene facturas para mostrar");			
 		} else if (e.getActionCommand().equalsIgnoreCase("Cerrar")) { // Cierra el popup de facturas
 			this.ventanaAgregaTecnico.setVisible(false);
 			this.ventanaAgregaTecnico.limpia();

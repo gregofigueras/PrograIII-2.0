@@ -16,18 +16,18 @@ public class ConContratacionesState implements IState {
 		this.AbonadoF = AbonadoF;
 	}
 	
-	public void PagarFactura() {
+	public void pagarFactura() {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + " ,quiere pagar su factura");
 		this.AbonadoF.EfectuaPago();
 	}
 	
-	public void ContratarNuevoServicio(String domicilio, Servicio servicio) {
+	public void contratarNuevoServicio(String domicilio, Servicio servicio) {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + "quiere contratar un nuevo servicio");
 		this.AbonadoF.agregaServicio(domicilio,servicio );
 	}
 	
 	
-	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
+	public void bajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI() + "quiere dar de baja un servicio");
 		this.AbonadoF.quitaServicio(domicilio);
 	}

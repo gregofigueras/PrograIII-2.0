@@ -484,7 +484,7 @@ public class VentanaPrincipal extends JFrame
 		this.btnEliminarAbonado.setEnabled(condicion3);
 		boolean condicion4 = !this.listDomicilio.isSelectionEmpty();
 		this.btnDarDeBajaS.setEnabled(condicion3 && condicion4);
-		this.btnPagaFactura.setEnabled(condicion3);
+		this.btnPagaFactura.setEnabled(condicion3 || this.listDomicilio.isSelectionEmpty());
 		boolean condicion6 = this.modeloListaTecnico.size() > 0;
 		boolean condicion7 = this.modeloListaDomicilio.size() > 0;
 		this.btnSolicitarTecnico.setEnabled(condicion3 && condicion6 && condicion7);

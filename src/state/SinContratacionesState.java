@@ -14,18 +14,18 @@ public class SinContratacionesState implements IState {
 		this.AboandoF = AbonadoF;
 	}
 	
-	public void PagarFactura() {
+	public void pagarFactura() {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede pagar la factura debido a que no tiene contrataciones hechas");
 		//no puede pagar aún”. EN LA VENTANA
 	}
 	
-	public void ContratarNuevoServicio(String domicilio, Servicio servicio) {
+	public void contratarNuevoServicio(String domicilio, Servicio servicio) {
 		System.out.println("El abonado con DNI: " + this.AboandoF.getDNI() + "quiere contratar un nuevo servicio");
 		this.AboandoF.setEstado ( new ConContratacionesState(this.AboandoF) ); 
 		this.AboandoF.agregaServicio(domicilio,servicio );
 	}
 
-	public void BajaDeUnServicio(String Domicilio) {
+	public void bajaDeUnServicio(String Domicilio) {
 		System.out.println("ERROR: el abonado con DNI: " + this.AboandoF.getDNI() + ", no puede dar de baja un sercivio ya que no tiene servicios contratados");
 	}
 

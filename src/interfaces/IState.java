@@ -8,8 +8,8 @@ import modelo.Factura;
 import modelo.Servicio;
 
 public interface IState {
-	void PagarFactura();
-	void ContratarNuevoServicio(String domicilio, Servicio servicio);
-	void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException;
+	void pagarFactura();
+	void contratarNuevoServicio(String domicilio, Servicio servicio);
+	void bajaDeUnServicio(String domicilio) throws DomicilioInvalidoException;
 	String getEstado();
 }

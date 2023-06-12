@@ -13,7 +13,7 @@ public class MorosoState implements IState {
 		this.AbonadoF = AbonadoF;
 	}
 
-	public void PagarFactura() {
+	public void pagarFactura() {
 
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI()
 				+ ",quiere pagar una factura. Tendra un 30% de recargo");
@@ -21,12 +21,12 @@ public class MorosoState implements IState {
 		this.AbonadoF.setEstado(new ConContratacionesState(this.AbonadoF));
 	}
 
-	public void ContratarNuevoServicio(String domicilio, Servicio servicio) {
+	public void contratarNuevoServicio(String domicilio, Servicio servicio) {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI()
 				+ " no puede contratar un servicio al estar moroso");
 	}
 
-	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
+	public void bajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
 		System.out.println("El abonado con DNI: " + this.AbonadoF.getDNI()
 				+ " no puede dar de baja un servicio porque esta moroso");
 	}

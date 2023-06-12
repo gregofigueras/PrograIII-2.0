@@ -54,8 +54,8 @@ public class DecoratorCheque extends DecoratorPagos {
 	}
 
 	@Override
-	public void PagarFactura() {
-		encapsulado.PagarFactura();
+	public void pagarFactura() {
+		encapsulado.pagarFactura();
 
 	}
 

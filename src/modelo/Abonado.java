@@ -151,7 +151,7 @@ public abstract class Abonado extends Thread implements IAbonado, Serializable {
 		}
 	}
 
-	public abstract void PagarFactura();
+	public abstract void pagarFactura();
 
 	public void AgregarFactura(Factura factura) {
 		listaFacturas.add(factura);

@@ -77,7 +77,7 @@ public class AbonadoJuridico extends Abonado {
 	}
 
 	@Override
-	public void PagarFactura() {
+	public void pagarFactura() {
 		double total = 0;
 
 		for (Factura factura : listaFacturas) {

@@ -113,8 +113,8 @@ public class AbonadoFisico extends Abonado {
 		return this.estado.getEstado();
 	}
 
-	public void PagarFactura() {
-		this.estado.PagarFactura();
+	public void pagarFactura() {
+		this.estado.pagarFactura();
 	}
 
 	public void EfectuaPago() {
@@ -134,11 +134,11 @@ public class AbonadoFisico extends Abonado {
 	}
 
 	public void ContratarNuevoServicio(String domicilio, Servicio s) {
-		this.estado.ContratarNuevoServicio(domicilio, s);
+		this.estado.contratarNuevoServicio(domicilio, s);
 	}
 
 	public void BajaDeUnServicio(String domicilio) throws DomicilioInvalidoException {
-		this.estado.BajaDeUnServicio(domicilio);
+		this.estado.bajaDeUnServicio(domicilio);
 	}
 
 	public String toString() {
