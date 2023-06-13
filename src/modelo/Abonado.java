@@ -14,8 +14,9 @@ import factory.TecnicosFactory;
 import interfaces.IAbonado;
 
 /**
- * @author clase abstracta que representa un abonado dentro de un sistema
+ * @author Clase abstracta que representa un abonado dentro de un sistema
  */
+
 public abstract class Abonado extends Thread implements IAbonado {
 	protected String nombre;
 	protected String DNI;
@@ -28,16 +29,11 @@ public abstract class Abonado extends Thread implements IAbonado {
 	protected double totalPagado;
 
 	/**
-	 * constructor de la clase
-	 * 
-	 * @param sistemaTecnicos
-	 * 
-	 * @param nombre:         es el nombre del abonado
-	 * @param DNI:            DNI del abonado <b> pre: </b> nombre tiene que ser no
-	 *                        vacio y no null <br>
-	 *                        <b> pre: </b> DNI tiene que ser no vacio y no null
-	 *                        <br>
-	 *                        <b> post: </b> Crea un objeto de tipo abonado
+	 * Constructor de la clase
+	 * @param nombre Nombre del abonado
+	 * @param DNI DNI del abonado
+	 * @param fecha Fecha 
+	 * @param tecnicosFactory Referencia al sistema de tecnicos (Abonado es el recurso compartido)
 	 */
 	public Abonado(String nombre, String DNI, GregorianCalendar fecha, TecnicosFactory tecnicosFactory) {
 		this.DNI = DNI;
@@ -50,36 +46,49 @@ public abstract class Abonado extends Thread implements IAbonado {
 		this.totalPagado = 0;
 	}
 
+	/**
+	 *Método que devuelve el último total pagado
+	 */
 	public double getTotalPagado() {
 		return totalPagado;
 	}
 
+	/**
+	 *Método que devuelve la fecha de facturación
+	 */
 	public GregorianCalendar getFecha() {
 		return fecha;
 	}
 
+	/**
+	 *Método que devuelve el nombre del abonado
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 *Método que devuelve el DNI del abonado
+	 */
 	public String getDNI() {
 		return DNI;
 	}
 
-	public HashMap<String, Servicio> getServicio() {
+	/**
+	 *Método que devuelve los servicios que tiene el abonado
+	 */
+	public HashMap<String, Servicio> getServicios() {
 		return servicios;
 	}
 
 	/**
-	 * metodo void que agrega un determinado domicilio y tipo de servicio al hashmap
-	 * de servicios
+	 * Método que agrega un servicio al abonado dado un domicilio
 	 * 
-	 * @param domicilio: domicilio del servicio
-	 * @param servicio:  parametro que representa a un tipo de servicio <b> pre:
-	 *                   </b> domicilio tiene que ser no nulo y no vacio <br>
-	 *                   <b> pre: </b> servicio tiene que ser no nulo y no vacio
-	 *                   <br>
-	 *                   <b> post: </b> agrega servicio al hashmap de domicilios
+	 * @param domicilio Domicilio del servicio
+	 * @param servicio  Servicio a agregar
+	 * <b>Pre:</b> domicilio tiene que ser no nulo y diferente de null <br>
+	 * <b>Pre:</b> servicio tiene que ser no nulo y diferente de null<br>
+	 * <b>Post:</b> Agrega servicio al hashmap de domicilios
 	 */
 
 	public void agregaServicio(String domicilio, Servicio servicio) {
@@ -95,20 +104,17 @@ public abstract class Abonado extends Thread implements IAbonado {
 	}
 
 	/**
-	 * metodo void que quita un determinado servicio de un domicilio en el hashmap
-	 * de servicios
-	 * 
-	 * @param domicilio: domicilio del servicio <b> pre: </b> domicilio tiene que
-	 *                   ser no nulo y no vacio <br>
-	 *                   <b> post: </b> elimina un servicio del hashmap de
-	 *                   domicilios
+	 * Método que quita un servicio del abonado dado el domcilio del servicio
+	 * @param domicilio Domicilio del servicio<br>
+	 * <b>Pre:</b> domicilio tiene que ser no nulo y diferente de null<br>
+	 * <b>Post:</b> Elimina un servicio del HashMap de servicios
 	 */
 
 	public abstract void quitaServicio(String domicilio) throws DomicilioInvalidoException;
 
 	/**
-	 * metodo void que imprime por pantalla cada uno de los servicios de un abonado
-	 * <b> post: </b> imprime por pantalla los servicios de un abonado
+	 * Método que imprime por pantalla cada uno de los servicios de un abonado
+	 * <b>Post:</b> Imprime por pantalla los servicios de un abonado
 	 */
 
 	public void imprimeServicios() {
@@ -118,19 +124,24 @@ public abstract class Abonado extends Thread implements IAbonado {
 		}
 	}
 
+	/**
+	 *Método que devuelve un servicio dado su domicilio
+	 *@param domicilio domicilio donde se encuentra asociado el servicio
+	 *<b>Pre:</b> domicilio debe ser distinto de null
+	 */
 	public Servicio getServicio(String domicilio) {
 		return this.servicios.get(domicilio);
 	}
 
 	/**
-	 * metodo abstracto que calcula el costo de todos los servicios de un cliente
+	 * Método abstracto que calcula el costo de todos los servicios de un cliente
 	 */
 	public abstract double getCostoServicios();
 
 	/**
-	 * metodo que clona el abonado <br>
-	 * puede lanzar una excepcion en caso que el abonado sea juridico <b> post: </b>
-	 * genera un clon de abonado
+	 * Método que clona a un abonado <br>
+	 * Puede lanzar una excepcion en caso que el abonado sea juridico<br>
+	 * <b>Post:</b> Genera un clon de abonado
 	 */
 	public Object clone() throws CloneNotSupportedException {
 		Abonado clonado;
@@ -138,7 +149,7 @@ public abstract class Abonado extends Thread implements IAbonado {
 
 		try {
 			clonado = (Abonado) super.clone();
-			clonado.servicios = (HashMap<String, Servicio>) servicios.clone();
+			clonado.servicios = (HashMap<String,Servicio>) servicios.clone();
 			while (it.hasNext()) {
 				Map.Entry<String, Servicio> entry = it.next();
 				clonado.servicios.put(entry.getKey(), (Servicio) entry.getValue().clone());
@@ -150,24 +161,36 @@ public abstract class Abonado extends Thread implements IAbonado {
 		}
 	}
 
+	/**
+	 *Método abstracto que representa que el abonado pagó su factura
+	 */
 	public abstract void pagarFactura();
 
+	/**
+	 * Método que agrega una factura a la lista de facturas
+	 * @param factura Factura a agregar
+	 * <b>Pre:</b> factura debe ser distinto de null<br>
+	 * <b>Post:</b> Agrega la factura al ArrayList listaFacturas
+	 */
 	public void AgregarFactura(Factura factura) {
 		listaFacturas.add(factura);
 	}
 
+	/**
+	 *Método perteneciente a la clase Thread<br>
+	 *En este caso simula que un abonado pide la visita de un técnico al azar
+	 */
 	@Override
 	public void run() {
-		System.out.println("corriendo");
 		int i;
 		if (this.tecnico == null) {
-			i = this.tecnicosFactory.ConsultaTecnica(this);
+			i = this.tecnicosFactory.consultaTecnica();
 			this.tecnico = this.tecnicosFactory.getTecnico(i);
 			Random r = new Random();
 			int q = r.nextInt(2000);
 			try {
 				Thread.sleep(q);
-				this.tecnicosFactory.TerminaConsulta(this, i);
+				this.tecnicosFactory.terminaConsulta(i);
 				this.tecnico = null;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -175,6 +198,12 @@ public abstract class Abonado extends Thread implements IAbonado {
 		}
 	}
 
+	/**
+	 *Método que simula un mes a la fecha y agrega una nueva factura a la lista de facturas
+	 *@param fecha Nueva fecha
+	 *<b>Pre:</b> fecha debe ser distinto de null
+	 *<b>Post:</b> Simula un día al atributo fecha
+	 */
 	@Override
 	public void simularMes(GregorianCalendar fecha) {
 		this.fecha = fecha;
@@ -188,6 +217,12 @@ public abstract class Abonado extends Thread implements IAbonado {
 
 	}
 
+	/**
+	 *Método que simula un día a la fecha y agrega una factura a la lista de facturas de ser necesario
+	 *@param fecha Nueva fecha
+	 *<b>Pre:</b> fecha debe ser distinto de null
+	 *<b>Post:</b> Simula un día al atributo fecha
+	 */
 	@Override
 	public void sumarDia(GregorianCalendar fecha) {
 		this.fecha = fecha;
@@ -200,34 +235,64 @@ public abstract class Abonado extends Thread implements IAbonado {
 		}
 	}
 
+	/**
+	 * Constructor vacio de la clase<br>
+	 * Requisito de persistencia mediante XML
+	 */
 	public Abonado() {
 		super();
 	}
 
+	/**
+	 *Método que devuelve la lista de facturas
+	 *@return ArrayList de Factura
+	 */
 	public ArrayList<Factura> getFactura() {
 		return this.listaFacturas;
 	}
 
+	/**
+	 * Método que devuelve el gestor de técnicos
+	 * @return referencia de tipo TecnicosFactory
+	 */
 	public TecnicosFactory getTecnicosFactory() {
 		return tecnicosFactory;
 	}
 
+	/**
+	 * Setter del atributo tecnicosFactory
+	 * @param tecnicosFactory Nueva referencia de tecnicosFactory a cambiar
+	 * <b>Pre:</b> tecnicosFactory debe ser distinto de null<br>
+	 * <b>Post:</b> El atributo tecnicosFactory cambia
+	 */
 	public void setTecnicosFactory(TecnicosFactory tecnicosFactory) {
 		this.tecnicosFactory = tecnicosFactory;
 	}
 
-	public HashMap<String, Servicio> getServicios() {
-		return servicios;
-	}
-
+	/**
+	 * Setter del atributo servicios
+	 * @param tecnicosFactory Nueva referencia de servicios a cambiar
+	 * <b>Pre:</b> tecnicosFactory debe ser distinto de null<br>
+	 * <b>Post:</b> El atributo servicios cambia
+	 */
 	public void setServicios(HashMap<String, Servicio> servicios) {
 		this.servicios = servicios;
 	}
 
+	/**
+	 * Método que devuelve la lista de facturas
+	 * @return ArrayList de Factura
+	 */
 	public ArrayList<Factura> getListaFacturas() {
 		return listaFacturas;
 	}
 
+	/**
+	 * Setter del atributo listaFacturas
+	 * @param tecnicosFactory Nueva referencia de tecnicosFactory a cambiar
+	 * <b>Pre:</b> tecnicosFactory debe ser distinto de null<br>
+	 * <b>Post:</b> El atributo tecnicosFactory cambia
+	 */
 	public void setListaFacturas(ArrayList<Factura> listaFacturas) {
 		this.listaFacturas = listaFacturas;
 	}

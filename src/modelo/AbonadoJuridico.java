@@ -73,7 +73,7 @@ public class AbonadoJuridico extends Abonado {
 	}
 
 	@Override
-	public HashMap<String, Servicio> getServicio() {
+	public HashMap<String, Servicio> getServicios() {
 		return this.servicios;
 	}
 

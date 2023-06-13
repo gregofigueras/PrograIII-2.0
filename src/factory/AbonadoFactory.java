@@ -12,15 +12,21 @@ import modelo.DecoratorCredito;
 import modelo.DecoratorEfectivo;
 import modelo.DecoratorPagos;
 
+/**
+ * @author
+ * Clase perteneciente al patrón creacional Factory<br>
+ * Crea instancias de la clase IAbonado
+ *
+ */
 public class AbonadoFactory {
 
 	/**
 	 * Metodo que devuelve una nueva instancia segun los parametros dados
 	 * 
-	 * @param tipoAbonado: Tipo de abonado de la nueva instancia
-	 * @param formaPago:   Forma de pago del abonado
-	 * @param nombre:      Nombre del abonado
-	 * @param DNI:         DNI del abonado
+	 * @param tipoAbonado Tipo de abonado de la nueva instancia
+	 * @param formaPago Forma de pago del abonado
+	 * @param nombre Nombre del abonado
+	 * @param DNI DNI del abonado
 	 * @return: Devuelve una nueva instancia del tipo IAbonado <b>Pre: <b> el tipo
 	 *          de abonado debe ser distinto de null y no vacio <br>
 	 *          <b> Pre: <b> la forma de pago debe ser distinta de null y no vacia

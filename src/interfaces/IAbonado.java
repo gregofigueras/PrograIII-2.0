@@ -29,7 +29,7 @@ public interface IAbonado extends Cloneable, Runnable {
 
 	Servicio getServicio(String domicilio);
 
-	HashMap<String, Servicio> getServicio();
+	HashMap<String, Servicio> getServicios();
 
 	void pagarFactura();
 

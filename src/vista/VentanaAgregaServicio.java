@@ -302,10 +302,10 @@ public class VentanaAgregaServicio extends JFrame implements ActionListener, Key
 		boolean condicion2 = false;
 		boolean condicion3 = false;
 
-		if (this.textFieldCantBA.getText() != null) {
+		if (!this.textFieldCantBA.getText().equals(null) && !this.textFieldCantBA.getText().equals("")) {
 			condicion1 = Integer.parseInt(this.textFieldCantBA.getText()) >= 0;
 		}
-		if (this.textFieldCantCamaras.getText() != null) {
+		if (!this.textFieldCantCamaras.getText().equals(null) && !this.textFieldCantCamaras.getText().equals("")) {
 			condicion2 = Integer.parseInt(this.textFieldCantCamaras.getText()) >= 0;
 		}
 		condicion3 = (!this.textFieldDomicilio.getText().equals(null) && !this.textFieldDomicilio.getText().equals(""));

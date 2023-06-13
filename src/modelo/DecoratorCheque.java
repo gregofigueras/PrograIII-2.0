@@ -55,8 +55,8 @@ public class DecoratorCheque extends DecoratorPagos {
 	}
 
 	@Override
-	public HashMap<String, Servicio> getServicio() {
-		return encapsulado.getServicio();
+	public HashMap<String, Servicio> getServicios() {
+		return encapsulado.getServicios();
 	}
 
 	@Override
