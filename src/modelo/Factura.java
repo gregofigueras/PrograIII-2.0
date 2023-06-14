@@ -1,8 +1,6 @@
 package modelo;
 
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-
 import interfaces.IAbonado;
 
 /**
