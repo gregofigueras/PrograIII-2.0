@@ -1,7 +1,6 @@
 package modelo;
 
 import java.text.SimpleDateFormat;
-
 import interfaces.IAbonado;
 
 /**
