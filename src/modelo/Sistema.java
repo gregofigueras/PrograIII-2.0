@@ -20,7 +20,6 @@ import persistencia.PersistenciaXML;
  */
 public class Sistema {
 	private ArrayList<IAbonado> abonados = new ArrayList<IAbonado>();
-	private ArrayList<Abonado> abonadosprueba = new ArrayList<Abonado>();
 	IPersistencia persistencia = new PersistenciaXML();
 	private static Sistema instance = null;
 	private TecnicosFactory tecnicos;
