@@ -15,7 +15,7 @@ public class PromoPlatino implements IPromocion {
 	 */
 	@Override
 	public double getPromoVivienda(double costoBruto) {
-		assert costoBruto > 0 : "costo bruto no valido";
+		assert costoBruto < 0 : "costo bruto no valido";
 		return costoBruto * 0.7;
 	}
 
@@ -26,7 +26,7 @@ public class PromoPlatino implements IPromocion {
 	 */
 	@Override
 	public double getPromoComercio(double costoBruto) {
-		assert costoBruto > 0 : "costo bruto no valido";
+		assert costoBruto < 0 : "costo bruto no valido";
 		return costoBruto * 0.65;
 	}
 

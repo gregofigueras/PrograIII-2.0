@@ -14,7 +14,6 @@ public class MorosoState implements IState {
 	}
 
 	public void pagarFactura() {
-
 		this.AbonadoF.EfectuaPago();
 		this.AbonadoF.setEstado(new ConContratacionesState(this.AbonadoF));
 	}

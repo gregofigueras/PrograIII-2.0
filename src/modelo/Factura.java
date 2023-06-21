@@ -82,8 +82,6 @@ public class Factura implements Cloneable {
 
 	@Override
 	public String toString() {
-		
-
 		if (pago)
 			return "[" + this.fecha + "]: $" + total;
 		else
